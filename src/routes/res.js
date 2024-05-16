@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { ResController } from '../controlles/res.controller.js'
+import { ResController } from '../controllers/res.controller.js'
 
 export const ResRouter = Router()
 

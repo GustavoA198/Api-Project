@@ -11,7 +11,6 @@ export class ResController {
         success(req, res, added, 200)
       } catch (e) {
         error(req, res, e.message, e.status)
-        console.log('no paso la prueba')
       }
     } else {
       error(req, res, JSON.parse(result.error.message), 400)
