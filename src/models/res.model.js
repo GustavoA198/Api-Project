@@ -2,7 +2,7 @@ import { database } from '../database/db.js'
 
 export class ResModel {
   static async getAll () {
-    return await database.query('SELECT * FROM res')
+    return await database.query('SELECT * FROM Res')
   }
 
   static async create (data) {
