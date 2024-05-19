@@ -289,233 +289,231 @@ ADD FOREIGN KEY (resID) REFERENCES res(ID);
 -- Inicio de la insercion de datos de prueba
 
 -- Cliente
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('1', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('2', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('3', '123123123', 'Pedro Gomez', 'Calle 789', '3213213', 'pedro@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('4', '321321321', 'Luisa Perez', 'Calle 321', '3213213', 'luisa@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('5', '456456456', 'Carlos Rodriguez', 'Calle 654', '6546546', 'carlos@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('6', '654654654', 'Ana Gomez', 'Calle 987', '6546546', 'ana@gmail.com');
+INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000001', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@gmail.com');
+INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000002', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@gmail.com');
+INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000003', '123123123', 'Pedro Gomez', 'Calle 789', '3213213', 'pedro@gmail.com');
+INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000004', '321321321', 'Luisa Perez', 'Calle 321', '3213213', 'luisa@gmail.com');
+INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000005', '456456456', 'Carlos Rodriguez', 'Calle 654', '6546546', 'carlos@gmail.com');
+INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000006', '654654654', 'Ana Gomez', 'Calle 987', '6546546', 'ana@gmail.com');
 
 -- Finca
-INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('1', 'Finca La Esperanza', 'Calle 123', 'Finca de prueba');
-INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('2', 'Finca La Ilusion', 'Calle 456', 'Finca de prueba');
-INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('3', 'Finca La Alegria', 'Calle 789', 'Finca de prueba');
-INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('4', 'Finca La Felicidad', 'Calle 321', 'Finca de prueba');
+INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', 'Finca La Esperanza', 'Calle 123', 'Finca de prueba');
+INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', 'Finca La Ilusion', 'Calle 456', 'Finca de prueba');
+INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', 'Finca La Alegria', 'Calle 789', 'Finca de prueba');
+INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', 'Finca La Felicidad', 'Calle 321', 'Finca de prueba');
 
 -- Lote
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('1', 'Lote 1', 1, 25, '1');   
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('2', 'Lote 2', 2, 30, '1');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('3', 'Lote 3', 3, 20, '2');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('4', 'Lote 4', 4, 15, '2');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('5', 'Lote 5', 5, 10, '3');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('6', 'Lote 6', 6, 5, '3');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('7', 'Lote 7', 7, 10, '4');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('8', 'Lote 8', 8, 15, '4');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('9', 'Lote 9', 9, 20, '4');
-INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('10', 'Lote 10', 10, 25, '4');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000001', 'Lote 1', 1, 25, '00000000-0000-0000-0000-000000000001');   
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000002', 'Lote 2', 2, 30, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000003', 'Lote 3', 3, 20, '00000000-0000-0000-0000-000000000002');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000004', 'Lote 4', 4, 15, '00000000-0000-0000-0000-000000000002');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000005', 'Lote 5', 5, 10, '00000000-0000-0000-0000-000000000003');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000006', 'Lote 6', 6, 5, '00000000-0000-0000-0000-000000000003');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000007', 'Lote 7', 7, 10, '00000000-0000-0000-0000-000000000004');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000008', 'Lote 8', 8, 15, '00000000-0000-0000-0000-000000000004');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000009', 'Lote 9', 9, 20, '00000000-0000-0000-0000-000000000004');
+INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000010', 'Lote 10', 10, 25, '00000000-0000-0000-0000-000000000004');
 
 -- Insumo
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('1', 'Vacuna 1', '2021-05-17', 100, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('2', 'Vacuna 2', '2021-05-17', 50, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('3', 'Vacuna 3', '2021-05-17', 75, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('4', 'Vacuna 4', '2021-05-17', 25, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('5', 'Vacuna 5', '2021-05-17', 10, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('6', 'Vacuna 6', '2021-05-17', 5, '2022-01-01', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', 'Vacuna 1', '2021-05-17', 100, '2022-01-01', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', 'Vacuna 2', '2021-05-17', 50, '2022-01-01', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', 'Vacuna 3', '2021-05-17', 75, '2022-01-01', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', 'Vacuna 4', '2021-05-17', 25, '2022-01-01', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000005', 'Vacuna 5', '2021-05-17', 10, '2022-01-01', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000006', 'Vacuna 6', '2021-05-17', 5, '2022-01-01', 'Vacuna para enfermedades comunes');
 
 -- Actividad
-INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('1', '2021-02-15', 'Fumigada', '2021-03-01', '1', 'Actividad de prueba');
-INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('2', '2022-03-10', 'Fumigada', '2022-04-05', '2', 'Actividad de prueba');
-INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('3', '2023-04-05', 'Limpieza', '2023-05-01', '3', 'Actividad de prueba');
-INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('4', '2022-05-20', 'Limpieza', '2022-06-15', '4', 'Actividad de prueba');
-INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('5', '2023-06-30', 'Cercada', '2023-07-20', '5', 'Actividad de prueba');
-INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('6', '2021-07-25', 'Cercada', '2021-08-10', '6', 'Actividad de prueba');
+INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', '2021-02-15', 'Fumigada', '2021-03-01', '00000000-0000-0000-0000-000000000001', 'Actividad de prueba');
+INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', '2022-03-10', 'Fumigada', '2022-04-05', '00000000-0000-0000-0000-000000000002', 'Actividad de prueba');
+INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', '2023-04-05', 'Limpieza', '2023-05-01', '00000000-0000-0000-0000-000000000003', 'Actividad de prueba');
+INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', '2022-05-20', 'Limpieza', '2022-06-15', '00000000-0000-0000-0000-000000000004', 'Actividad de prueba');
+INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('00000000-0000-0000-0000-000000000005', '2023-06-30', 'Cercada', '2023-07-20', '00000000-0000-0000-0000-000000000005', 'Actividad de prueba');
+INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('00000000-0000-0000-0000-000000000006', '2021-07-25', 'Cercada', '2021-08-10', '00000000-0000-0000-0000-000000000006', 'Actividad de prueba');
 
 
 -- InsumosActividad
-INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('1', '1', '1');
-INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('2', '2', '2');
-INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('3', '3', '3');
-INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('4', '4', '4');
-INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('5', '5', '5');
-INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('6', '6', '6');
+INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
+INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
+INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
+INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004');
+INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005');
+INSERT INTO InsumosActividad (ID, InsumoID, ActividadID) VALUES ('00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006');
 
 -- Ocupacion
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('1', 10, '2021-02-15', 'Lecheras', '2021-03-15', '1');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('2', 15, '2023-04-05', 'Secas', '2023-05-05', '2');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('3', 20, '2023-06-30', 'Engorde', '2023-07-30', '3');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('4', 25, '2021-08-30', 'Novillas', '2021-09-30', '4');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('5', 30, '2022-09-05', 'Novillos', '2022-10-05', '5');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('6', 35, '2023-10-30', 'Otro', '2023-11-30', '6');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('7', 40, '2020-01-01', 'Lecheras', '2020-01-31', '7');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('8', 45, '2020-02-01', 'Secas', '2020-02-29', '8');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('9', 50, '2020-03-01', 'Engorde', '2020-03-31', '9');
-INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('10', 55, '2020-04-01', 'Novillas', '2020-04-30', '10');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000001', 10, '2021-02-15', 'Lecheras', '2021-03-15', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000002', 15, '2023-04-05', 'Secas', '2023-05-05', '00000000-0000-0000-0000-000000000002');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000003', 20, '2023-06-30', 'Engorde', '2023-07-30', '00000000-0000-0000-0000-000000000003');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000004', 25, '2021-08-30', 'Novillas', '2021-09-30', '00000000-0000-0000-0000-000000000004');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000005', 30, '2022-09-05', 'Novillos', '2022-10-05', '00000000-0000-0000-0000-000000000005');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000006', 35, '2023-10-30', 'Otro', '2023-11-30', '00000000-0000-0000-0000-000000000006');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000007', 40, '2020-01-01', 'Lecheras', '2020-01-31', '00000000-0000-0000-0000-000000000007');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000008', 45, '2020-02-01', 'Secas', '2020-02-29', '00000000-0000-0000-0000-000000000008');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000009', 50, '2020-03-01', 'Engorde', '2020-03-31', '00000000-0000-0000-0000-000000000009');
+INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000010', 55, '2020-04-01', 'Novillas', '2020-04-30', '00000000-0000-0000-0000-000000000010');
 
 -- Productos
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('1', 'Leche', '2021-02-15', 100);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('2', 'Carne', '2022-03-10', 550);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('3', 'Leche', '2023-04-05', 75);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('4', 'Carne', '2022-05-20', 425);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('5', 'Leche', '2023-06-30', 114);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('6', 'Carne', '2021-07-25', 295);
+INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000001', 'Leche', '2021-02-15', 100);
+INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000002', 'Carne', '2022-03-10', 550);
+INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000003', 'Leche', '2023-04-05', 75);
+INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000004', 'Carne', '2022-05-20', 425);
+INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000005', 'Leche', '2023-06-30', 114);
+INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000006', 'Carne', '2021-07-25', 295);
 
 -- Venta
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('1', 100.00, 'Venta de prueba', '1');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('2', 50.00, 'Venta de prueba', '2');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('3', 75.00, 'Venta de prueba', '3');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('4', 25.00, 'Venta de prueba', '4');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('5', 10.00, 'Venta de prueba', '5');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('6', 5.00, 'Venta de prueba', '6');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('7', 100.00, 'Venta de prueba', '1');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('8', 50.00, 'Venta de prueba', '2');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000001', 100.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000002', 50.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000002');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000003', 75.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000003');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000004', 25.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000004');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000005', 10.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000005');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000006', 5.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000006');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000007', 100.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000008', 50.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000002');
 
 -- ProductosVentas
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('1', 10.00, 10, '1', '1');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('2', 5.00, 10, '2', '2');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('3', 7.50, 10, '3', '3');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('4', 2.50, 10, '4', '4');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('5', 1.00, 10, '5', '5');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('6', 0.50, 10, '6', '6');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('7', 10.00, 10, '1', '7');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('8', 5.00, 10, '2', '8');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000001', 10.00, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000002', 5.00, 10, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000003', 7.50, 10, '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000004', 2.50, 10, '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000005', 1.00, 10, '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000006', 0.50, 10, '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000007', 10.00, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000007');
+INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000008', 5.00, 10, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000008');
 
    -- Reses madres y padres sin relaciones parentales iniciales
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('1', 1, 'Pepe', 'Leche', '2015-01-01', 'Activa', NULL, NULL, 900.00, 50.00, 'M', 'Holstein', 0, '123456789', 'Padre de varias reses', '1');
+VALUES ('00000000-0000-0000-0000-000000000001', 1, 'Pepe', 'Leche', '2015-01-01', 'Activa', NULL, NULL, 900.00, 50.00, 'M', 'Holstein', 0, '123456789', 'Padre de varias reses', '00000000-0000-0000-0000-000000000001');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('2', 2, 'Luisa', 'Leche', '2015-02-01', 'Activa', NULL, NULL, 850.00, 50.00, 'F', 'Holstein', 0, '987654321', 'Madre de varias reses', '2');
+VALUES ('00000000-0000-0000-0000-000000000002', 2, 'Luisa', 'Leche', '2015-02-01', 'Activa', NULL, NULL, 850.00, 50.00, 'F', 'Holstein', 0, '987654321', 'Madre de varias reses', '00000000-0000-0000-0000-000000000002');
 
 -- Reses hijas con sus relaciones parentales
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('3', 3, 'Juanita', 'Leche', '2023-01-01', 'Activa', '2', '1', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '1');
+VALUES ('00000000-0000-0000-0000-000000000003', 3, 'Juanita', 'Leche', '2023-01-01', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '00000000-0000-0000-0000-000000000001');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('4', 4, 'Maria', 'Leche', '2019-01-01', 'Activa', '2', '1', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '2');
+VALUES ('00000000-0000-0000-0000-000000000004', 4, 'Maria', 'Leche', '2019-01-01', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '00000000-0000-0000-0000-000000000002');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('5', 5, 'Pepa', 'Leche', '2021-01-15', 'Activa', '2', '1', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '3');
+VALUES ('00000000-0000-0000-0000-000000000005', 5, 'Pepa', 'Leche', '2021-01-15', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '00000000-0000-0000-0000-000000000003');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('6', 6, 'Luna', 'Leche', '2018-08-01', 'Activa', '2', '1', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '4');
+VALUES ('00000000-0000-0000-0000-000000000006', 6, 'Luna', 'Leche', '2018-08-01', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '00000000-0000-0000-0000-000000000004');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('7', 7, 'Estrella', 'Leche', '2020-01-01', 'Activa', '2', '1', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '4');
+VALUES ('00000000-0000-0000-0000-000000000007', 7, 'Estrella', 'Leche', '2020-01-01', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 100.00, 50.00, 'F', 'Holstein', 0, '123456789', 'Hija de Luisa y Pepe', '00000000-0000-0000-0000-000000000004');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('8', 8, 'Sol', 'Leche', '2019-01-21', 'Activa', '2', '1', 110.00, 55.00, 'M', 'Holstein', 0, '987654321', 'Hijo de Luisa y Pepe', '1');
+VALUES ('00000000-0000-0000-0000-000000000008', 8, 'Rey', 'Leche', '2019-01-21', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 110.00, 55.00, 'M', 'Holstein', 0, '987654321', 'Hijo de Luisa y Pepe', '00000000-0000-0000-0000-000000000001');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('9', 9, 'Rosa', 'Leche', '2022-01-30', 'Activa', '2', '1', 105.00, 53.00, 'F', 'Holstein', 0, '987654322', 'Hija de Luisa y Pepe', '2');
+VALUES ('00000000-0000-0000-0000-000000000009', 9, 'Rosa', 'Leche', '2022-01-30', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 105.00, 53.00, 'F', 'Holstein', 0, '987654322', 'Hija de Luisa y Pepe', '00000000-0000-0000-0000-000000000002');
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
-VALUES ('10', 10, 'Jazmín', 'Leche', '2020-01-01', 'Activa', '2', '1', 108.00, 54.00, 'F', 'Holstein', 0, '987654323', 'Hija de Luisa y Pepe', '3');
+VALUES ('00000000-0000-0000-0000-000000000010', 10, 'Jazmín', 'Leche', '2020-01-01', 'Activa', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000001', 108.00, 54.00, 'F', 'Holstein', 0, '987654323', 'Hija de Luisa y Pepe', '00000000-0000-0000-0000-000000000003');
 
 -- Alimentos
-INSERT INTO alimento (ID, Nombre, Tipo) VALUES ('1', 'Concentrado terneros', 'Concentrado');
-INSERT INTO alimento (ID, Nombre, Tipo) VALUES ('2', 'Concentrado vacas', 'Concentrado');
-INSERT INTO alimento (ID, Nombre, Tipo) VALUES ('3', 'Concentrado vacas en secado', 'Concentrado');
+INSERT INTO alimento (ID, Nombre, Tipo) VALUES ('00000000-0000-0000-0000-000000000001', 'Concentrado terneros', 'Concentrado');
+INSERT INTO alimento (ID, Nombre, Tipo) VALUES ('00000000-0000-0000-0000-000000000002', 'Concentrado vacas', 'Concentrado');
+INSERT INTO alimento (ID, Nombre, Tipo) VALUES ('00000000-0000-0000-0000-000000000003', 'Concentrado vacas en secado', 'Concentrado');
 
 -- Muertes
-INSERT INTO Muerte (ID, Fecha, Causa, Observaciones, ResID) VALUES ('1', '2020-01-01', 'Enfermedad', 'Muerte de prueba', '1');
-INSERT INTO Muerte (ID, Fecha, Causa, Observaciones, ResID) VALUES ('2', '2020-01-01', 'Enfermedad', 'Muerte de prueba', '2');
+INSERT INTO Muerte (ID, Fecha, Causa, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000001', '2020-01-01', 'Enfermedad', 'Muerte de prueba', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Muerte (ID, Fecha, Causa, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000002', '2020-01-01', 'Enfermedad', 'Muerte de prueba', '00000000-0000-0000-0000-000000000002');
 
 -- Produccion individual
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('1', '2020-01-01', 'Leche', 10.00, '1');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('2', '2020-01-01', 'Leche', 10.00, '2');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('3', '2020-01-01', 'Leche', 10.00, '3');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('4', '2020-01-01', 'Leche', 10.00, '4');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('5', '2020-01-01', 'Leche', 10.00, '5');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('6', '2020-01-01', 'Leche', 10.00, '6');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('7', '2020-01-01', 'Leche', 10.00, '7');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('8', '2020-01-01', 'Leche', 10.00, '8');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('9', '2020-01-01', 'Leche', 10.00, '9');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('10', '2020-01-02', 'Leche', 10.00, '10');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('11', '2020-01-02', 'Carne', 10.00, '1');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('12', '2020-01-02', 'Carne', 10.00, '2');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('13', '2020-01-02', 'Carne', 10.00, '3');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('14', '2020-01-02', 'Carne', 10.00, '4');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('15', '2020-01-02', 'Carne', 10.00, '5');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('16', '2020-01-02', 'Carne', 10.00, '6');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('17', '2020-01-02', 'Carne', 10.00, '7');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('18', '2020-01-02', 'Carne', 10.00, '8');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('19', '2020-01-02', 'Carne', 10.00, '9');
-INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('20', '2020-01-02', 'Carne', 10.00, '10');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000001', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000002', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000002');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000003', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000003');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000004', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000004');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000005', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000005');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000006', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000006');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000007', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000007');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000008', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000008');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000009', '2020-01-01', 'Leche', 10.00, '00000000-0000-0000-0000-000000000009');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000010', '2020-01-02', 'Leche', 10.00, '00000000-0000-0000-0000-000000000010');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000011', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000012', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000002');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000013', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000003');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000014', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000004');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000015', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000005');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000016', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000006');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000017', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000007');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000018', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000008');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000019', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000009');
+INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000020', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000010');
 
 -- Servicio
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('1', 'Inseminacion', '2021-02-15', 'Juan Perez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('2', 'Inseminacion', '2022-03-10', 'Maria Rodriguez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('3', 'Inseminacion', '2023-04-05', 'Pedro Gomez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('4', 'Inseminacion', '2022-05-20', 'Luisa Perez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('5', 'Podología', '2023-06-30', 'Carlos Rodriguez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('6', 'Inseminacion', '2021-07-25', 'Ana Gomez', 'Servicio de prueba');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', 'Inseminacion', '2021-02-15', 'Juan Perez', 'Servicio de prueba');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', 'Inseminacion', '2022-03-10', 'Maria Rodriguez', 'Servicio de prueba');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', 'Inseminacion', '2023-04-05', 'Pedro Gomez', 'Servicio de prueba');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', 'Inseminacion', '2022-05-20', 'Luisa Perez', 'Servicio de prueba');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000005', 'Podología', '2023-06-30', 'Carlos Rodriguez', 'Servicio de prueba');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000006', 'Inseminacion', '2021-07-25', 'Ana Gomez', 'Servicio de prueba');
 
 -- Montas
-INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('1', '2020-01-25', '1', '1');
-INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('2', '2021-02-11', '3', '1');
-INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('3', '2021-01-01', '5', '1');
-INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('4', '2023-01-01', '1', '2');
-INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('5', '2024-08-01', '3', '2');
-INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('6', '2021-01-10', '5', '2');
-INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('7', '2020-09-01', '1', '3');
+INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000001', '2020-01-25', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000002', '2021-02-11', '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000003', '2021-01-01', '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000004', '2023-01-01', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000008');
+INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000005', '2024-08-01', '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000006', '2021-01-10', '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000008');
+INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000007', '2020-09-01', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000008');
 
 -- Inseminaciones
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('1', '2022-01-25', '2');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('2', '2023-02-11', '4');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('3', '2022-03-01', '6');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('4', '2023-04-15', '2');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('5', '2021-06-10', '4');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('6', '2023-07-20', '6');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('7', '2021-08-25', '2');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('8', '2022-09-05', '4');
-INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('9', '2023-10-30', '6');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000001', '2022-01-25', '00000000-0000-0000-0000-000000000002');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000002', '2023-02-11', '00000000-0000-0000-0000-000000000004');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000003', '2022-03-01', '00000000-0000-0000-0000-000000000006');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000004', '2023-04-15', '00000000-0000-0000-0000-000000000002');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000005', '2021-06-10', '00000000-0000-0000-0000-000000000004');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000006', '2023-07-20', '00000000-0000-0000-0000-000000000006');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000007', '2021-08-25', '00000000-0000-0000-0000-000000000002');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000008', '2022-09-05', '00000000-0000-0000-0000-000000000004');
+INSERT INTO Inseminacion (ID, FechaParto, ServicioID) VALUES ('00000000-0000-0000-0000-000000000009', '2023-10-30', '00000000-0000-0000-0000-000000000006');
 
 -- Uso
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('1', 'consumo personal', '2022-01-15', 10, '1');   
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('2', 'alimentar terneros', '2023-03-10', 15, '2');
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('3', 'alimentar terneros', '2021-06-25', 20, '3'); 
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('4', 'alimentar terneros', '2022-09-05', 25, '4'); 
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('5', 'alimentar terneros', '2023-11-18', 30, '5'); 
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('6', 'alimentar terneros', '2021-12-02', 35, '6');
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('7', 'alimentar terneros', '2022-07-22', 40, '1');
-INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('8', 'alimentar terneros', '2023-08-30', 45, '2');
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000001', 'consumo personal', '2022-01-15', 10, '00000000-0000-0000-0000-000000000001');   
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000002', 'alimentar terneros', '2023-03-10', 15, '00000000-0000-0000-0000-000000000002');
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000003', 'alimentar terneros', '2021-06-25', 20, '00000000-0000-0000-0000-000000000003'); 
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000004', 'alimentar terneros', '2022-09-05', 25, '00000000-0000-0000-0000-000000000004'); 
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000005', 'alimentar terneros', '2023-11-18', 30, '00000000-0000-0000-0000-000000000005'); 
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000006', 'alimentar terneros', '2021-12-02', 35, '00000000-0000-0000-0000-000000000004');
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000007', 'alimentar terneros', '2022-07-22', 40, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000008', 'alimentar terneros', '2023-08-30', 45, '00000000-0000-0000-0000-000000000002');
 
 -- Usuario
-INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contraseña) VALUES ('1', 'admin', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@juan.com', '123456');
-INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contraseña) VALUES ('2', 'operario', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@maria.com', '123456');
+INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contraseña) VALUES ('00000000-0000-0000-0000-000000000001', 'admin', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@juan.com', '123456');
+INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contraseña) VALUES ('00000000-0000-0000-0000-000000000002', 'operario', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@maria.com', '123456');
 
 -- Transaccion
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('1', 'Compra de insumos', '2021-05-01', 100.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('2', 'Compra de insumos', '2022-03-15', 50.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('3', 'Compra de insumos', '2023-07-20', 75.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('4', 'Compra de insumos', '2022-09-10', 325.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('5', 'Compra de insumos', '2023-11-05', 910.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('6', 'Compra de insumos', '2022-12-25', 500.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('7', 'Compra de insumos', '2021-08-30', 100.00);
+INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000001', 'Compra de insumos', '2021-05-01', 100.00);
+INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000002', 'Compra de insumos', '2022-03-15', 50.00);
+INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000003', 'Compra de insumos', '2023-07-20', 75.00);
+INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000004', 'Compra de insumos', '2022-09-10', 325.00);
+INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000005', 'Compra de insumos', '2023-11-05', 910.00);
+INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000006', 'Compra de insumos', '2022-12-25', 500.00);
+INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000007', 'Compra de insumos', '2021-08-30', 100.00);
 
 -- InsumosTransaccion
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('1', 10, 10.00, '1', '1');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('2', 10, 5.00, '2', '2');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('3', 10, 7.50, '3', '3');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('4', 10, 32.50, '4', '4');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('5', 10, 91.00, '5', '5');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('6', 10, 50.00, '6', '6');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('7', 10, 10.00, '1', '7');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000001', 10, 10.00, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000002', 10, 5.00, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000003', 10, 7.50, '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000004', 10, 32.50, '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000005', 10, 91.00, '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000006', 10, 50.00, '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000007', 10, 10.00, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000007');
 
 -- Imagen
-INSERT INTO Imagen (ID, URL, resID) VALUES ('1', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '1');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('2', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '2');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('3', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '3');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('4', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '4');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('5', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '5');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('6', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '6');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('7', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '7');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('8', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '8');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('9', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '9');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('10', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '10');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('11', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '1');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('12', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '2');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('13', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '3');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('14', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '4');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000001', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000002', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000002');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000003', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000003');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000004', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000004');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000005', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000005');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000006', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000006');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000007', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000007');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000008', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000008');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000009', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000009');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000010', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000010');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000011', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000001');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000012', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000002');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000013', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000003');
+INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000014', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000004');
 
 -- InsumoServicio
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('1', '1', '1');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('2', '2', '2');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('3', '3', '3');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('4', '4', '4');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('5', '5', '5');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('6', '6', '6');
-
-
+INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
+INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
+INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
+INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004');
+INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005');
+INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006');

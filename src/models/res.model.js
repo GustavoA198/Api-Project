@@ -5,12 +5,35 @@ export class ResModel {
     return await database.query('SELECT * FROM Res')
   }
 
+  static async getRes (id) {
+    return await database.query('SELECT * FROM Res WHERE ID = ?', [id])
+  }
+
   static async create (data) {
-    const { nombre, fechaNacimiento, madre, padre, pesoActual, pesoNacimiento, sexo, raza, numeroPartos, registroICA, fincaID } = data
+    const { Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID } = data
     const [[{id}]] = await database.query('SELECT UUID() id')
     const result = await database.query(
-      'INSERT INTO res VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-      [id, nombre, fechaNacimiento, madre, padre, pesoActual, pesoNacimiento, sexo, raza, numeroPartos, registroICA, fincaID])
+      'INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        id, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID])
     return result
+  }
+
+  static async update (id, data) {
+    const keys = Object.keys(data)
+    const values = Object.values(data)
+    let query = 'UPDATE Res SET '
+    keys.forEach((key, index) => {
+      query += `${key} = ?`
+      if (index < keys.length - 1) {
+        query += ', '
+      }
+    })
+    query += ' WHERE ID = ?'
+    values.push(id)
+    return await database.query(query, values)
+  }
+
+  static async delete (id) {
+    return await database.query('DELETE FROM Res WHERE ID = ?', [id])
   }
 }

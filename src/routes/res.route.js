@@ -5,6 +5,13 @@ export const ResRouter = Router()
 
 // GET
 ResRouter.get('/', ResController.getAll)
+ResRouter.get('/:id', ResController.getRes)
 
 // POST
 ResRouter.post('/', ResController.create)
+
+// PUT
+ResRouter.put('/:id', ResController.update)
+
+// DELETE
+ResRouter.delete('/:id', ResController.delete)

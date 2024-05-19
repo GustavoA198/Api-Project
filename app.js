@@ -1,5 +1,7 @@
 import express, {json} from 'express'
-import { ResRouter } from './src/routes/res.js'
+
+import { ResRouter } from './src/routes/res.route.js'
+import { ClienteRouter } from './src/routes/cliente.route.js'
 
 const app = express()
 app.use(json())
@@ -18,5 +20,6 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/res', ResRouter)
+app.use('/cliente', ClienteRouter)
 
 export default app

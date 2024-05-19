@@ -13,3 +13,11 @@ export function error (req, res, message = 'Error Interno', status = 500) {
     body: message
   })
 }
+
+export function notFound (req, res, message = 'Not Found', status = 404) {
+  res.status(status).send({
+    error: true,
+    status,
+    body: message
+  })
+}
