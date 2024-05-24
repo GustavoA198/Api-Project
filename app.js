@@ -3,6 +3,9 @@ import express, {json} from 'express'
 import { ResRouter } from './src/routes/res.route.js'
 import { ClienteRouter } from './src/routes/cliente.route.js'
 import { FincaRouter } from './src/routes/finca.route.js'
+import { LoteRouter } from './src/routes/lote.route.js'
+import { InsumoRouter } from './src/routes/insumo.route.js'
+import { ActividadRouter } from './src/routes/actividad.route.js'
 
 const app = express()
 app.use(json())
@@ -23,5 +26,8 @@ app.get('/', (req, res) => {
 app.use('/res', ResRouter)
 app.use('/cliente', ClienteRouter)
 app.use('/finca', FincaRouter)
+app.use('/lote', LoteRouter)
+app.use('/insumo', InsumoRouter)
+app.use('/actividad', ActividadRouter)
 
 export default app

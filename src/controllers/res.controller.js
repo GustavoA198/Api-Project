@@ -60,7 +60,7 @@ export class ResController {
   static async delete (req, res) {
     try {
       const [deleteResult] = await ResModel.delete(req.params.id)
-      if (deleteResult.affectedRows === 0) {
+      if (deleteResult.affectedRows === 0 || deleteResult.affectedRows === undefined) {
         notFound(req, res, `No se encontró ninguna 'res' con el ID ${req.params.id} para eliminar`)
       } else {
         success(req, res, deleteResult, 200)
