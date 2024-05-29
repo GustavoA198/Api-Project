@@ -6,10 +6,13 @@ import { FincaRouter } from './src/routes/finca.route.js'
 import { LoteRouter } from './src/routes/lote.route.js'
 import { InsumoRouter } from './src/routes/insumo.route.js'
 import { ActividadRouter } from './src/routes/actividad.route.js'
+import cors from 'cors'
 
 const app = express()
-app.use(json())
 
+app.use(cors())
+
+app.use(json())
 app.get('/', (req, res) => {
   res.json(
     {
