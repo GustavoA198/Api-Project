@@ -282,7 +282,7 @@ FOREIGN KEY (TransaccionID) REFERENCES Transaccion(ID);
 
 ALTER TABLE Imagen
 ADD CONSTRAINT fk_Imagen_Res
-ADD FOREIGN KEY (resID) REFERENCES res(ID);
+FOREIGN KEY (resID) REFERENCES res(ID);
 -- Fin de las sentencias ALTER TABLE con comentarios
 
 

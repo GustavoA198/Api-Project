@@ -10,10 +10,13 @@ import { OcupacionRouter } from './src/routes/ocupacion.route.js'
 import { ProductoRouter } from './src/routes/producto.route.js'
 import { VentaRouter } from './src/routes/venta.route.js'
 import { ProductoVentasRouter } from './src/routes/productosVentas.route.js'
+import cors from 'cors'
 
 const app = express()
-app.use(json())
 
+app.use(cors())
+
+app.use(json())
 app.get('/', (req, res) => {
   res.json(
     {
