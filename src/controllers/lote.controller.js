@@ -60,7 +60,7 @@ export class LoteController {
   static async delete (req, res) {
     try {
       const deleted = await LoteModel.delete(req.params.id)
-      if (deleted.affectedRows === 0 || deleted.affectedRows === undefined) {
+      if (deleted.affectedRows === 0) {
         notFound(req, res, `No se encontro ningún lote con el ID ${req.params.id} para eliminar`)
       } else {
         success(req, res, `Lote con ID ${req.params.id} eliminado`, 200)

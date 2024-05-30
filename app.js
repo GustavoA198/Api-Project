@@ -6,6 +6,10 @@ import { FincaRouter } from './src/routes/finca.route.js'
 import { LoteRouter } from './src/routes/lote.route.js'
 import { InsumoRouter } from './src/routes/insumo.route.js'
 import { ActividadRouter } from './src/routes/actividad.route.js'
+import { OcupacionRouter } from './src/routes/ocupacion.route.js'
+import { ProductoRouter } from './src/routes/producto.route.js'
+import { VentaRouter } from './src/routes/venta.route.js'
+import { ProductoVentasRouter } from './src/routes/productosVentas.route.js'
 
 const app = express()
 app.use(json())
@@ -17,7 +21,13 @@ app.get('/', (req, res) => {
       endpoints: {
         res: '/res',
         register: '/register',
-        login: '/login'
+        login: '/login',
+        cliente: '/cliente',
+        finca: '/finca',
+        lote: '/lote',
+        insumo: '/insumo',
+        actividad: '/actividad',
+        ocupacion: '/ocupacion'
       }
     })
 })
@@ -29,5 +39,9 @@ app.use('/finca', FincaRouter)
 app.use('/lote', LoteRouter)
 app.use('/insumo', InsumoRouter)
 app.use('/actividad', ActividadRouter)
+app.use('/ocupacion', OcupacionRouter)
+app.use('/producto', ProductoRouter)
+app.use('/venta', VentaRouter)
+app.use('/productosVentas', ProductoVentasRouter)
 
 export default app

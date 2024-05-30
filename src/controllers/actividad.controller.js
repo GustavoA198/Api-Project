@@ -59,7 +59,7 @@ export class ActividadController {
 
   static async delete (req, res) {
     try {
-      const deleted = await ActividadModel.delete(req.params.id)
+      const [deleted] = await ActividadModel.delete(req.params.id)
       console.log(deleted.affectedRows)
       if (deleted.affectedRows === 0 || deleted.affectedRows === undefined) {
         console.log(1)

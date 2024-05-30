@@ -3,7 +3,7 @@ import z from 'zod'
 export const OcupacionSchema = z.object({
   NoAnimales: z.number().int(),
   FechaIngreso: z.string().transform((str) => new Date(str)).optional(),
-  TipoRebano: z.enum(['Lecheras', 'Secas', 'Engorde', 'Novillas', 'Novillos', 'Otro']),
+  TipoRebano: z.enum(['Lecheras', 'Secas', 'Engorde', 'Novillas', 'Novillos', 'Otro']).optional(),
   FechaSalida: z.string().transform((str) => new Date(str)).optional(),
   LoteID: z.string().uuid()
 })
