@@ -70,118 +70,118 @@ CREATE TABLE Producto (
 );
 
 CREATE TABLE Venta (
-ID VARCHAR(36) PRIMARY KEY,
-Total DECIMAL(10,2) NOT NULL,
-Observaciones TEXT,
-ClienteID VARCHAR(36) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Total DECIMAL(10,2) NOT NULL,
+    Observaciones TEXT,
+    ClienteID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE ProductosVentas (
-ID VARCHAR(36) PRIMARY KEY,
-PrecioUnitario DECIMAL(10,2),
-Cantidad INT(11) NOT NULL,
-ProductoID VARCHAR(36) NOT NULL,
-VentaID VARCHAR(36) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    PrecioUnitario DECIMAL(10,2),
+    Cantidad INT(11) NOT NULL,
+    ProductoID VARCHAR(36) NOT NULL,
+    VentaID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Res (
-ID VARCHAR(36) PRIMARY KEY,
-Numero INT(6) NOT NULL,
-Nombre VARCHAR(100),
-Tipo ENUM('Leche', 'Carne', 'Doble Proposito'),
-FechaNacimiento DATE,
-Estado ENUM('Activa', 'Vendida', 'Muerte'),
-Madre VARCHAR(36),
-Padre VARCHAR(36),
-PesoActual DECIMAL(5,2),
-PesoNacimiento DECIMAL(5,2),
-Sexo CHAR(1) CHECK (Sexo IN ('M', 'F')),
-Raza VARCHAR(20),
-NumeroPartos INT(5),
-RegistroICA VARCHAR(50),
-Observaciones TEXT,
-FincaID VARCHAR(36) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Numero INT(6) NOT NULL,
+    Nombre VARCHAR(100),
+    Tipo ENUM('Leche', 'Carne', 'Doble Proposito'),
+    FechaNacimiento DATE,
+    Estado ENUM('Activa', 'Vendida', 'Muerte'),
+    Madre VARCHAR(36),
+    Padre VARCHAR(36),
+    PesoActual DECIMAL(5,2),
+    PesoNacimiento DECIMAL(5,2),
+    Sexo CHAR(1) CHECK (Sexo IN ('M', 'F')),
+    Raza VARCHAR(20),
+    NumeroPartos INT(5),
+    RegistroICA VARCHAR(50),
+    Observaciones TEXT,
+    FincaID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE alimento(
-ID VARCHAR(36) PRIMARY KEY,
-Nombre VARCHAR(100) NOT NULL,
-Tipo VARCHAR(100) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Tipo VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Muerte (
-ID VARCHAR(36) PRIMARY KEY,
-Fecha DATE NOT NULL,
-Causa VARCHAR(200),
-Observaciones TEXT,
-ResID VARCHAR(36) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Fecha DATE NOT NULL,
+    Causa VARCHAR(200),
+    Observaciones TEXT,
+    ResID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE ProduccionIndividual (
-ID VARCHAR(36) PRIMARY KEY,
-Fecha DATE NOT NULL,
-Tipo VARCHAR(20) CHECK (Tipo IN ('Leche', 'Carne')),
-Cantidad DECIMAL(5,2) NOT NULL,
-ResID VARCHAR(36) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Fecha DATE NOT NULL,
+    Tipo VARCHAR(20) CHECK (Tipo IN ('Leche', 'Carne')),
+    Cantidad DECIMAL(5,2) NOT NULL,
+    ResID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Servicio (
-ID VARCHAR(36) PRIMARY KEY,
-Tipo VARCHAR(100),
-Fecha DATE NOT NULL,
-Veterinario VARCHAR(100),
-Observaciones TEXT
+    ID VARCHAR(36) PRIMARY KEY,
+    Tipo VARCHAR(100),
+    Fecha DATE NOT NULL,
+    Veterinario VARCHAR(100),
+    Observaciones TEXT
 );
 
 CREATE TABLE Monta (
-ID VARCHAR(36) PRIMARY KEY,
-FechaParto DATE,
-ServicioID VARCHAR(36) NOT NULL,
-ToroID VARCHAR(36) NOT NULL,
-FOREIGN KEY (ServicioID) REFERENCES Servicio(ID),
-FOREIGN KEY (ToroID) REFERENCES Res(ID)
+    ID VARCHAR(36) PRIMARY KEY,
+    FechaParto DATE,
+    ServicioID VARCHAR(36) NOT NULL,
+    ToroID VARCHAR(36) NOT NULL,
+    FOREIGN KEY (ServicioID) REFERENCES Servicio(ID),
+    FOREIGN KEY (ToroID) REFERENCES Res(ID)
 );
 
 CREATE TABLE Inseminacion (
-ID VARCHAR(36) PRIMARY KEY,
-FechaParto DATE,
-ServicioID VARCHAR(36) NOT NULL,
-FOREIGN KEY (ServicioID) REFERENCES Servicio(ID)
+    ID VARCHAR(36) PRIMARY KEY,
+    FechaParto DATE,
+    ServicioID VARCHAR(36) NOT NULL,
+    FOREIGN KEY (ServicioID) REFERENCES Servicio(ID)
 );
 
 CREATE TABLE Uso (
-ID VARCHAR(36) PRIMARY KEY,
-Justificacion TEXT,
-Fecha DATE NOT NULL,
-Cantidad INT(11),
-ProductoID VARCHAR(36),
-FOREIGN KEY (ProductoID) REFERENCES Producto(ID)
+    ID VARCHAR(36) PRIMARY KEY,
+    Justificacion TEXT,
+    Fecha DATE NOT NULL,
+    Cantidad INT(11),
+    ProductoID VARCHAR(36),
+    FOREIGN KEY (ProductoID) REFERENCES Producto(ID)
 );
 
 CREATE TABLE Usuario (
-ID VARCHAR(36) PRIMARY KEY,
-Tipo VARCHAR(20) CHECK (Tipo IN ('admin', 'operario')),
-Identificacion VARCHAR(20),
-Nombre VARCHAR(100),
-Direccion VARCHAR(100),
-Telefono VARCHAR(20),
-Email VARCHAR(100) NOT NULL,
-Contraseña VARCHAR(100) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Tipo VARCHAR(20) CHECK (Tipo IN ('admin', 'operario')),
+    Identificacion VARCHAR(20),
+    Nombre VARCHAR(100),
+    Direccion VARCHAR(100),
+    Telefono VARCHAR(20),
+    Email VARCHAR(100) NOT NULL,
+    Contrasena VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Transaccion (
-ID VARCHAR(36) PRIMARY KEY,
-Descripcion TEXT,
-Fecha DATE NOT NULL,
-Valor DECIMAL(10,2) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Descripcion TEXT,
+    Fecha DATE NOT NULL,
+    Valor DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE InsumosTransaccion (
-ID VARCHAR(36) PRIMARY KEY,
-Cantidad INT(10) NOT NULL,
-ValorUnitario DECIMAL(10,2),
-InsumoID VARCHAR(36) NOT NULL,
-TransaccionID VARCHAR(36) NOT NULL
+    ID VARCHAR(36) PRIMARY KEY,
+    Cantidad INT(10) NOT NULL,
+    ValorUnitario DECIMAL(10,2),
+    InsumoID VARCHAR(36) NOT NULL,
+    TransaccionID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Imagen (
@@ -473,8 +473,8 @@ INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('000000
 INSERT INTO Uso (ID, Justificacion, Fecha, Cantidad, ProductoID) VALUES ('00000000-0000-0000-0000-000000000008', 'alimentar terneros', '2023-08-30', 45, '00000000-0000-0000-0000-000000000002');
 
 -- Usuario
-INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contraseña) VALUES ('00000000-0000-0000-0000-000000000001', 'admin', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@juan.com', '123456');
-INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contraseña) VALUES ('00000000-0000-0000-0000-000000000002', 'operario', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@maria.com', '123456');
+INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contrasena) VALUES ('00000000-0000-0000-0000-000000000001', 'admin', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@juan.com', '123456');
+INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contrasena) VALUES ('00000000-0000-0000-0000-000000000002', 'operario', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@maria.com', '123456');
 
 -- Transaccion
 INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000001', 'Compra de insumos', '2021-05-01', 100.00);

@@ -7,7 +7,7 @@ export const UsuarioSchema = z.object({
   Direccion: z.string().max(100).optional(),
   Telefono: z.string().max(20).optional(),
   Email: z.string().email(),
-  Contraseña: z.string().min(1).max(100)
+  Contrasena: z.string().min(1).max(100)
 })
 
 export function validateUsuario (input) {

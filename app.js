@@ -17,6 +17,10 @@ import { ProduccionIndividualRouter } from './src/routes/produccionIndividual.ro
 import { ServicioRouter } from './src/routes/servicio.route.js'
 import { MontaRouter } from './src/routes/monta.route.js'
 import { InseminacionRouter } from './src/routes/inseminacion.route.js'
+import { UsoRouter } from './src/routes/uso.route.js'
+import { UsuarioRouter } from './src/routes/usuario.route.js'
+import { TransaccionRouter } from './src/routes/transaccion.route.js'
+import { InsumosTransaccionRouter } from './src/routes/insumosTransaccion.route.js'
 
 const app = express()
 
@@ -58,5 +62,9 @@ app.use('/produccionIndividual', ProduccionIndividualRouter)
 app.use('/servicio', ServicioRouter)
 app.use('/monta', MontaRouter)
 app.use('/inseminacion', InseminacionRouter)
+app.use('/uso', UsoRouter)
+app.use('/usuario', UsuarioRouter)
+app.use('/transaccion', TransaccionRouter)
+app.use('/insumosTransaccion', InsumosTransaccionRouter)
 
 export default app
