@@ -9,8 +9,7 @@ export class ProduccionIndividualModel {
     return await database.query('SELECT * FROM ProduccionIndividual WHERE id = ?', [id])
   }
 
-  static async createProduccionIndividual (data) {
-    const { Fecha, Tipo, Cantidad, ResID } = data
+  static async createProduccionIndividual ({Fecha, Tipo, Cantidad, ResID}) {
     const [[{ id }]] = await database.query('SELECT UUID() id')
     const result = await database.query('INSERT INTO ProduccionIndividual (id, Fecha, Tipo, Cantidad, ResID) VALUES (?, ?, ?, ?, ?)',
       [id, Fecha, Tipo, Cantidad, ResID])
