@@ -41,7 +41,20 @@ app.get('/', (req, res) => {
         lote: '/lote',
         insumo: '/insumo',
         actividad: '/actividad',
-        ocupacion: '/ocupacion'
+        ocupacion: '/ocupacion',
+        producto: '/producto',
+        venta: '/venta',
+        productosVentas: '/productosVentas',
+        alimento: '/alimento',
+        muerte: '/muerte',
+        produccionIndividual: '/produccionIndividual',
+        servicio: '/servicio',
+        monta: '/monta',
+        inseminacion: '/inseminacion',
+        uso: '/uso',
+        usuario: '/usuario',
+        Transaccion: '/transaccion',
+        insumosTransaccion: '/insumosTransaccion'
       }
     })
 })

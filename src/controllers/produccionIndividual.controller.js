@@ -28,9 +28,19 @@ export class ProduccionIndividualController {
   static async create (req, res) {
     const result = validateProduccionIndividual(req.body)
     if (result.success) {
+      const { data } = result
+      const ListResID = data.ResID
+      const Fecha = data.Fecha
+      const Tipo = data.Tipo
+      const Cantidad = data.Cantidad / ListResID.length
+
       try {
-        const added = await ProduccionIndividualModel.createProduccionIndividual(result.data)
-        success(req, res, added, 200)
+        let listAdded = []
+        for (const ResID of ListResID) {
+          const added = await ProduccionIndividualModel.createProduccionIndividual({ Fecha, Tipo, Cantidad, ResID })
+          listAdded.push(added)
+        }
+        success(req, res, listAdded, 200)
       } catch (e) {
         error(req, res, e.message, e.status)
       }
