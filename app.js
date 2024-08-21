@@ -21,6 +21,7 @@ import { UsoRouter } from './src/routes/uso.route.js'
 import { UsuarioRouter } from './src/routes/usuario.route.js'
 import { TransaccionRouter } from './src/routes/transaccion.route.js'
 import { InsumosTransaccionRouter } from './src/routes/insumosTransaccion.route.js'
+import { ImagenRouter } from './src/routes/imagen.route.js'
 
 const app = express()
 
@@ -66,5 +67,6 @@ app.use('/uso', UsoRouter)
 app.use('/usuario', UsuarioRouter)
 app.use('/transaccion', TransaccionRouter)
 app.use('/insumosTransaccion', InsumosTransaccionRouter)
+app.use('/imagen', ImagenRouter)
 
 export default app
