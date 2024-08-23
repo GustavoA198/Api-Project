@@ -17,7 +17,7 @@ export class ImagenController {
 
   static async getAll (req, res) {
     try {
-      const [all] = await ImagenModel.getAll()
+      const [all] = await ImagenModel.getAll(req.params.resid)
       success(req, res, all, 200)
     } catch (e) {
       error(req, res, e.message, e.status)
@@ -26,11 +26,11 @@ export class ImagenController {
 
   static async getImagen (req, res) {
     try {
-      const [imagen] = await ImagenModel.getImagen(req.params.id)
+      const imagen = await ImagenModel.getImagen(req.params.imagen)
       if (!imagen || imagen.length === 0) {
-        notFound(req, res, `No se encontró ninguna imagen con el ID ${req.params.id}`)
+        notFound(req, res, `No se encontró ninguna imagen con el nombre ${req.params.imagen}`)
       } else {
-        success(req, res, imagen, 200)
+        res.sendFile(imagen)
       }
     } catch (e) {
       error(req, res, e.message, e.status)
@@ -49,6 +49,7 @@ export class ImagenController {
       }
       const fileLocations = req.files.map(file => file.path)// Crear un array con las ubicaciones de los archivos
       const resID = req.body.resID
+      console.log(fileLocations)
       ImagenModel.create({ URL: fileLocations, resID: resID })
         .then(() => success(req, res, 'Imágenes guardadas con éxito'))
         .catch(err => {

@@ -5,36 +5,28 @@ import { promisify } from 'util'
 import fs from 'fs'
 
 export class ImagenModel {
-  static async getAll () {
-    return await database.query('SELECT * FROM Imagen')
+  static async getAll (resID) {
+    return await database.query('SELECT * FROM Imagen WHERE resID = ?', [resID])
   }
 
-  static async getImagen (resID) {
+  static async getImagen (imagen) {
     const __filename = fileURLToPath(import.meta.url)
-    const __dirname = dirname(__filename);
-    const results = await database.query('SELECT * FROM Imagen WHERE resID = ?', [resID])
+    const __dirname = dirname(__filename)
     const readFile = promisify(fs.readFile)
-    console.log('_____________________________________________________________________')
-    console.log('results', results, 'filename', __filename, 'dirname', __dirname, 'readfile', readFile)
-  
-    if (results[0].length > 0) {
-      const images = []
-      for (let result of results[0]) {
-        console.log('result.url', result.URL)
-        if (result.URL) {          
-          const data = await readFile(path.join(__dirname, '..', '..', result.URL)) // Lee el archivo de imagen
-          const imageBase64 = Buffer.from(data).toString('base64') // Convierte la imagen a Base64          
-          images.push({
-            ID: result.ID,
-            Image: imageBase64,
-            resID: result.resID
-          })
-        }
-      }
-      return images
-    } else {
-      throw new Error(`No se encontró ninguna imagen con el ID ${resID}`)
+    try {
+      const imagenData = path.join(__dirname, '..', '..', 'images', imagen)  // Direccion de la imagen
+      await readFile(imagenData) // Lee el archivo de imagen
+      return imagenData
+    } catch (error) {
+      throw new Error(`No se encontró ninguna imagen con el nombre ${imagen}`)
     }
+  }
+
+  static async create (imagen) {
+    const {URL, resID} = imagen
+    const [[{id}]] = await database.query('SELECT UUID() id')
+    const result = await database.query('INSERT INTO Imagen (ID, URL, resID) VALUES (?, ?, ?)', [id, URL, resID])
+    return result
   }
 
   static async delete (id) {
