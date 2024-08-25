@@ -22,8 +22,7 @@ export class ImagenModel {
     }
   }
 
-  static async create (imagen) {
-    const {URL, resID} = imagen
+  static async create (URL, resID) {
     const [[{id}]] = await database.query('SELECT UUID() id')
     const result = await database.query('INSERT INTO Imagen (ID, URL, resID) VALUES (?, ?, ?)', [id, URL, resID])
     return result

@@ -7,7 +7,8 @@ const storage = multer.diskStorage({
     cb(null, './images')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix)
   }
 })
 
@@ -39,7 +40,7 @@ export class ImagenController {
 
   static create (req, res) {
     const maxImagenes = 10
-    upload.array('images', maxImagenes)(req, res, function (err) {
+    upload.array('images', maxImagenes)(req, res, async function (err) {
       if (err instanceof multer.MulterError) {
         console.error(err)
         return error(req, res, 'Se produjo un error al cargar imágenes. Asegúrese de que las imágenes sean válidas y de que no excedan el tamaño máximo permitido.')
@@ -47,15 +48,20 @@ export class ImagenController {
         console.error(err)
         return error(req, res, 'Se produjo un error al cargar imágenes. Asegúrese de que las imágenes sean válidas y de que no excedan el tamaño máximo permitido.')
       }
-      const fileLocations = req.files.map(file => file.path)// Crear un array con las ubicaciones de los archivos
-      const resID = req.body.resID
-      console.log(fileLocations)
-      ImagenModel.create({ URL: fileLocations, resID: resID })
-        .then(() => success(req, res, 'Imágenes guardadas con éxito'))
-        .catch(err => {
-          console.error(err)
-          error(req, res, 'Se produjo un error al guardar las imágenes')
-        })
+
+      const fileNames = req.files.map(file => file.filename)// Crear un array con los nombres de los archivos
+
+      try {
+        let listAdded = []
+        for (const filename of fileNames) {
+          console.log(filename)
+          const added = await ImagenModel.create(filename, req.body.resID)
+          listAdded.push(added)
+        }
+        success(req, res, listAdded, 200)
+      } catch (e) {
+        error(req, res, e.message, e.status)
+      }
     })
   }
 
