@@ -2,11 +2,11 @@ import { database } from '../database/db.js'
 
 export class ResModel {
   static async getAll () {
-    return await database.query('SELECT * FROM Res')
+    return await database.query('SELECT * FROM Res WHERE Estado = ?', ['Activa'])
   }
 
   static async getRes (id) {
-    return await database.query('SELECT * FROM Res WHERE ID = ?', [id])
+    return await database.query('SELECT * FROM Res WHERE ID = ? AND Estado = ? ', [id, 'Activa'])
   }
 
   static async create (data) {
@@ -34,6 +34,6 @@ export class ResModel {
   }
 
   static async delete (id) {
-    return await database.query('DELETE FROM Res WHERE ID = ?', [id])
+    return await database.query('UPDATE Res SET Estado = ? WHERE ID = ? ', ['Muerte', id])
   }
 }

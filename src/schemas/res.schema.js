@@ -4,7 +4,7 @@ const ResSchema = z.object({
   Numero: z.number().int().min(0).max(999999),
   Nombre: z.string().max(100).optional(),
   Tipo: z.enum(['Leche', 'Carne', 'Doble Proposito']).optional(),
-  FechaNacimiento: z.string().transform(str => new Date(str)).optional(),
+  FechaNacimiento: z.string().optional(),
   Estado: z.enum(['Activa', 'Vendida', 'Muerte']).optional(),
   Madre: z.string().uuid().optional(),
   Padre: z.string().uuid().optional(),

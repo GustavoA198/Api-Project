@@ -27,6 +27,7 @@ export class ResController {
 
   static async create (req, res) {
     const result = validateRes(req.body)
+    console.log(result.data)
     if (result.success) {
       try {
         const added = await ResModel.create(result.data)
