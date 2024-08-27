@@ -5,7 +5,9 @@ export const ImagenRouter = Router()
 // Get imagen
 ImagenRouter.get('/:resid', ImagenController.getAll)
 
-ImagenRouter.get('/img/:imagen', ImagenController.getImagen)
+ImagenRouter.get('/img/:imagen', ImagenController.getImagenByName)
+
+ImagenRouter.get('/id/:resid', ImagenController.getImagenById)
 
 // Create imagen
 ImagenRouter.post('/', ImagenController.create)

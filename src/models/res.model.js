@@ -6,7 +6,11 @@ export class ResModel {
   }
 
   static async getRes (id) {
-    return await database.query('SELECT * FROM Res WHERE ID = ? AND Estado = ? ', [id, 'Activa'])
+    return await database.query('SELECT * FROM Res WHERE ID = ? ', [id])
+  }
+
+  static async getHijos (id) {
+    return await database.query('SELECT * FROM Res WHERE Madre = ? OR Padre = ?', [id, id])
   }
 
   static async create (data) {

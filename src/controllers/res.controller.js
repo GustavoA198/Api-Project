@@ -18,7 +18,20 @@ export class ResController {
       if (!Res || Res.length === 0) {
         notFound(req, res, `No se encontró ninguna 'res' con el ID ${req.params.id}`)
       } else {
-        success(req, res, Res, 200)
+        success(req, res, Res[0], 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getHijos (req, res) {
+    try {
+      const [hijos] = await ResModel.getHijos(req.params.id)
+      if (!hijos || hijos.length === 0) {
+        notFound(req, res, `No se encontró hijos para la res con el ID ${req.params.id}`)
+      } else {
+        success(req, res, hijos, 200)
       }
     } catch (e) {
       error(req, res, e.message, e.status)

@@ -25,11 +25,30 @@ export class ImagenController {
     }
   }
 
-  static async getImagen (req, res) {
+  static async getImagenByName (req, res) {
     try {
       const imagen = await ImagenModel.getImagen(req.params.imagen)
       if (!imagen || imagen.length === 0) {
         notFound(req, res, `No se encontró ninguna imagen con el nombre ${req.params.imagen}`)
+      } else {
+        res.sendFile(imagen)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getImagenById (req, res) {
+    try {
+      const [all] = await ImagenModel.getAll(req.params.resid)
+      if (!all || all.length === 0) {
+        notFound(req, res, `No se encontró ninguna imagen para el id ${req.params.resid}`)
+        return
+      }
+      const imagename = all[0].URL
+      const imagen = await ImagenModel.getImagen(imagename)
+      if (!imagen || imagen.length === 0) {
+        notFound(req, res, `No se encontró ninguna imagen`)
       } else {
         res.sendFile(imagen)
       }
