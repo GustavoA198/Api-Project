@@ -32,17 +32,17 @@ CREATE TABLE Lote (
 CREATE TABLE Insumo (
     ID VARCHAR(36) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    FechaIngreso DATE NOT NULL,
+    FechaIngreso VARCHAR(10) NOT NULL,
     CantidadActual BIGINT,
-    FechaVencimiento DATE,
+    FechaVencimiento VARCHAR(10),
     Observaciones TEXT
 );
 
 CREATE TABLE Actividad (
     ID VARCHAR(36) PRIMARY KEY,
-    Fecha DATE NOT NULL,
+    Fecha VARCHAR(10) NOT NULL,
     Tipo VARCHAR(100),
-    TiempoCarencia DATE,
+    TiempoCarencia VARCHAR(10),
     LoteID VARCHAR(36) NOT NULL,
     Observaciones TEXT
 );
@@ -56,16 +56,16 @@ CREATE TABLE InsumosActividad (
 CREATE TABLE Ocupacion (
     ID VARCHAR(36) PRIMARY KEY,
     NoAnimales INT(11) NOT NULL,
-    FechaIngreso DATE,
+    FechaIngreso VARCHAR(10),
     TipoRebano ENUM("Lecheras","Secas", "Engorde", "Novillas", "Novillos", "Otro"),
-    FechaSalida DATE,
+    FechaSalida VARCHAR(10),
     LoteID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Producto (
     ID VARCHAR(36) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    Fecha DATE,
+    Fecha VARCHAR(10),
     Cantidad INT(11) NOT NULL
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE Res (
     Numero INT(6) NOT NULL,
     Nombre VARCHAR(100),
     Tipo ENUM('Leche', 'Carne', 'Doble Proposito'),
-    FechaNacimiento DATE,
+    FechaNacimiento VARCHAR(10),
     Estado ENUM('Activa', 'Vendida', 'Muerte'),
     Madre VARCHAR(36),
     Padre VARCHAR(36),
@@ -111,7 +111,7 @@ CREATE TABLE alimento(
 
 CREATE TABLE Muerte (
     ID VARCHAR(36) PRIMARY KEY,
-    Fecha DATE NOT NULL,
+    Fecha VARCHAR(10) NOT NULL,
     Causa VARCHAR(200),
     Observaciones TEXT,
     ResID VARCHAR(36) NOT NULL
@@ -119,23 +119,25 @@ CREATE TABLE Muerte (
 
 CREATE TABLE ProduccionIndividual (
     ID VARCHAR(36) PRIMARY KEY,
-    Fecha DATE NOT NULL,
+    Fecha VARCHAR(10) NOT NULL,
     Tipo VARCHAR(20) CHECK (Tipo IN ('Leche', 'Carne')),
     Cantidad DECIMAL(5,2) NOT NULL,
     ResID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Servicio (
-    ID VARCHAR(36) PRIMARY KEY,
+    ID VARCHAR(36) UNIQUE,       -- ID is unique but not the primary key
+    Numero INT(6) AUTO_INCREMENT PRIMARY KEY, -- Numero is the primary key and auto-increments
     Tipo VARCHAR(100),
-    Fecha DATE NOT NULL,
+    Fecha VARCHAR(10) NOT NULL,
     Veterinario VARCHAR(100),
-    Observaciones TEXT
+    Observaciones TEXT,
+    ResID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Monta (
     ID VARCHAR(36) PRIMARY KEY,
-    FechaParto DATE,
+    FechaParto VARCHAR(10),
     ServicioID VARCHAR(36) NOT NULL,
     ToroID VARCHAR(36) NOT NULL,
     FOREIGN KEY (ServicioID) REFERENCES Servicio(ID),
@@ -144,7 +146,7 @@ CREATE TABLE Monta (
 
 CREATE TABLE Inseminacion (
     ID VARCHAR(36) PRIMARY KEY,
-    FechaParto DATE,
+    FechaParto VARCHAR(10),
     ServicioID VARCHAR(36) NOT NULL,
     FOREIGN KEY (ServicioID) REFERENCES Servicio(ID)
 );
@@ -152,10 +154,12 @@ CREATE TABLE Inseminacion (
 CREATE TABLE Uso (
     ID VARCHAR(36) PRIMARY KEY,
     Justificacion TEXT,
-    Fecha DATE NOT NULL,
+    Fecha VARCHAR(10) NOT NULL,
     Cantidad INT(11),
     ProductoID VARCHAR(36),
-    FOREIGN KEY (ProductoID) REFERENCES Producto(ID)
+    ServicioID VARCHAR(36),
+    FOREIGN KEY (ProductoID) REFERENCES Insumo(ID),
+    FOREIGN KEY (ServicioID) REFERENCES Servicio(ID)
 );
 
 CREATE TABLE Usuario (
@@ -172,7 +176,7 @@ CREATE TABLE Usuario (
 CREATE TABLE Transaccion (
     ID VARCHAR(36) PRIMARY KEY,
     Descripcion TEXT,
-    Fecha DATE NOT NULL,
+    Fecha VARCHAR(10) NOT NULL,
     Valor DECIMAL(10,2) NOT NULL
 );
 
@@ -283,6 +287,10 @@ FOREIGN KEY (TransaccionID) REFERENCES Transaccion(ID);
 ALTER TABLE Imagen
 ADD CONSTRAINT fk_Imagen_Res
 FOREIGN KEY (resID) REFERENCES res(ID);
+
+ALTER TABLE Servicio
+ADD CONSTRAINT fk_Servicio_Res
+FOREIGN KEY (ResID) REFERENCES Res(ID);
 -- Fin de las sentencias ALTER TABLE con comentarios
 
 
@@ -435,12 +443,12 @@ INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('000
 INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000020', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000010');
 
 -- Servicio
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', 'Inseminacion', '2021-02-15', 'Juan Perez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', 'Inseminacion', '2022-03-10', 'Maria Rodriguez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', 'Inseminacion', '2023-04-05', 'Pedro Gomez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', 'Inseminacion', '2022-05-20', 'Luisa Perez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000005', 'Podología', '2023-06-30', 'Carlos Rodriguez', 'Servicio de prueba');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones) VALUES ('00000000-0000-0000-0000-000000000006', 'Inseminacion', '2021-07-25', 'Ana Gomez', 'Servicio de prueba');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000002', 'Inseminacion', '2022-03-10', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000001' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000001', 'Inseminacion', '2021-02-15', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000009');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000003', 'Inseminacion', '2023-04-05', 'Pedro Gomez', 'Servicio de prueba','00000000-0000-0000-0000-000000000003' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000004', 'Inseminacion', '2022-05-20', 'Luisa Perez', 'Servicio de prueba','00000000-0000-0000-0000-000000000006' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000005', 'Podología', '2023-06-30', 'Carlos Rodriguez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000008');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000006', 'Inseminacion', '2021-07-25', 'Ana Gomez', 'Servicio de prueba','00000000-0000-0000-0000-000000000010' );
 
 -- Montas
 INSERT INTO Monta (ID, FechaParto, ServicioID, ToroID) VALUES ('00000000-0000-0000-0000-000000000001', '2020-01-25', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
@@ -495,20 +503,49 @@ INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, Transacci
 INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000007', 10, 10.00, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000007');
 
 -- Imagen
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000001', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000001');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000002', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000002');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000003', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000003');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000004', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000004');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000005', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000005');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000006', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000006');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000007', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000007');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000008', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000008');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000009', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000009');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000010', 'https://riquezasdebolivia.com/wp-content/uploads/2…ses-de-20-a-25-meses-de-edad-1300-libras-peso.jpg', '00000000-0000-0000-0000-000000000010');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000011', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000001');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000012', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000002');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000013', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000003');
-INSERT INTO Imagen (ID, URL, resID) VALUES ('00000000-0000-0000-0000-000000000014', 'https://ganaderiasos.com/wp-content/uploads/2016/12/GSOO16Dc8-1068x776.jpg', '00000000-0000-0000-0000-000000000004');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000001', 'vaca.jpg' , '00000000-0000-0000-0000-000000000001');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000002', 'descarga.webp' , '00000000-0000-0000-0000-000000000001');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000003', 'descarga.jpg' , '00000000-0000-0000-0000-000000000001');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000004', 'cow-mountains-cows-meadow-alps-260nw-2478818519.webp' , '00000000-0000-0000-0000-000000000001');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000005', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-000000000001');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000006', 'vaca.jpg' , '00000000-0000-0000-0000-000000000002');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000007', 'descarga.webp' , '00000000-0000-0000-0000-000000000002');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000008', 'descarga.jpg' , '00000000-0000-0000-0000-000000000002');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000009', 'cow-mountains-cows-meadow-alps-260nw-2478818519.webp' , '00000000-0000-0000-0000-000000000002');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000010', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-000000000002');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000011', 'vaca.jpg' , '00000000-0000-0000-0000-000000000003');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000012', 'descarga.webp' , '00000000-0000-0000-0000-000000000003');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000013', 'descarga.jpg' , '00000000-0000-0000-0000-000000000003');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000014', 'cow-mountains-cows-meadow-alps-260nw-2478818519.webp' , '00000000-0000-0000-0000-000000000003');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000015', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-000000000003');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000016', 'descarga.jpg' , '00000000-0000-0000-0000-000000000004');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000018', 'descarga.webp' , '00000000-0000-0000-0000-000000000005');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000019', 'descarga.jpg' , '00000000-0000-0000-0000-000000000005');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000020', 'vaca.jpg' , '00000000-0000-0000-0000-000000000006');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000021', 'descarga.webp' , '00000000-0000-0000-0000-000000000006');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000022', 'descarga.jpg' , '00000000-0000-0000-0000-000000000006');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000023', 'vaca.jpg' , '00000000-0000-0000-0000-000000000007');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000024', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-000000000007');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000025', 'descarga.jpg' , '00000000-0000-0000-0000-000000000007');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000026', 'cow-mountains-cows-meadow-alps-260nw-2478818519.webp' , '00000000-0000-0000-0000-000000000008');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000027', 'descarga.webp' , '00000000-0000-0000-0000-000000000008');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000028', 'descarga.jpg' , '00000000-0000-0000-0000-000000000008');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000029', 'descarga.jpg' , '00000000-0000-0000-0000-000000000009');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000030', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-000000000009');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000031', 'descarga.jpg' , '00000000-0000-0000-0000-000000000009');
+
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000032', 'descarga.jpg' , '00000000-0000-0000-0000-000000000010');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000033', 'descarga.webp' , '00000000-0000-0000-0000-000000000010');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000034', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-0000000000010');
+
 
 -- InsumoServicio
 INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
