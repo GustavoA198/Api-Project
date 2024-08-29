@@ -29,6 +29,24 @@ export class ImagenModel {
   }
 
   static async delete (id) {
-    return await database.query('DELETE FROM Imagen WHERE ID = ?', [id])
+
+    const [resp] = await database.query('SELECT URL FROM Imagen WHERE ID = ?', [id])
+    const imagenName = resp[0].URL
+    
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = dirname(__filename)
+  
+    try {
+      const imagenData = path.join(__dirname, '..', '..', 'images', imagenName)  // Direccion de la imagen
+      fs.unlink(imagenData, async (err) => {
+        if (err) {
+          throw new Error(`No se encontró ninguna imagen con el ID ${id} para eliminar`)
+        }else{
+          return await database.query('DELETE FROM Imagen WHERE ID = ?', [id])
+        }
+      })
+    } catch (error) {
+      throw new Error(`No se encontró ninguna imagen con el id ${id}`)
+    }
   }
 }

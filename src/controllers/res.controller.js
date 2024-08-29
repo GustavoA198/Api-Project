@@ -1,6 +1,6 @@
 import { ResModel } from '../models/res.model.js'
 import { validateRes, validatePartialRes } from '../schemas/res.schema.js'
-import { error, success, notFound } from '../utils/responses.js'
+import { error, success, notFound, notContent } from '../utils/responses.js'
 
 export class ResController {
   static async getAll (req, res) {
@@ -29,7 +29,7 @@ export class ResController {
     try {
       const [hijos] = await ResModel.getHijos(req.params.id)
       if (!hijos || hijos.length === 0) {
-        notFound(req, res, `No se encontró hijos para la res con el ID ${req.params.id}`)
+        notContent(req, res)
       } else {
         success(req, res, hijos, 200)
       }

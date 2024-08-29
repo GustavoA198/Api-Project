@@ -1,5 +1,5 @@
 import { ImagenModel } from '../models/imagen.model.js'
-import { error, success, notFound } from '../utils/responses.js'
+import { error, success, notFound, notContent } from '../utils/responses.js'
 import multer from 'multer'
 
 const storage = multer.diskStorage({
@@ -42,13 +42,13 @@ export class ImagenController {
     try {
       const [all] = await ImagenModel.getAll(req.params.resid)
       if (!all || all.length === 0) {
-        notFound(req, res, `No se encontró ninguna imagen para el id ${req.params.resid}`)
+        notContent(req, res, `No se encontró ninguna imagen para el id ${req.params.resid}`)
         return
       }
       const imagename = all[0].URL
       const imagen = await ImagenModel.getImagen(imagename)
       if (!imagen || imagen.length === 0) {
-        notFound(req, res, `No se encontró ninguna imagen`)
+        notContent(req, res, `No se encontró ninguna imagen`)
       } else {
         res.sendFile(imagen)
       }
