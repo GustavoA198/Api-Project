@@ -14,10 +14,11 @@ export class ServicioModel {
   }
 
   static async createServicio (data) {
-    const { Tipo, Fecha, Veterinario, Observaciones } = data
+    console.log(data)
+    const { Tipo, Fecha, Veterinario, Observaciones, ResID } = data
     const [[{ id }]] = await database.query('SELECT UUID() id')
-    const result = await database.query('INSERT INTO Servicio (id, Tipo, Fecha, Veterinario, Observaciones) VALUES (?, ?, ?, ?, ?)',
-      [id, Tipo, Fecha, Veterinario, Observaciones])
+    const result = await database.query('INSERT INTO Servicio (id, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES (?, ?, ?, ?, ?, ?)',
+      [id, Tipo, Fecha, Veterinario, Observaciones, ResID])
     return result
   }
 
