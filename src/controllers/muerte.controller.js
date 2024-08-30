@@ -1,4 +1,5 @@
 import { MuerteModel } from '../models/muerte.model.js'
+import { ResModel } from '../models/res.model.js'
 import { validateMuerte, validatePartialMuerte } from '../schemas/muerte.schema.js'
 import { error, success, notFound } from '../utils/responses.js'
 
@@ -29,8 +30,16 @@ export class MuerteController {
     const result = validateMuerte(req.body)
     if (result.success) {
       try {
-        const added = await MuerteModel.createMuerte(result.data)
-        success(req, res, added, 200)
+        const [updateResult] = await ResModel.delete(req.body.ResID)
+        if (updateResult.affectedRows === 0 || updateResult.affectedRows === undefined) {
+          notFound(req, res, `No se encontró ninguna 'res' con el ID ${req.body.ResID} para actualizar`)
+        } else {
+          const [added] = await MuerteModel.createMuerte(req.body)
+          if (updateResult.affectedRows === 0 || updateResult.affectedRows === undefined) {
+            notFound(req, res, `No se encontró ninguna 'res' con el ID ${req.body.ResID} para actualizar`)
+          }
+          success(req, res, added, 200)
+        }
       } catch (e) {
         error(req, res, e.message, e.status)
       }

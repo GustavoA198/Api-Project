@@ -6,6 +6,7 @@ export const ServicioRouter = Router()
 // GET
 ServicioRouter.get('/', ServicioController.getAll)
 ServicioRouter.get('/:id', ServicioController.getServicio)
+ServicioRouter.get('/res/:id', ServicioController.getServicioByIdRes)
 
 // POST
 ServicioRouter.post('/', ServicioController.create)

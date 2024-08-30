@@ -9,6 +9,10 @@ export class ServicioModel {
     return await database.query('SELECT * FROM Servicio WHERE id = ?', [id])
   }
 
+  static async getServicioByIdRes (ResID) {
+    return await database.query('SELECT * FROM Servicio WHERE ResID = ?', [ResID])
+  }
+
   static async createServicio (data) {
     const { Tipo, Fecha, Veterinario, Observaciones } = data
     const [[{ id }]] = await database.query('SELECT UUID() id')

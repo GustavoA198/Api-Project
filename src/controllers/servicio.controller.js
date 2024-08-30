@@ -25,6 +25,19 @@ export class ServicioController {
     }
   }
 
+  static async getServicioByIdRes (req, res) {
+    try {
+      const [Servicio] = await ServicioModel.getServicioByIdRes(req.params.id)
+      if (!Servicio || Servicio.length === 0) {
+        notFound(req, res, `No se encontró ningun servicio con el ID  de la res${req.params.id}`)
+      } else {
+        success(req, res, Servicio, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
   static async create (req, res) {
     const result = validateServicio(req.body)
     if (result.success) {
