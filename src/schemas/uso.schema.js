@@ -2,9 +2,9 @@ import z from 'zod'
 
 export const UsoSchema = z.object({
   Justificacion: z.string().optional(),
-  Fecha: z.string().transform((str) => new Date(str)),
-  Cantidad: z.number().int().optional(),
-  ProductoID: z.string().uuid().optional()
+  Fecha: z.string().max(10),
+  Cantidad: z.number().int(),
+  ProductoID: z.string().uuid()
 })
 
 export function validateUso (input) {

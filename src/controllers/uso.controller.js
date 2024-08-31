@@ -25,19 +25,6 @@ export class UsoController {
     }
   }
 
-  static async getUsoByIdServicio (req, res) {
-    try {
-      const [Uso] = await UsoModel.getUsoByIdServicio(req.params.id)
-      if (!Uso || Uso.length === 0) {
-        notFound(req, res, `No se encontró ninguna 'uso' con el ResID ${req.params.id}`)
-      } else {
-        success(req, res, Uso, 200)
-      }
-    } catch (e) {
-      error(req, res, e.message, e.status)
-    }
-  }
-
   static async create (req, res) {
     const result = validateUso(req.body)
     if (result.success) {
