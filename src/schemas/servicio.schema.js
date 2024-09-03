@@ -5,7 +5,11 @@ export const ServicioSchema = z.object({
   Fecha: z.string().max(10),
   Veterinario: z.string().max(100).optional(),
   Observaciones: z.string().optional(),
-  ResID: z.string().uuid()
+  ResID: z.string().uuid(),
+  listInsumos: z.array(z.object({
+    InsumoID: z.string().uuid(),
+    Cantidad: z.number().int()
+  })).optional()
 })
 
 export function validateServicio (input) {
