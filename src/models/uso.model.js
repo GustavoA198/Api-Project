@@ -9,10 +9,6 @@ export class UsoModel {
     return database.query('SELECT * FROM Uso WHERE id = ?', [id])
   }
 
-  static async getUsoByIdServicio (ServicioID) {
-    return database.query('SELECT * FROM Uso WHERE ServicioID = ?', [ServicioID])
-  }
-
   static async create (data) {
     const {Justificacion, Fecha, Cantidad, ProductoID} = data
     const [[{ id }]] = await database.query('SELECT UUID() id')

@@ -6,7 +6,6 @@ export const UsoRouter = Router()
 // GET
 UsoRouter.get('/', UsoController.getAll)
 UsoRouter.get('/:id', UsoController.getUsoById)
-UsoRouter.get('/servicio/:id', UsoController.getUsoByIdServicio)
 
 // POST
 UsoRouter.post('/', UsoController.create)
