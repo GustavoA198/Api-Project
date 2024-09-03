@@ -128,7 +128,7 @@ CREATE TABLE ProduccionIndividual (
 CREATE TABLE Servicio (
     ID VARCHAR(36) UNIQUE,       -- ID is unique but not the primary key
     Numero INT(6) AUTO_INCREMENT PRIMARY KEY, -- Numero is the primary key and auto-increments
-    Tipo ENUM('Monta', 'Inseminación', 'Podologia', 'Vacunación', 'Desparasitación', 'Control', 'Castración', 'Topizado', 'Curación', 'Otra') NOT NULL,
+    Tipo ENUM('Monta', 'Inseminacion', 'Podologia', 'Vacunacion', 'Desparasitacion', 'Control', 'Castracion', 'Topizado', 'Curacion', 'Secado', 'Otro') NOT NULL,
     Fecha VARCHAR(10) NOT NULL,
     Veterinario VARCHAR(100),
     Observaciones TEXT,
@@ -442,25 +442,28 @@ INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('000
 INSERT INTO ProduccionIndividual (ID, Fecha, Tipo, Cantidad, ResID) VALUES ('00000000-0000-0000-0000-000000000020', '2020-01-02', 'Carne', 10.00, '00000000-0000-0000-0000-000000000010');
 
 -- Servicio
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000002', 'Inseminación', '2022-03-10', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000001' );
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000001', 'Inseminación', '2021-02-15', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000009');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000003', 'Inseminación', '2023-04-05', 'Pedro Gomez', 'Servicio de prueba','00000000-0000-0000-0000-000000000003' );
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000004', 'Inseminación', '2022-05-20', 'Luisa Perez', 'Servicio de prueba','00000000-0000-0000-0000-000000000006' );
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000005', 'Podología', '2023-06-30', 'Carlos Rodriguez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000008');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000006', 'Inseminación', '2021-07-25', 'Ana Gomez', 'Servicio de prueba','00000000-0000-0000-0000-000000000010' );
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000007', 'Curación', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000002', 'Inseminacion', '2022-03-10', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000001' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000001', 'Inseminacion', '2021-02-15', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000009');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000003', 'Inseminacion', '2023-04-05', 'Pedro Gomez', 'Servicio de prueba','00000000-0000-0000-0000-000000000003' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000004', 'Inseminacion', '2022-05-20', 'Luisa Perez', 'Servicio de prueba','00000000-0000-0000-0000-000000000006' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000005', 'Podologia', '2023-06-30', 'Carlos Rodriguez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000008');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000006', 'Inseminacion', '2021-07-25', 'Ana Gomez', 'Servicio de prueba','00000000-0000-0000-0000-000000000010' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000007', 'Curacion', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
 INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000008', 'Control', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000009', 'Vacunación', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000010', 'Desparasitación', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000011', 'Castración', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000008' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000009', 'Vacunacion', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000010', 'Desparasitacion', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000011', 'Castracion', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000008' );
 INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000012', 'Topizado', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000013', 'Otra', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000013', 'Otro', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
 INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000014', 'Monta', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000015', 'Inseminación', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000016', 'Podología', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000017', 'Vacunación', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000018', 'Desparasitación', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
-INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000019', 'Castración', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000001' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000015', 'Inseminacion', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000016', 'Podologia', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000017', 'Vacunacion', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000018', 'Desparasitacion', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000019', 'Castracion', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000001' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000020', 'Secado', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000021', 'Secado', '2020-01-01', 'Maria Rodriguez', 'Servicio de prueba','00000000-0000-0000-0000-000000000002' );
+INSERT INTO Servicio (ID, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES ('00000000-0000-0000-0000-000000000022', 'Secado', '2020-01-01', 'Juan Perez', 'Servicio de prueba', '00000000-0000-0000-0000-000000000007');
 
 
 -- Montas
@@ -557,7 +560,7 @@ INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-00000000003
 
 INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000032', 'descarga.jpg' , '00000000-0000-0000-0000-000000000010');
 INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000033', 'descarga.webp' , '00000000-0000-0000-0000-000000000010');
-INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000034', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-0000000000010');
+INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-000000000034', '120111165002_vaca304.jpg.webp' , '00000000-0000-0000-0000-000000000010');
 
 
 -- InsumoServicio

@@ -13,6 +13,22 @@ export class ServicioModel {
     return await database.query('SELECT * FROM Servicio WHERE ResID = ?', [ResID])
   }
 
+  static async getInseminacionOMontaByIdRes (ResID) {
+    const result = await database.query(`
+        SELECT s.*, m.*, i.* 
+        FROM Servicio s
+        LEFT JOIN Monta m ON s.ID = m.ServicioID
+        LEFT JOIN Inseminacion i ON s.ID = i.ServicioID
+        WHERE s.ResID = ? AND (s.Tipo = "Inseminacion" OR s.Tipo = "Monta")
+    `, [ResID])
+
+    return result
+  }
+
+  static async getSecadoByIdRes (ResID) {
+    return await database.query('SELECT * FROM Servicio WHERE ResID = ? and Tipo = "Secado"', [ResID])
+  }
+
   static async createServicio (data) {
     console.log(data)
     const { Tipo, Fecha, Veterinario, Observaciones, ResID } = data
