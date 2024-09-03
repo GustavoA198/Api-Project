@@ -34,6 +34,7 @@ CREATE TABLE Insumo (
     Nombre VARCHAR(100) NOT NULL,
     FechaIngreso VARCHAR(10) NOT NULL,
     CantidadActual BIGINT,
+    UnidadMedida VARCHAR(20),
     FechaVencimiento VARCHAR(10),
     Observaciones TEXT
 );
@@ -196,6 +197,7 @@ resID VARCHAR(36) NOT NULL
 CREATE TABLE InsumoServicio (  
 ID VARCHAR(36) PRIMARY KEY,
 InsumoID VARCHAR(36) NOT NULL,
+Cantidad INT(10) NOT NULL,
 ServicioID VARCHAR(36) NOT NULL
 );
 
