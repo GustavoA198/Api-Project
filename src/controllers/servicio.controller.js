@@ -38,6 +38,32 @@ export class ServicioController {
     }
   }
 
+  static async getInseminacionOMontaByIdRes (req, res) {
+    try {
+      const [Servicio] = await ServicioModel.getInseminacionOMontaByIdRes(req.params.id)
+      if (!Servicio || Servicio.length === 0) {
+        notFound(req, res, `No se encontró ningun servicio de inseminación o monta con el ID  de la res${req.params.id}`)
+      } else {
+        success(req, res, Servicio, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getSecadoByIdRes (req, res) {
+    try {
+      const [Servicio] = await ServicioModel.getSecadoByIdRes(req.params.id)
+      if (!Servicio || Servicio.length === 0) {
+        notFound(req, res, `No se encontró ningun servicio de secado con el ID  de la res${req.params.id}`)
+      } else {
+        success(req, res, Servicio, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
   static async create (req, res) {
     const result = validateServicio(req.body)
     if (result.success) {

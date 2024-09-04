@@ -7,6 +7,8 @@ export const ServicioRouter = Router()
 ServicioRouter.get('/', ServicioController.getAll)
 ServicioRouter.get('/:id', ServicioController.getServicio)
 ServicioRouter.get('/res/:id', ServicioController.getServicioByIdRes)
+ServicioRouter.get('/res/inseminacionOmonta/:id', ServicioController.getInseminacionOMontaByIdRes)
+ServicioRouter.get('/res/secado/:id', ServicioController.getSecadoByIdRes)
 
 // POST
 ServicioRouter.post('/', ServicioController.create)
