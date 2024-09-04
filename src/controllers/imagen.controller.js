@@ -12,7 +12,18 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage })
+function fileFilter (req, file, cb) {
+  const validImageExtensions = /jpeg|jpg|png|webp/
+  const validTypes = /image|images/
+
+  const [type, ext] = file.mimetype.split('/')
+  const extIsValid = validImageExtensions.test(ext)
+  const typeIsValid = validTypes.test(type)
+
+  cb(null, (typeIsValid && extIsValid))
+}
+
+const upload = multer({ storage: storage, fileFilter: fileFilter })
 
 export class ImagenController {
 
@@ -71,9 +82,11 @@ export class ImagenController {
       const fileNames = req.files.map(file => file.filename)// Crear un array con los nombres de los archivos
 
       try {
+        if (fileNames.length === 0) {
+          return error(req, res, 'No se cargaron imágenes. Asegúrese de que los archivos sean válidos', 400)
+        }
         let listAdded = []
         for (const filename of fileNames) {
-          console.log(filename)
           const added = await ImagenModel.create(filename, req.body.resID)
           listAdded.push(added)
         }
