@@ -66,7 +66,6 @@ CREATE TABLE Ocupacion (
 CREATE TABLE Producto (
     ID VARCHAR(36) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    Fecha VARCHAR(10),
     Cantidad INT(11) NOT NULL
 );
 
@@ -324,12 +323,12 @@ INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-000
 INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000010', 'Lote 10', 10, 25, '00000000-0000-0000-0000-000000000004');
 
 -- Insumo
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', 'Vacuna 1', '2021-05-17', 100, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', 'Vacuna 2', '2021-05-17', 50, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', 'Vacuna 3', '2021-05-17', 75, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', 'Vacuna 4', '2021-05-17', 25, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000005', 'Vacuna 5', '2021-05-17', 10, '2022-01-01', 'Vacuna para enfermedades comunes');
-INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, Observaciones) VALUES ('00000000-0000-0000-0000-000000000006', 'Vacuna 6', '2021-05-17', 5, '2022-01-01', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, UnidadMedida,  Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', 'Vacuna 1', '2021-05-17', 100, '2022-01-01', 'unidad', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, UnidadMedida, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', 'Vacuna 2', '2021-05-17', 50, '2022-01-01', 'unidad', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, UnidadMedida, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', 'Vacuna 3', '2021-05-17', 75, '2022-01-01', 'unidad', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, UnidadMedida, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', 'Vacuna 4', '2021-05-17', 25, '2022-01-01', 'unidad', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, UnidadMedida, Observaciones) VALUES ('00000000-0000-0000-0000-000000000005', 'Vacuna 5', '2021-05-17', 10, '2022-01-01', 'unidad', 'Vacuna para enfermedades comunes');
+INSERT INTO Insumo (ID, Nombre, FechaIngreso, CantidadActual, FechaVencimiento, UnidadMedida, Observaciones) VALUES ('00000000-0000-0000-0000-000000000006', 'Vacuna 6', '2021-05-17', 5, '2022-01-01', 'unidad', 'Vacuna para enfermedades comunes');
 
 -- Actividad
 INSERT INTO Actividad (ID, Fecha, Tipo, TiempoCarencia, LoteID, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', '2021-02-15', 'Fumigada', '2021-03-01', '00000000-0000-0000-0000-000000000001', 'Actividad de prueba');
@@ -361,12 +360,8 @@ INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, Lo
 INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000010', 55, '2020-04-01', 'Novillas', '2020-04-30', '00000000-0000-0000-0000-000000000010');
 
 -- Productos
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000001', 'Leche', '2021-02-15', 100);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000002', 'Carne', '2022-03-10', 550);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000003', 'Leche', '2023-04-05', 75);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000004', 'Carne', '2022-05-20', 425);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000005', 'Leche', '2023-06-30', 114);
-INSERT INTO Producto (ID, Nombre, Fecha, Cantidad) VALUES ('00000000-0000-0000-0000-000000000006', 'Carne', '2021-07-25', 295);
+INSERT INTO Producto (ID, Nombre, Cantidad) VALUES ('00000000-0000-0000-0000-000000000001', 'Leche', 100);
+INSERT INTO Producto (ID, Nombre, Cantidad) VALUES ('00000000-0000-0000-0000-000000000002', 'Carne', 550)
 
 -- Venta
 INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000001', 100.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000001');
@@ -566,9 +561,9 @@ INSERT INTO Imagen (ID, URL, ResID) VALUES ('00000000-0000-0000-0000-00000000003
 
 
 -- InsumoServicio
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005');
-INSERT INTO InsumoServicio (ID, InsumoID, ServicioID) VALUES ('00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006');
+INSERT INTO InsumoServicio (ID, InsumoID, Cantidad, ServicioID) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 3, '00000000-0000-0000-0000-000000000001');
+INSERT INTO InsumoServicio (ID, InsumoID, Cantidad, ServicioID) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002', 22, '00000000-0000-0000-0000-000000000002');
+INSERT INTO InsumoServicio (ID, InsumoID, Cantidad, ServicioID) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003', 1,'00000000-0000-0000-0000-000000000003');
+INSERT INTO InsumoServicio (ID, InsumoID, Cantidad, ServicioID) VALUES ('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004', 12,'00000000-0000-0000-0000-000000000004');
+INSERT INTO InsumoServicio (ID, InsumoID, Cantidad, ServicioID) VALUES ('00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005', 15,'00000000-0000-0000-0000-000000000005');
+INSERT INTO InsumoServicio (ID, InsumoID, Cantidad, ServicioID) VALUES ('00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006', 18,'00000000-0000-0000-0000-000000000006');
