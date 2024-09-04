@@ -1,7 +1,7 @@
 import z from 'zod'
 
 export const ProduccionIndividualSchema = z.object({
-  Fecha: z.string().transform((str) => new Date(str)),
+  Fecha: z.string().max(10),
   Tipo: z.enum(['Leche', 'Carne']),
   Cantidad: z.number().nonnegative().min(0).max(999.99), // decimal(5,2) equivale a un rango de 0 a 999.99
   ResID: z.array(z.string().uuid())

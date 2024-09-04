@@ -10,7 +10,11 @@ export class ProduccionIndividualModel {
   }
 
   static async createProduccionIndividual ({Fecha, Tipo, Cantidad, ResID}) {
+    if (Tipo === 'Carne') {
+      await database.query('UPDATE Res SET Estado = "Vendida" WHERE id = ?', [ResID])
+    }
     const [[{ id }]] = await database.query('SELECT UUID() id')
+    await database.query('UPDATE producto SET Cantidad = Cantidad + ? WHERE Nombre = ?', [Cantidad, Tipo])
     const result = await database.query('INSERT INTO ProduccionIndividual (id, Fecha, Tipo, Cantidad, ResID) VALUES (?, ?, ?, ?, ?)',
       [id, Fecha, Tipo, Cantidad, ResID])
     return result

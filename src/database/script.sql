@@ -361,7 +361,7 @@ INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, Lo
 
 -- Productos
 INSERT INTO Producto (ID, Nombre, Cantidad) VALUES ('00000000-0000-0000-0000-000000000001', 'Leche', 100);
-INSERT INTO Producto (ID, Nombre, Cantidad) VALUES ('00000000-0000-0000-0000-000000000002', 'Carne', 550)
+INSERT INTO Producto (ID, Nombre, Cantidad) VALUES ('00000000-0000-0000-0000-000000000002', 'Carne', 550);
 
 -- Venta
 INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000001', 100.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000001');
