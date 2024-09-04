@@ -5,7 +5,7 @@ import { error, success, notFound } from '../utils/responses.js'
 export class ServicioController {
   static async getAll (req, res) {
     try {
-      const [all] = await ServicioModel.getServicios()
+      const all = await ServicioModel.getServicios()
       success(req, res, all, 200)
     } catch (e) {
       error(req, res, e.message, e.status)
@@ -14,7 +14,7 @@ export class ServicioController {
 
   static async getServicio (req, res) {
     try {
-      const [Servicio] = await ServicioModel.getServicioById(req.params.id)
+      const Servicio = await ServicioModel.getServicioById(req.params.id)
       if (!Servicio || Servicio.length === 0) {
         notFound(req, res, `No se encontró ningun servicio con el ID ${req.params.id}`)
       } else {
@@ -27,7 +27,7 @@ export class ServicioController {
 
   static async getServicioByIdRes (req, res) {
     try {
-      const [Servicio] = await ServicioModel.getServicioByIdRes(req.params.id)
+      const Servicio = await ServicioModel.getServicioByIdRes(req.params.id)
       if (!Servicio || Servicio.length === 0) {
         notFound(req, res, `No se encontró ningun servicio con el ID  de la res${req.params.id}`)
       } else {

@@ -6,10 +6,12 @@ export const ServicioSchema = z.object({
   Veterinario: z.string().max(100).optional(),
   Observaciones: z.string().optional(),
   ResID: z.string().uuid(),
-  listInsumos: z.array(z.object({
-    InsumoID: z.string().uuid(),
-    Cantidad: z.number().int()
-  })).optional()
+  listInsumos: z.object(
+    {
+      Cantidad: z.string(),
+      InsumoID: z.string().uuid()
+    }
+  ).array().optional()
 })
 
 export function validateServicio (input) {
