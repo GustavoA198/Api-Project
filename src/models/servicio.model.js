@@ -3,14 +3,13 @@ import { database } from '../database/db.js'
 export class ServicioModel {
   static async getServicios () {
     const [ids] = await database.query('SELECT ID FROM Servicio')
-    console.log(ids)
+
     let serviciosWithInsumos = []
     for (const id of ids) {
-      console.log(id)
       const servicio = await this.getServicioById(id.ID)
       serviciosWithInsumos.push(servicio)
     }
-    console.log(serviciosWithInsumos + 'servicios INSUMOOOOOOOS')
+
     return serviciosWithInsumos
   }
 
@@ -25,14 +24,13 @@ export class ServicioModel {
 
   static async getServicioByIdRes (ResID) {
     const [ids] = await database.query('SELECT ID FROM Servicio WHERE ResID = ?', [ResID])
-    console.log(ids)
+
     let serviciosWithInsumos = []
     for (const id of ids) {
-      console.log(id)
       const servicio = await this.getServicioById(id.ID)
       serviciosWithInsumos.push(servicio)
     }
-    console.log(serviciosWithInsumos + 'servicios INSUMOOOOOOOS')
+
     return serviciosWithInsumos
   }
 
@@ -49,7 +47,15 @@ export class ServicioModel {
   }
 
   static async getSecadoByIdRes (ResID) {
-    return await database.query('SELECT * FROM Servicio WHERE ResID = ? and Tipo = "Secado"', [ResID])
+    const [ids] = await database.query('SELECT ID FROM Servicio WHERE ResID = ? and Tipo = "Secado"', [ResID])
+
+    let serviciosWithInsumos = []
+    for (const id of ids) {
+      const servicio = await this.getServicioById(id.ID)
+      serviciosWithInsumos.push(servicio)
+    }
+
+    return serviciosWithInsumos
   }
 
   static async createServicio (data) {
