@@ -8,7 +8,7 @@ export const ServicioSchema = z.object({
   ResID: z.string().uuid(),
   listInsumos: z.object(
     {
-      Cantidad: z.string(),
+      Cantidad: z.union([z.string(), z.number()]),
       InsumoID: z.string().uuid()
     }
   ).array().optional(),
