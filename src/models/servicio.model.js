@@ -55,19 +55,40 @@ export class ServicioModel {
   static async createServicio (data) {
     const { Tipo, Fecha, Veterinario, Observaciones, ResID, listInsumos } = data
     let result = []
+
+    // Insertar servicio
     const [[{ id }]] = await database.query('SELECT UUID() id')
     const resultServicio = await database.query('INSERT INTO Servicio (id, Tipo, Fecha, Veterinario, Observaciones, ResID) VALUES (?, ?, ?, ?, ?, ?)',
       [id, Tipo, Fecha, Veterinario, Observaciones, ResID])
+
     result.push(resultServicio)
 
+    // Insertar insumos
     for (const insumo of listInsumos) {
       const [[{id: idRegistro}]] = await database.query('SELECT UUID() id')
+
       const resultInsumo = await database.query(
         'INSERT INTO InsumoServicio (id, InsumoID, ServicioID, Cantidad) VALUES (?, ?, ?, ?)',
-        [idRegistro, insumo.InsumoID, id, insumo.Cantidad]
-      )
+        [idRegistro, insumo.InsumoID, id, insumo.Cantidad])
+
       await database.query('UPDATE Insumo SET CantidadActual = CantidadActual - ? WHERE ID = ?', [insumo.Cantidad, insumo.InsumoID])
       result.push(resultInsumo)
+    }
+
+    // insertar inseminacion
+    if (Tipo === 'Inseminación') {
+      const [[{ id: idInseminacion }]] = await database.query('SELECT UUID() id')
+      const { FechaParto } = data
+      await database.query('INSERT INTO Inseminacion (id, ServicioID, FechaParto) VALUES (?, ?, ?)',
+        [idInseminacion, id, FechaParto])
+    }
+
+    // insertar monta
+    if (Tipo === 'Monta') {
+      const [[{ id: idMonta }]] = await database.query('SELECT UUID() id')
+      const { FechaParto, ToroID } = data
+      await database.query('INSERT INTO Monta (id, ServicioID, FechaParto, ToroID) VALUES (?, ?, ?, ?)',
+        [idMonta, id, FechaParto, ToroID])
     }
     return result
   }

@@ -11,7 +11,9 @@ export const ServicioSchema = z.object({
       Cantidad: z.string(),
       InsumoID: z.string().uuid()
     }
-  ).array().optional()
+  ).array().optional(),
+  ToroID: z.string().uuid().optional(),
+  FechaParto: z.string().max(10).optional()
 })
 
 export function validateServicio (input) {
