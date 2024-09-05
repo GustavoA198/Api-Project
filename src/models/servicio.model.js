@@ -34,16 +34,42 @@ export class ServicioModel {
     return serviciosWithInsumos
   }
 
-  static async getInseminacionOMontaByIdRes (ResID) {
-    const result = await database.query(`
-        SELECT s.*, m.*, i.* 
+  static async getInseminacionOMontaById (id) {
+    const [[servicio]] = await database.query(`
+        SELECT s.*, m.FechaParto, m.ToroID, i.FechaParto 
         FROM Servicio s
         LEFT JOIN Monta m ON s.ID = m.ServicioID
         LEFT JOIN Inseminacion i ON s.ID = i.ServicioID
-        WHERE s.ResID = ? AND (s.Tipo = "Inseminacion" OR s.Tipo = "Monta")
-    `, [ResID])
+        WHERE s.ID = ? AND (s.Tipo = "Inseminacion" OR s.Tipo = "Monta")`
+        , [id])
 
-    return result
+    if (!servicio) {
+      return null
+    }
+
+    const [listInsumos] = await database.query(
+      `SELECT i.ID, i.Nombre
+      FROM SERVICIO s INNER JOIN INSUMOSERVICIO ins ON s.ID = ins.ServicioID
+      INNER JOIN insumo i ON i.ID = ins.InsumoID
+      WHERE s.ID = ?`, [id])
+
+    return { ...servicio, listInsumos }
+  }
+
+  static async getInseminacionOMontaByIdRes (ResID) {
+    const [ids] = await database.query(
+      `SELECT ID 
+      FROM Servicio 
+      WHERE ResID = ? AND (Tipo = "Inseminacion" OR Tipo = "Monta")`
+      , [ResID])
+
+    let serviciosWithInsumos = []
+    for (const id of ids) {
+      const servicio = await this.getInseminacionOMontaById(id.ID)
+      serviciosWithInsumos.push(servicio)
+    }
+
+    return serviciosWithInsumos
   }
 
   static async getSecadoByIdRes (ResID) {

@@ -1,6 +1,6 @@
 import { ServicioModel } from '../models/servicio.model.js'
 import { validateServicio, validatePartialServicio } from '../schemas/servicio.schema.js'
-import { error, success, notFound } from '../utils/responses.js'
+import { error, success, notFound, notContent } from '../utils/responses.js'
 
 export class ServicioController {
   static async getAll (req, res) {
@@ -16,7 +16,7 @@ export class ServicioController {
     try {
       const Servicio = await ServicioModel.getServicioById(req.params.id)
       if (!Servicio || Servicio.length === 0) {
-        notFound(req, res, `No se encontró ningun servicio con el ID ${req.params.id}`)
+        notContent(req, res, `No se encontró ningun servicio con el ID ${req.params.id}`)
       } else {
         success(req, res, Servicio, 200)
       }
@@ -29,7 +29,20 @@ export class ServicioController {
     try {
       const Servicio = await ServicioModel.getServicioByIdRes(req.params.id)
       if (!Servicio || Servicio.length === 0) {
-        notFound(req, res, `No se encontró ningun servicio con el ID  de la res${req.params.id}`)
+        notContent(req, res, `No se encontró ningun servicio con el ID  de la res${req.params.id}`)
+      } else {
+        success(req, res, Servicio, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getInseminacionOMontaById (req, res) {
+    try {
+      const Servicio = await ServicioModel.getInseminacionOMontaById(req.params.id)
+      if (!Servicio || Servicio.length === 0) {
+        notContent(req, res, `No se encontró ningun servicio de inseminación o monta con el ID ${req.params.id}`)
       } else {
         success(req, res, Servicio, 200)
       }
@@ -40,9 +53,9 @@ export class ServicioController {
 
   static async getInseminacionOMontaByIdRes (req, res) {
     try {
-      const [Servicio] = await ServicioModel.getInseminacionOMontaByIdRes(req.params.id)
+      const Servicio = await ServicioModel.getInseminacionOMontaByIdRes(req.params.id)
       if (!Servicio || Servicio.length === 0) {
-        notFound(req, res, `No se encontró ningun servicio de inseminación o monta con el ID  de la res${req.params.id}`)
+        notContent(req, res, `No se encontró ningun servicio de inseminación o monta con el ID  de la res${req.params.id}`)
       } else {
         success(req, res, Servicio, 200)
       }
@@ -53,9 +66,9 @@ export class ServicioController {
 
   static async getSecadoByIdRes (req, res) {
     try {
-      const [Servicio] = await ServicioModel.getSecadoByIdRes(req.params.id)
+      const Servicio = await ServicioModel.getSecadoByIdRes(req.params.id)
       if (!Servicio || Servicio.length === 0) {
-        notFound(req, res, `No se encontró ningun servicio de secado con el ID  de la res${req.params.id}`)
+        notContent(req, res, `No se encontró ningun servicio de secado con el ID  de la res${req.params.id}`)
       } else {
         success(req, res, Servicio, 200)
       }
