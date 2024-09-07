@@ -30,7 +30,8 @@ CREATE TABLE Lote (
 );
 
 CREATE TABLE Insumo (
-    ID VARCHAR(36) PRIMARY KEY,
+    ID VARCHAR(36) UNIQUE,       -- ID is unique but not the primary key
+    Numero INT(8) AUTO_INCREMENT PRIMARY KEY, -- Numero is the primary key and auto-increments
     Nombre VARCHAR(100) NOT NULL,
     FechaIngreso VARCHAR(10) NOT NULL,
     CantidadActual BIGINT,
@@ -127,7 +128,7 @@ CREATE TABLE ProduccionIndividual (
 
 CREATE TABLE Servicio (
     ID VARCHAR(36) UNIQUE,       -- ID is unique but not the primary key
-    Numero INT(6) AUTO_INCREMENT PRIMARY KEY, -- Numero is the primary key and auto-increments
+    Numero INT(8) AUTO_INCREMENT PRIMARY KEY, -- Numero is the primary key and auto-increments
     Tipo ENUM('Monta', 'Inseminacion', 'Podologia', 'Vacunacion', 'Desparasitacion', 'Control', 'Castracion', 'Topizado', 'Curacion', 'Secado', 'Otro') NOT NULL,
     Fecha VARCHAR(10) NOT NULL,
     Veterinario VARCHAR(100),

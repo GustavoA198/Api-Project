@@ -14,16 +14,20 @@ export class ServicioModel {
   }
 
   static async getServicioById (id) {
-    const [[servicio]] = await database.query('SELECT * FROM Servicio WHERE id = ?', [id])
-    const [listInsumos] = await database.query(`SELECT i.ID, i.Nombre
+    const [[servicio]] = await database.query(`SELECT s.*, r.Nombre as ResNombre
+                                              FROM Servicio s
+                                              INNER JOIN res r ON r.ID = s.ResID 
+                                              WHERE s.id = ?`, [id])
+
+    const [listInsumos] = await database.query(`SELECT i.ID, i.Nombre, ins.Cantidad
                                 FROM SERVICIO s INNER JOIN INSUMOSERVICIO ins ON s.ID = ins.ServicioID
-                                INNER JOIN insumo i ON i.ID = ins.InsumoID
+                                INNER JOIN insumo i ON i.ID = ins.InsumoID                                
                                 WHERE s.ID = ?`, [id])
     return { ...servicio, listInsumos }
   }
 
   static async getServicioByIdRes (ResID) {
-    const [ids] = await database.query('SELECT ID FROM Servicio WHERE ResID = ?', [ResID])
+    const [ids] = await database.query(`SELECT ID FROM Servicio WHERE ResID = ?`, [ResID])
 
     let serviciosWithInsumos = []
     for (const id of ids) {
@@ -36,10 +40,12 @@ export class ServicioModel {
 
   static async getInseminacionOMontaById (id) {
     const [[servicio]] = await database.query(`
-        SELECT s.*, m.FechaParto, m.ToroID, i.FechaParto 
+        SELECT s.*, m.FechaParto, m.ToroID, i.FechaParto, r.Nombre as ResNombre, toro.Nombre as ToroNombre 
         FROM Servicio s
         LEFT JOIN Monta m ON s.ID = m.ServicioID
         LEFT JOIN Inseminacion i ON s.ID = i.ServicioID
+        INNER JOIN res r ON r.ID = s.ResID
+        LEFT JOIN res toro ON toro.ID = m.ToroID
         WHERE s.ID = ? AND (s.Tipo = "Inseminacion" OR s.Tipo = "Monta")`
         , [id])
 
@@ -48,7 +54,7 @@ export class ServicioModel {
     }
 
     const [listInsumos] = await database.query(
-      `SELECT i.ID, i.Nombre
+      `SELECT i.ID, i.Nombre, ins.Cantidad
       FROM SERVICIO s INNER JOIN INSUMOSERVICIO ins ON s.ID = ins.ServicioID
       INNER JOIN insumo i ON i.ID = ins.InsumoID
       WHERE s.ID = ?`, [id])
