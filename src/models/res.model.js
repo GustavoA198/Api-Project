@@ -2,11 +2,19 @@ import { database } from '../database/db.js'
 
 export class ResModel {
   static async getAll () {
-    return await database.query('SELECT * FROM Res WHERE Estado = ?', ['Activa'])
+    return await database.query(
+      `SELECT r.*, f.Nombre as FincaNombre
+       FROM Res r
+       INNER JOIN Finca f ON r.FincaID = f.ID 
+       WHERE r.Estado = ?`, ['Activa'])
   }
 
   static async getRes (id) {
-    return await database.query('SELECT * FROM Res WHERE ID = ? ', [id])
+    return await database.query(`
+      SELECT r.*, f.Nombre as FincaNombre 
+      FROM Res r
+      INNER JOIN Finca f ON r.FincaID = f.ID
+      WHERE r.ID = ? `, [id])
   }
 
   static async getHijos (id) {

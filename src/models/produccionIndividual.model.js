@@ -2,11 +2,18 @@ import { database } from '../database/db.js'
 
 export class ProduccionIndividualModel {
   static async getProduccionIndividuals () {
-    return await database.query('SELECT * FROM ProduccionIndividual')
+    return await database.query(`
+      SELECT p.*, r.Nombre as ResNombre
+      FROM ProduccionIndividual p
+      INNER JOIN Res r ON p.ResID = r.ID`)
   }
 
   static async getProduccionIndividualById (id) {
-    return await database.query('SELECT * FROM ProduccionIndividual WHERE id = ?', [id])
+    return await database.query(`
+      SELECT p.*, r.Nombre as ResNombre 
+      FROM ProduccionIndividual p
+      INNER JOIN Res r ON p.ResID = r.ID
+      WHERE p.id = ?`, [id])
   }
 
   static async createProduccionIndividual ({Fecha, Tipo, Cantidad, ResID}) {
