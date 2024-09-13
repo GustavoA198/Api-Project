@@ -5,8 +5,11 @@ export const ServicioRouter = Router()
 
 // GET
 ServicioRouter.get('/', ServicioController.getAll)
+ServicioRouter.get('/inseminacionOmonta', ServicioController.getAllInseminacionOMonta)
+
 ServicioRouter.get('/:id', ServicioController.getServicio)
 ServicioRouter.get('/inseminacionOmonta/:id', ServicioController.getInseminacionOMontaById)
+
 ServicioRouter.get('/res/:id', ServicioController.getServicioByIdRes)
 ServicioRouter.get('/res/inseminacionOmonta/:id', ServicioController.getInseminacionOMontaByIdRes)
 ServicioRouter.get('/res/secado/:id', ServicioController.getSecadoByIdRes)

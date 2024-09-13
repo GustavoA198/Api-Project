@@ -12,6 +12,15 @@ export class ServicioController {
     }
   }
 
+  static async getAllInseminacionOMonta (req, res) {
+    try {
+      const all = await ServicioModel.getInseminacionOMonta()
+      success(req, res, all, 200)
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
   static async getServicio (req, res) {
     try {
       const Servicio = await ServicioModel.getServicioById(req.params.id)

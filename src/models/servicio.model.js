@@ -13,29 +13,33 @@ export class ServicioModel {
     return serviciosWithInsumos
   }
 
+  static async getInseminacionOMonta () {
+    const [ids] = await database.query(
+      `SELECT ID 
+      FROM Servicio 
+      WHERE Tipo = "Inseminacion" OR Tipo = "Monta"`)
+
+    let serviciosWithInsumos = []
+    for (const id of ids) {
+      const servicio = await this.getInseminacionOMontaById(id.ID)
+      serviciosWithInsumos.push(servicio)
+    }
+
+    return serviciosWithInsumos
+  }
+
   static async getServicioById (id) {
     const [[servicio]] = await database.query(`SELECT s.*, r.Nombre as ResNombre
                                               FROM Servicio s
                                               INNER JOIN res r ON r.ID = s.ResID 
                                               WHERE s.id = ?`, [id])
 
-    const [listInsumos] = await database.query(`SELECT i.ID, i.Nombre, ins.Cantidad
+    const [listInsumos] = await database.query(`SELECT i.Nombre
                                 FROM SERVICIO s INNER JOIN INSUMOSERVICIO ins ON s.ID = ins.ServicioID
                                 INNER JOIN insumo i ON i.ID = ins.InsumoID                                
                                 WHERE s.ID = ?`, [id])
-    return { ...servicio, listInsumos }
-  }
-
-  static async getServicioByIdRes (ResID) {
-    const [ids] = await database.query(`SELECT ID FROM Servicio WHERE ResID = ?`, [ResID])
-
-    let serviciosWithInsumos = []
-    for (const id of ids) {
-      const servicio = await this.getServicioById(id.ID)
-      serviciosWithInsumos.push(servicio)
-    }
-
-    return serviciosWithInsumos
+    const listInsumosToString = listInsumos.map(insumo => insumo.Nombre).join(', ')
+    return { ...servicio, listInsumos: listInsumosToString }
   }
 
   static async getInseminacionOMontaById (id) {
@@ -59,7 +63,20 @@ export class ServicioModel {
       INNER JOIN insumo i ON i.ID = ins.InsumoID
       WHERE s.ID = ?`, [id])
 
-    return { ...servicio, listInsumos }
+    const listInsumosToString = listInsumos.map(insumo => insumo.Nombre).join(', ')
+    return { ...servicio, listInsumos: listInsumosToString }
+  }
+
+  static async getServicioByIdRes (ResID) {
+    const [ids] = await database.query(`SELECT ID FROM Servicio WHERE ResID = ?`, [ResID])
+
+    let serviciosWithInsumos = []
+    for (const id of ids) {
+      const servicio = await this.getServicioById(id.ID)
+      serviciosWithInsumos.push(servicio)
+    }
+
+    return serviciosWithInsumos
   }
 
   static async getInseminacionOMontaByIdRes (ResID) {
@@ -114,7 +131,7 @@ export class ServicioModel {
     }
 
     // insertar inseminacion
-    if (Tipo === 'Inseminación') {
+    if (Tipo === 'Inseminacion') {
       const [[{ id: idInseminacion }]] = await database.query('SELECT UUID() id')
       const { FechaParto } = data
       await database.query('INSERT INTO Inseminacion (id, ServicioID, FechaParto) VALUES (?, ?, ?)',
@@ -134,6 +151,14 @@ export class ServicioModel {
   static async updateServicio (id, data) {
     const keys = Object.keys(data)
     const values = Object.values(data)
+
+    if (data.FechaParto) {
+      if (data.Tipo === 'Monta') {
+        await database.query('UPDATE Monta SET FechaParto = ? WHERE ServicioID = ?', [data.FechaParto, id])
+      } else if (data.Tipo === 'Inseminacion') {
+        await database.query('UPDATE Inseminacion SET FechaParto = ? WHERE ServicioID = ?', [data.FechaParto, id])
+      }
+    }
     let query = 'UPDATE Servicio SET '
     keys.forEach((key, index) => {
       query += `${key} = ?`
