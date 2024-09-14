@@ -44,7 +44,8 @@ CREATE TABLE ParaInseminar (
     ID VARCHAR(36) UNIQUE,       -- ID is unique but not the primary key
     Fecha VARCHAR(10) NOT NULL,
     Observaciones TEXT,
-    ResID VARCHAR(36) NOT NULL
+    ResID VARCHAR(36) NOT NULL,
+    Estado ENUM('Pendiente', 'Realizado')
 );
 
 
@@ -326,6 +327,12 @@ INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-
 INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000002', 'Finca La Ilusion', 'Calle 456', 'Finca de prueba');
 INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000003', 'Finca La Alegria', 'Calle 789', 'Finca de prueba');
 INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000004', 'Finca La Felicidad', 'Calle 321', 'Finca de prueba');
+
+-- ParaInseminar
+INSERT INTO ParaInseminar (ID, Fecha, Observaciones, ResID, Estado) VALUES ('00000000-0000-0000-0000-000000000001', '2021-05-17', 'Inseminacion de prueba', '00000000-0000-0000-0000-000000000001', 'Pendiente');
+INSERT INTO ParaInseminar (ID, Fecha, Observaciones, ResID, Estado) VALUES ('00000000-0000-0000-0000-000000000002', '2021-05-17', 'Inseminacion de prueba', '00000000-0000-0000-0000-000000000002', 'Pendiente');
+INSERT INTO ParaInseminar (ID, Fecha, Observaciones, ResID, Estado) VALUES ('00000000-0000-0000-0000-000000000003', '2021-05-17', 'Inseminacion de prueba', '00000000-0000-0000-0000-000000000003', 'Pendiente');
+INSERT INTO ParaInseminar (ID, Fecha, Observaciones, ResID, Estado) VALUES ('00000000-0000-0000-0000-000000000004', '2021-05-17', 'Inseminacion de prueba', '00000000-0000-0000-0000-000000000004', 'Realizado');
 
 -- Lote
 INSERT INTO Lote (ID, Nombre, Numero, Aforo, FincaID) VALUES ('00000000-0000-0000-0000-000000000001', 'Lote 1', 1, 25, '00000000-0000-0000-0000-000000000001');   

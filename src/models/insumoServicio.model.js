@@ -125,6 +125,7 @@ export class InsumosServicioModel {
     } catch (error) {
       // Si algo falla, revertir
       await connection.rollback()
+      error('Error en la transacción, se ha hecho rollback:', error)
       console.log('Error en la transacción, se ha hecho rollback:', error)
     } finally {
       // Desconexión

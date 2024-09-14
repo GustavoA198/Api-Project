@@ -38,7 +38,9 @@ export class ServicioModel {
                                 FROM SERVICIO s INNER JOIN INSUMOSERVICIO ins ON s.ID = ins.ServicioID
                                 INNER JOIN insumo i ON i.ID = ins.InsumoID                                
                                 WHERE s.ID = ?`, [id])
+
     const listInsumosToString = listInsumos.map(insumo => insumo.Nombre).join(', ')
+
     return { ...servicio, listInsumos: listInsumosToString }
   }
 

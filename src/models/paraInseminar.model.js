@@ -2,19 +2,28 @@ import { database } from '../database/db.js'
 
 export class ParaInseminarModel {
   static async getAll () {
-    return await database.query('SELECT * FROM paraInseminar')
+    return await database.query(`
+      SELECT Pi.*, R.Nombre AS ResNombre 
+      FROM paraInseminar Pi
+      JOIN res R ON Pi.ResID = R.ID
+      WHERE Pi.Estado =  ?`,
+      ['Pendiente'])
   }
 
   static async getParaInseminar (id) {
-    return await database.query('SELECT * FROM paraInseminar WHERE id = ?', [id])
+    return await database.query(`
+      SELECT Pi.*, R.Nombre AS ResNombre 
+      FROM paraInseminar Pi
+      JOIN res R ON Pi.ResID = R.ID 
+      WHERE Pi.id = ?`, [id])
   }
 
   static async create (data) {
-    const { Fecha, Observaciones, ResID } = data
+    const { Fecha, Observaciones, ResID, Estado } = data
     const [[{ id }]] = await database.query('SELECT UUID() id')
     const result = await database.query(
-      'INSERT INTO paraInseminar (ID, Fecha, Observaciones, ResID ) VALUES (?, ?, ?, ?)',
-      [ id, Fecha, Observaciones, ResID ])
+      'INSERT INTO paraInseminar (ID, Fecha, Observaciones, ResID, Estado ) VALUES (?, ?, ?, ?, ?)',
+      [ id, Fecha, Observaciones, ResID, Estado ])
     return result
   }
 
