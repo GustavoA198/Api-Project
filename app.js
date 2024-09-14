@@ -23,6 +23,7 @@ import { TransaccionRouter } from './src/routes/transaccion.route.js'
 import { InsumosTransaccionRouter } from './src/routes/insumosTransaccion.route.js'
 import { ImagenRouter } from './src/routes/imagen.route.js'
 import { InsumoServicioRouter } from './src/routes/insumoServicio.route.js'
+import { ParaInseminarRouter } from './src/routes/parainseminar.route.js'
 
 const app = express()
 
@@ -83,5 +84,6 @@ app.use('/transaccion', TransaccionRouter)
 app.use('/insumosTransaccion', InsumosTransaccionRouter)
 app.use('/imagen', ImagenRouter)
 app.use('/insumoServicio', InsumoServicioRouter)
+app.use('/parainseminar', ParaInseminarRouter)
 
 export default app

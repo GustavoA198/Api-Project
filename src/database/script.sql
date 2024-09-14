@@ -40,6 +40,14 @@ CREATE TABLE Insumo (
     Observaciones TEXT
 );
 
+CREATE TABLE ParaInseminar (
+    ID VARCHAR(36) UNIQUE,       -- ID is unique but not the primary key
+    Fecha VARCHAR(10) NOT NULL,
+    Observaciones TEXT,
+    ResID VARCHAR(36) NOT NULL
+);
+
+
 CREATE TABLE Actividad (
     ID VARCHAR(36) PRIMARY KEY,
     Fecha VARCHAR(10) NOT NULL,
@@ -220,6 +228,11 @@ FOREIGN KEY (FincaID) REFERENCES Finca(ID);
 ALTER TABLE Actividad
 ADD CONSTRAINT fk_Actividad_Lote
 FOREIGN KEY (LoteID) REFERENCES Lote(ID);
+
+-- Foreign Keys ParaInseminar
+ALTER TABLE ParaInseminar
+ADD CONSTRAINT fk_ParaInseminar_Res
+FOREIGN KEY (ResID) REFERENCES Res(ID);
 
 -- foreign keys Res
 ALTER TABLE Res
