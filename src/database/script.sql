@@ -207,7 +207,10 @@ ALTER TABLE InsumoServicio
 ADD CONSTRAINT fk_InsumoServicio_Insumo
 FOREIGN KEY (InsumoID) REFERENCES Insumo(ID),
 ADD CONSTRAINT fk_InsumoServicio_Servicio
-FOREIGN KEY (ServicioID) REFERENCES Servicio(ID);
+FOREIGN KEY (ServicioID) REFERENCES Servicio(ID) ON DELETE CASCADE;
+
+
+
 -- Foreign Keys Lote
 ALTER TABLE Lote
 ADD CONSTRAINT fk_Lote_Finca
@@ -264,14 +267,14 @@ FOREIGN KEY (ResID) REFERENCES Res(ID);
 -- Asociación de la tabla 'Monta' con las tablas 'Servicio' y 'Res'
 ALTER TABLE Monta
 ADD CONSTRAINT fk_Monta_Servicio
-FOREIGN KEY (ServicioID) REFERENCES Servicio(ID),
+FOREIGN KEY (ServicioID) REFERENCES Servicio(ID) ON DELETE CASCADE,
 ADD CONSTRAINT fk_Monta_Res
 FOREIGN KEY (ToroID) REFERENCES Res(ID);
 
 -- Asociación de la tabla 'Inseminacion' con la tabla 'Servicio'
 ALTER TABLE Inseminacion
 ADD CONSTRAINT fk_Inseminacion_Servicio
-FOREIGN KEY (ServicioID) REFERENCES Servicio(ID);
+FOREIGN KEY (ServicioID) REFERENCES Servicio(ID) ON DELETE CASCADE;
 
 -- Asociación de la tabla 'Uso' con la tabla 'Producto'
 ALTER TABLE Uso
