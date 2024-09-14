@@ -31,22 +31,32 @@ export class InsumosServicioModel {
     await connection.beginTransaction()
     try {
       for (const {InsumoID, ServicioID, Cantidad} of data) {
-        const [[{ Cantidad: oldCantidad }]] = await connection.query(`
+        const [[resp]] = await connection.query(`
           SELECT Cantidad
           FROM InsumoServicio
           WHERE InsumoID = ? AND ServicioID = ?`,
           [InsumoID, ServicioID]
         )
-        if (oldCantidad === Cantidad) {
-          return (false)
-        }
+        let oldCantidad = 0
+        if (resp) {
+          oldCantidad = resp.Cantidad
 
-        await connection.query(`
-          UPDATE InsumoServicio 
-          SET Cantidad = ?
-          WHERE InsumoID = ? AND ServicioID = ?`,
-          [Cantidad, InsumoID, ServicioID]
-        )
+          if (oldCantidad === Cantidad) { return (false) }
+
+          await connection.query(`
+            UPDATE InsumoServicio 
+            SET Cantidad = ?
+            WHERE InsumoID = ? AND ServicioID = ?`,
+            [Cantidad, InsumoID, ServicioID]
+          )
+        } else {
+          const [[{id: idInsumoServicio}]] = await connection.query('SELECT UUID() id')
+
+          await connection.query(`
+            INSERT INTO InsumoServicio (ID, InsumoID, ServicioID, Cantidad)
+            VALUES (?, ?, ?, ?)`, [idInsumoServicio, InsumoID, ServicioID, Cantidad]
+          )
+        }
 
         let diferencia
         if (Cantidad > oldCantidad) {
@@ -67,7 +77,8 @@ export class InsumosServicioModel {
     } catch (error) {
       // Si algo falla, revertir
       await connection.rollback()
-      console.log('Error en la transacción, se ha hecho rollback:', error)
+      console.log(error)
+      error('Error en la transacción, se ha hecho rollback:', error)
     } finally {
       // Desconexión
       connection.release()
