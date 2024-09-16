@@ -31,12 +31,12 @@ export class ServicioModel {
   static async getServicioById (id) {
     const [[servicio]] = await database.query(`SELECT s.*, r.Nombre as ResNombre
                                               FROM Servicio s
-                                              INNER JOIN res r ON r.ID = s.ResID 
+                                              INNER JOIN Res r ON r.ID = s.ResID 
                                               WHERE s.id = ?`, [id])
 
     const [listInsumos] = await database.query(`SELECT i.Nombre
-                                FROM SERVICIO s INNER JOIN INSUMOSERVICIO ins ON s.ID = ins.ServicioID
-                                INNER JOIN insumo i ON i.ID = ins.InsumoID                                
+                                FROM Servicio s INNER JOIN InsumoServicio  ins ON s.ID = ins.ServicioID
+                                INNER JOIN Insumo i ON i.ID = ins.InsumoID                                
                                 WHERE s.ID = ?`, [id])
 
     const listInsumosToString = listInsumos.map(insumo => insumo.Nombre).join(', ')
@@ -50,8 +50,8 @@ export class ServicioModel {
         FROM Servicio s
         LEFT JOIN Monta m ON s.ID = m.ServicioID
         LEFT JOIN Inseminacion i ON s.ID = i.ServicioID
-        INNER JOIN res r ON r.ID = s.ResID
-        LEFT JOIN res toro ON toro.ID = m.ToroID
+        INNER JOIN Res r ON r.ID = s.ResID
+        LEFT JOIN Res toro ON toro.ID = m.ToroID
         WHERE s.ID = ? AND (s.Tipo = "Inseminacion" OR s.Tipo = "Monta")`
         , [id])
 
@@ -61,8 +61,8 @@ export class ServicioModel {
 
     const [listInsumos] = await database.query(
       `SELECT i.ID, i.Nombre, ins.Cantidad
-      FROM SERVICIO s INNER JOIN INSUMOSERVICIO ins ON s.ID = ins.ServicioID
-      INNER JOIN insumo i ON i.ID = ins.InsumoID
+      FROM Servicio s INNER JOIN InsumoServicio  ins ON s.ID = ins.ServicioID
+      INNER JOIN Insumo i ON i.ID = ins.InsumoID
       WHERE s.ID = ?`, [id])
 
     const listInsumosToString = listInsumos.map(insumo => insumo.Nombre).join(', ')
