@@ -50,7 +50,11 @@ export class ReproduccionModel {
     let EnGestacion = []
     for (const id of idSeriviciosEngestacion) {
       const [[resp]] = await database.query(`
-        SELECT r.ID as ResID, r.Nombre, r.Numero, i.FechaParto as FechaPartoI, m.FechaParto as FechaPartoM
+        SELECT 
+          r.ID as ResID,
+          r.Nombre as ResNombre,
+          r.Numero,
+          COALESCE(i.FechaParto, m.FechaParto) AS FechaParto
         FROM Servicio s
         JOIN Res r ON s.ResID = r.ID
         LEFT JOIN Inseminacion i ON s.ID = i.ServicioID
@@ -65,22 +69,46 @@ export class ReproduccionModel {
 
   static async getPorConfirmar () {
     return await database.query(`
-      SELECT s.ID, 
-        r.ID AS ResID, 
-        r.Nombre AS ResNombre, 
-        m.ID AS MontaID, 
-        m.FechaParto AS FechaPartoM, 
-        i.ID AS InseminacionID, 
-        i.FechaParto AS FechaPartoI 
+      SELECT 
+        s.ID,
+        r.ID AS ResID,
+        r.Nombre AS ResNombre,
+        COALESCE(m.ID, i.ID) AS InseminacionOMontaID,
+        COALESCE(i.FechaParto, m.FechaParto) AS FechaParto
       FROM Servicio s
       INNER JOIN Res r ON s.ResID = r.ID
       LEFT JOIN Inseminacion i ON s.ID = i.ServicioID
       LEFT JOIN Monta m ON s.ID = m.ServicioID
       WHERE 
-        s.Tipo = 'Inseminacion' OR s.Tipo = 'Monta'
+        (s.Tipo = 'Inseminacion' OR s.Tipo = 'Monta')
         AND
-        (i.Estado = 'Por Confirmar' OR m.Estado = 'Por Confirmar');
-`
+        (i.Estado = 'No Confirmado' OR m.Estado = 'No Confirmado') 
+      ORDER BY COALESCE(i.FechaParto, m.FechaParto) DESC`
     )
+  }
+
+  static async confirmarInseminacion (id) {
+    const connection = await database.getConnection()
+    try {
+      await connection.beginTransaction()
+      await connection.query(`
+        UPDATE Inseminacion
+        SET Estado = 'Confirmado'
+        WHERE ServicioID = ?`,
+        [id])
+
+      await connection.query(`
+        UPDATE Monta
+        SET Estado = 'Confirmado'
+        WHERE ServicioID = ?`,
+        [id])
+      connection.commit()
+      return true
+    } catch (e) {
+      connection.rollback()
+      return false
+    } finally {
+      connection.release()
+    }
   }
 }

@@ -6,3 +6,5 @@ export const ReproduccionRouter = Router()
 // GET
 ReproduccionRouter.get('/engestacion', ReproduccionController.getEnGestacion)
 ReproduccionRouter.get('/porConfirmar', ReproduccionController.getPorConfirmar)
+
+ReproduccionRouter.put('/confirmarinseminacion/:id', ReproduccionController.confirmarInseminacion)

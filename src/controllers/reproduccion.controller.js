@@ -27,5 +27,17 @@ export class ReproduccionController {
       error(req, res, e.message, e.status)
     }
   }
-
+  static async confirmarInseminacion (req, res) {
+    try {
+      const { id } = req.params
+      const data = await ReproduccionModel.confirmarInseminacion(id)
+      if (!data) {
+        notContent(req, res, `No se encontró ningún Registro`)
+      } else {
+        success(req, res, data, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
 }
