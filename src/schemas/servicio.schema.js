@@ -1,7 +1,7 @@
 import z from 'zod'
 
 export const ServicioSchema = z.object({
-  Tipo: z.enum(['Monta', 'Inseminacion', 'Podologia', 'Vacunacion', 'Desparasitacion', 'Control', 'Castracion', 'Topizado', 'Curación', 'Secado', 'Otro']),
+  Tipo: z.enum(['Monta', 'Inseminacion', 'Podologia', 'Vacunacion', 'Desparasitacion', 'Control', 'Castracion', 'Topizado', 'Curación', 'Secado', 'Aborto', 'Otro']),
   Fecha: z.string().max(10),
   Veterinario: z.string().max(100).optional(),
   Observaciones: z.string().optional(),
