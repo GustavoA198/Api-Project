@@ -45,8 +45,6 @@ export class ReproduccionModel {
           ) = 0
         `)
 
-    console.log(idSeriviciosEngestacion)
-
     let EnGestacion = []
     for (const id of idSeriviciosEngestacion) {
       const [[resp]] = await database.query(`
@@ -63,7 +61,6 @@ export class ReproduccionModel {
       EnGestacion.push(resp)
     }
 
-    console.log(EnGestacion)
     return EnGestacion
   }
 
@@ -100,6 +97,31 @@ export class ReproduccionModel {
       await connection.query(`
         UPDATE Monta
         SET Estado = 'Confirmado'
+        WHERE ServicioID = ?`,
+        [id])
+      connection.commit()
+      return true
+    } catch (e) {
+      connection.rollback()
+      return false
+    } finally {
+      connection.release()
+    }
+  }
+
+  static async inseminacionFallida (id) {
+    const connection = await database.getConnection()
+    try {
+      await connection.beginTransaction()
+      await connection.query(`
+        UPDATE Inseminacion
+        SET Estado = 'Fallido'
+        WHERE ServicioID = ?`,
+        [id])
+
+      await connection.query(`
+        UPDATE Monta
+        SET Estado = 'Fallido'
         WHERE ServicioID = ?`,
         [id])
       connection.commit()
