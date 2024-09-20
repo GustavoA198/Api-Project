@@ -4,8 +4,8 @@ export class ParaInseminarModel {
   static async getAll () {
     return await database.query(`
       SELECT Pi.*, R.Nombre AS ResNombre 
-      FROM paraInseminar Pi
-      JOIN res R ON Pi.ResID = R.ID
+      FROM ParaInseminar Pi
+      JOIN Res R ON Pi.ResID = R.ID
       WHERE Pi.Estado =  ?`,
       ['Pendiente'])
   }
@@ -13,8 +13,8 @@ export class ParaInseminarModel {
   static async getParaInseminar (id) {
     return await database.query(`
       SELECT Pi.*, R.Nombre AS ResNombre 
-      FROM paraInseminar Pi
-      JOIN res R ON Pi.ResID = R.ID 
+      FROM ParaInseminar Pi
+      JOIN Res R ON Pi.ResID = R.ID 
       WHERE Pi.id = ?`, [id])
   }
 
@@ -22,7 +22,7 @@ export class ParaInseminarModel {
     const { Fecha, Observaciones, ResID, Estado } = data
     const [[{ id }]] = await database.query('SELECT UUID() id')
     const result = await database.query(
-      'INSERT INTO paraInseminar (ID, Fecha, Observaciones, ResID, Estado ) VALUES (?, ?, ?, ?, ?)',
+      'INSERT INTO ParaInseminar (ID, Fecha, Observaciones, ResID, Estado ) VALUES (?, ?, ?, ?, ?)',
       [ id, Fecha, Observaciones, ResID, Estado ])
     return result
   }
@@ -30,7 +30,7 @@ export class ParaInseminarModel {
   static async update (id, data) {
     const keys = Object.keys(data)
     const values = Object.values(data)
-    let query = 'UPDATE paraInseminar SET '
+    let query = 'UPDATE ParaInseminar SET '
     keys.forEach((key, index) => {
       query += `${key} = ?`
       if (index < keys.length - 1) {
@@ -43,6 +43,6 @@ export class ParaInseminarModel {
   }
 
   static async delete (id) {
-    return await database.query('DELETE FROM paraInseminar WHERE ID = ?', [id])
+    return await database.query('DELETE FROM ParaInseminar WHERE ID = ?', [id])
   }
 }
