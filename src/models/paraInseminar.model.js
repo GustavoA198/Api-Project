@@ -29,38 +29,63 @@ export class ParaInseminarModel {
       SELECT r.ID
       FROM Res r
       WHERE  
+      -- Que pesen más de 200 kg
+      r.PesoActual >= 200
+
+      AND
+      -- Que sea femenino
+      r.Sexo = 'F'
+
+      AND
+      -- Que este activa
+      r.Estado = 'Activa'
+
+      AND
+
       -- Condición para vacas que son madres de alguna vaca que tiene menos de 45 días
-      (
+       (
         SELECT COUNT(*)
         FROM Res hijo
-        WHERE hijo.Madre = r.ID
-          AND DATE_ADD(hijo.FechaNacimiento, INTERVAL 45 DAY) >= CURDATE()
-      ) = 0
+        WHERE 
+          hijo.Madre = r.ID AND
+          DATE_ADD(hijo.FechaNacimiento, INTERVAL 45 DAY) >= CURDATE()
+        ) = 0
+
+      AND
+        -- Vacas mayores a 18 meses
+        (TIMESTAMPDIFF(MONTH, r.FechaNacimiento, CURDATE())) > 18
+
+      AND
+       -- que no tenga abortos en los ultimos 40 dias
+        (
+          SELECT COUNT(*)
+          FROM Servicio s
+          WHERE
+            s.ResID = r.ID AND
+            s.Tipo = 'Aborto' AND
+            DATE_ADD(s.Fecha, INTERVAL 40 DAY) >= CURDATE()
+          ) = 0
       
-      OR
-      
-      -- Vacas entre 18 y 24 meses
-      (TIMESTAMPDIFF(MONTH, r.FechaNacimiento, CURDATE()) BETWEEN 18 AND 24)
-      
+      AND 
       -- Que no tengan inseminaciones o montas exitosas
-      AND (
+      (
         (SELECT COUNT(*)
         FROM Servicio s
         INNER JOIN Inseminacion i ON s.ID = i.ServicioID
         WHERE 
           s.ResID = r.ID AND
           s.Tipo = 'Inseminacion' AND
-          DATE_ADD(i.Fecha, INTERVAL 285 DAY) >= CURDATE() AND
+          DATE_ADD(s.Fecha, INTERVAL 285 DAY) >= CURDATE() AND
           i.Estado != 'Fallido') = 0
-        OR
+        AND
         (SELECT COUNT(*)
         FROM Servicio s
         INNER JOIN Monta m ON s.ID = m.ServicioID
         WHERE 
-        s.ResID = r.ID AND
-        s.Tipo = 'Monta' AND
-        DATE_ADD(m.Fecha, INTERVAL 285 DAY) >= CURDATE() AND
-        m.Estado != 'Fallido') = 0
+          s.ResID = r.ID AND
+          s.Tipo = 'Monta' AND
+          DATE_ADD(s.Fecha, INTERVAL 285 DAY) >= CURDATE() AND
+          m.Estado != 'Fallido') = 0
       )`
     )
   }
