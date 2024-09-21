@@ -6,6 +6,7 @@ export const ParaInseminarRouter = Router()
 // GET
 ParaInseminarRouter.get('/', ParaInseminarController.getAll)
 ParaInseminarRouter.get('/:id', ParaInseminarController.getParaInseminar)
+ParaInseminarRouter.get('/sugeridos', ParaInseminarController.getSugeridos)
 
 // POST
 ParaInseminarRouter.post('/', ParaInseminarController.create)

@@ -8,7 +8,7 @@ export class ReproduccionModel {
       WHERE 
         (s1.Tipo = 'Inseminacion' OR s1.Tipo = 'Monta') 
         AND 
-        DATE_ADD(fecha, interval 285 day) >= CURDATE() 
+        DATE_ADD(s1.Fecha, interval 285 day) >= CURDATE() 
         
         AND
 

@@ -1,5 +1,5 @@
 import { ParaInseminarModel } from '../models/paraInseminar.model.js'
-import { validateParaInseminar, validatePartialParaInseminar } from '../schemas/paraInseminar.schema.js'
+import { validateParaInseminar } from '../schemas/paraInseminar.schema.js'
 import { error, success, notFound } from '../utils/responses.js'
 
 export class ParaInseminarController {
@@ -25,6 +25,15 @@ export class ParaInseminarController {
     }
   }
 
+  static async getSugeridos (req, res) {
+    try {
+      const [sugeridos] = await ParaInseminarModel.getSugeridos()
+      success(req, res, sugeridos, 200)
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
   static async create (req, res) {
     const result = validateParaInseminar(req.body)
     if (result.success) {
@@ -40,20 +49,15 @@ export class ParaInseminarController {
   }
 
   static async update (req, res) {
-    const result = validatePartialParaInseminar(req.body)
-    if (result.success) {
-      try {
-        const [updateResult] = await ParaInseminarModel.update(req.params.id, result.data)
-        if (updateResult.affectedRows === 0) {
-          notFound(req, res, `No se encontro ningun registro con el ID ${req.params.id} para actualizar`)
-        } else {
-          success(req, res, updateResult, 200)
-        }
-      } catch (e) {
-        error(req, res, e.message, e.status)
+    try {
+      const [updateResult] = await ParaInseminarModel.update(req.params.id)
+      if (updateResult.affectedRows === 0) {
+        notFound(req, res, `No se encontro ningun registro con el ID ${req.params.id} para actualizar`)
+      } else {
+        success(req, res, updateResult, 200)
       }
-    } else {
-      error(req, res, JSON.parse(result.error.message), 400)
+    } catch (e) {
+      error(req, res, e.message, e.status)
     }
   }
 
