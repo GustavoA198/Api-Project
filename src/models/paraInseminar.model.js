@@ -3,9 +3,9 @@ import { database } from '../database/db.js'
 export class ParaInseminarModel {
   static async getAll () {
     return await database.query(`
-      SELECT Pi.*, R.Nombre AS ResNombre, R.ID AS ResID
-      FROM paraInseminar Pi
-      JOIN res R ON Pi.ResID = R.ID
+      SELECT Pi.*, R.Nombre AS ResNombre 
+      FROM ParaInseminar Pi
+      JOIN Res R ON Pi.ResID = R.ID
       WHERE Pi.Estado =  ?`,
       ['Pendiente'])
   }
@@ -13,8 +13,8 @@ export class ParaInseminarModel {
   static async getParaInseminar (id) {
     return await database.query(`
       SELECT Pi.*, R.Nombre AS ResNombre 
-      FROM paraInseminar Pi
-      JOIN res R ON Pi.ResID = R.ID 
+      FROM ParaInseminar Pi
+      JOIN Res R ON Pi.ResID = R.ID 
       WHERE Pi.id = ?`, [id])
   }
 
@@ -82,6 +82,6 @@ export class ParaInseminarModel {
   }
 
   static async delete (id) {
-    return await database.query('DELETE FROM paraInseminar WHERE ID = ?', [id])
+    return await database.query('DELETE FROM ParaInseminar WHERE ID = ?', [id])
   }
 }
