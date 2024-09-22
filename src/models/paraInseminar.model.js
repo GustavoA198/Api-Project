@@ -19,14 +19,13 @@ export class ParaInseminarModel {
   }
 
   static async getSugeridos () {
-    /* TO DO
-     Vacas despues 45 dias despues del parto
-     o vacas que tengan entre 18 y 24 meses
-     que no tenga inseminaciones en estado no confirmado o confirmado
-     que no tenga insemianciones fallida en los ultimos "NO SE" Dias */
+     /* TO DO
+     -- Recomendar fecha de inseminacion adecuada
+     */
 
     return await database.query(`
-      SELECT r.ID
+
+      SELECT r.ID, r.Nombre as ResNombre
       FROM Res r
       WHERE  
       -- Que pesen más de 200 kg

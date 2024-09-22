@@ -52,6 +52,7 @@ export class ReproduccionModel {
           r.ID as ResID,
           r.Nombre as ResNombre,
           r.Numero,
+          m.ToroID,
           COALESCE(i.FechaParto, m.FechaParto) AS FechaParto
         FROM Servicio s
         JOIN Res r ON s.ResID = r.ID
@@ -132,5 +133,20 @@ export class ReproduccionModel {
     } finally {
       connection.release()
     }
+  }
+
+  static async getPartos () {
+    return await database.query(`
+      SELECT 
+        r.ID,
+        r.Nombre AS ResNombre,
+        r.Numero,
+        hijo.FechaNacimiento as FechaParto,
+        hijo.Nombre AS HijoNombre,
+        hijo.ID AS HijoID
+      FROM Res r
+      JOIN Res hijo ON hijo.Madre = r.ID
+      WHERE hijo.FechaNacimiento IS NOT NULL
+      ORDER BY hijo.FechaNacimiento DESC`)
   }
 }

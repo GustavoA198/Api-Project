@@ -2,7 +2,7 @@ import z from 'zod'
 
 export const ParaInseminarSchema = z.object({
   Fecha: z.string().max(10),
-  Observaciones: z.string().max(255),
+  Observaciones: z.string().max(255).optional(),
   ResID: z.string().uuid()
 })
 

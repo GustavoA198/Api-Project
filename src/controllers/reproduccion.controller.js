@@ -27,6 +27,7 @@ export class ReproduccionController {
       error(req, res, e.message, e.status)
     }
   }
+
   static async confirmarInseminacion (req, res) {
     try {
       const { id } = req.params
@@ -49,6 +50,19 @@ export class ReproduccionController {
         notContent(req, res, `No se encontró ningún Registro`)
       } else {
         success(req, res, data, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getPartos (req, res) {
+    try {
+      const [dataPartos] = await ReproduccionModel.getPartos()
+      if (!dataPartos || dataPartos.length === 0) {
+        notContent(req, res, `No se encontró ningún Registro`)
+      } else {
+        success(req, res, dataPartos, 200)
       }
     } catch (e) {
       error(req, res, e.message, e.status)
