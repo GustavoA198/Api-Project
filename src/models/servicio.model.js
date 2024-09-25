@@ -158,6 +158,14 @@ export class ServicioModel {
           'INSERT INTO Monta (id, ServicioID, FechaParto, ToroID) VALUES (?, ?, ?, ?)',
           [idMonta, id, FechaParto, ToroID])
       }
+
+      // actulizar tabla paraInseminar
+      if (Tipo === 'Inseminacion' || Tipo === 'Monta') {
+        await connection.query(`
+          UPDATE paraInseminar
+          SET Estado = 'Realizado'
+          WHERE ResID = ?`, [ResID])
+      }
       // si todo salió bien se hace commit
       await connection.commit()
       return (true)

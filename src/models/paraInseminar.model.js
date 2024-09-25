@@ -40,6 +40,10 @@ export class ParaInseminarModel {
       r.Estado = 'Activa'
 
       AND
+      -- Que no esten el registros de para inseminar
+      r.ID NOT IN (SELECT ResID FROM paraInseminar)
+
+      AND
 
       -- Condición para vacas que son madres de alguna vaca que tiene menos de 45 días
        (
@@ -102,7 +106,7 @@ export class ParaInseminarModel {
     return await database.query(`
       UPDATE paraInseminar
       SET Estado = 'Realizado'
-      WHERE ID = ?`, [id])
+      WHERE ResID = ?`, [id])
   }
 
   static async delete (id) {
