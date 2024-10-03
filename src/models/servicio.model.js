@@ -28,6 +28,18 @@ export class ServicioModel {
     return serviciosWithInsumos
   }
 
+  static async getSecado () {
+    const [ids] = await database.query('SELECT ID FROM Servicio WHERE Tipo = "Secado"')
+
+    let serviciosWithInsumos = []
+    for (const id of ids) {
+      const servicio = await this.getServicioById(id.ID)
+      serviciosWithInsumos.push(servicio)
+    }
+
+    return serviciosWithInsumos
+  }
+
   static async getServicioById (id) {
     const [[servicio]] = await database.query(`SELECT s.*, r.Nombre as ResNombre
                                               FROM Servicio s
