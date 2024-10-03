@@ -15,6 +15,19 @@ export class ReproduccionController {
     }
   }
 
+  static async getParaSecado (req, res) {
+    try {
+      const dataParaSecado = await ReproduccionModel.getParaSecado()
+      if (!dataParaSecado || dataParaSecado.length === 0) {
+        notContent(req, res, `No se encontró ningún Registro`)
+      } else {
+        success(req, res, dataParaSecado, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
   static async getPorConfirmar (req, res) {
     try {
       const [dataPorConfirmar] = await ReproduccionModel.getPorConfirmar()

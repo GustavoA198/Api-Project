@@ -53,6 +53,7 @@ export class ReproduccionModel {
           r.Nombre as ResNombre,
           r.Numero,
           m.ToroID,
+          DATEDIFF(CURDATE(), s.Fecha) AS DiasGestacion,
           COALESCE(i.FechaParto, m.FechaParto) AS FechaParto
         FROM Servicio s
         JOIN Res r ON s.ResID = r.ID
@@ -63,6 +64,17 @@ export class ReproduccionModel {
     }
 
     return EnGestacion
+  }
+
+  static async getParaSecado () {
+    const EnGestacion = await this.getEnGestacion()
+    const ParaSecado = []
+    for (const res of EnGestacion) {
+      if (res.DiasGestacion >= 220) {
+        ParaSecado.push(res)
+      }
+    }
+    return ParaSecado
   }
 
   static async getPorConfirmar () {
