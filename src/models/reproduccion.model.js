@@ -1,4 +1,5 @@
 import { database } from '../database/db.js'
+import { IncludeInListObject } from '../utils/IncludeInListObject.js'
 
 export class ReproduccionModel {
   static async getEnGestacion () {
@@ -68,9 +69,20 @@ export class ReproduccionModel {
 
   static async getParaSecado () {
     const EnGestacion = await this.getEnGestacion()
+    const [idResesSecando] = await database.query(`
+        SELECT r.ID as ResID 
+        FROM Servicio s
+        INNER JOIN Res r ON r.ID = s.ResID 
+        WHERE 
+          s.Tipo = "Secado"
+          AND
+          s.Fecha  + INTERVAL 62 DAY > CURDATE()
+      `)
+
     const ParaSecado = []
     for (const res of EnGestacion) {
-      if (res.DiasGestacion >= 220) {
+      const notInclude = !IncludeInListObject(idResesSecando, ['ResID'], res.ResID)
+      if (res.DiasGestacion >= 220 && notInclude) {
         ParaSecado.push(res)
       }
     }
