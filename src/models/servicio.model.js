@@ -2,7 +2,7 @@ import { database } from '../database/db.js'
 
 export class ServicioModel {
   static async getServicios () {
-    const [ids] = await database.query('SELECT ID FROM Servicio')
+    const [ids] = await database.query('SELECT ID FROM Servicio WHERE Tipo NOT IN ("Secado", "Inseminacion", "Monta")')
 
     let serviciosWithInsumos = []
     for (const id of ids) {
@@ -17,7 +17,7 @@ export class ServicioModel {
     const [ids] = await database.query(
       `SELECT ID 
       FROM Servicio 
-      WHERE Tipo = "Inseminacion" OR Tipo = "Monta"`)
+      WHERE Tipo IN ("Inseminacion" ,"Monta")`)
 
     let serviciosWithInsumos = []
     for (const id of ids) {
@@ -64,7 +64,7 @@ export class ServicioModel {
         LEFT JOIN Inseminacion i ON s.ID = i.ServicioID
         INNER JOIN Res r ON r.ID = s.ResID
         LEFT JOIN Res toro ON toro.ID = m.ToroID
-        WHERE s.ID = ? AND (s.Tipo = "Inseminacion" OR s.Tipo = "Monta")`
+        WHERE s.ID = ? AND s.Tipo IN ("Inseminacion", "Monta")`
         , [id])
 
     if (!servicio) {
@@ -82,7 +82,14 @@ export class ServicioModel {
   }
 
   static async getServicioByIdRes (ResID) {
-    const [ids] = await database.query(`SELECT ID FROM Servicio WHERE ResID = ?`, [ResID])
+    const [ids] = await database.query(`
+      SELECT 
+        ID 
+      FROM Servicio 
+      WHERE 
+        ResID = ?
+        AND
+        Tipo NOT IN ("Secado", "Inseminacion", "Monta")`, [ResID])
 
     let serviciosWithInsumos = []
     for (const id of ids) {
@@ -95,10 +102,13 @@ export class ServicioModel {
 
   static async getInseminacionOMontaByIdRes (ResID) {
     const [ids] = await database.query(
-      `SELECT ID 
-      FROM Servicio 
-      WHERE ResID = ? AND (Tipo = "Inseminacion" OR Tipo = "Monta")`
-      , [ResID])
+      `SELECT s.ID 
+      FROM Servicio s
+      LEFT JOIN Monta m ON s.ID = m.ServicioID 
+      WHERE 
+        (s.ResID = ? OR m.ToroID = ?)
+        AND s.Tipo IN ("Inseminacion", "Monta")`
+      , [ResID, ResID])
 
     let serviciosWithInsumos = []
     for (const id of ids) {

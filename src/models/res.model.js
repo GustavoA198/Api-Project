@@ -3,15 +3,35 @@ import { database } from '../database/db.js'
 export class ResModel {
   static async getAll () {
     return await database.query(
-      `SELECT r.*, f.Nombre as FincaNombre
-       FROM Res r
-       INNER JOIN Finca f ON r.FincaID = f.ID 
-       WHERE r.Estado = ?`, ['Activa'])
+      `SELECT 
+        r.ID,
+        r.Numero,
+        r.Nombre,
+        r.Tipo,
+        r.Sexo,
+        DATEDIFF(CURDATE(), r.FechaNacimiento) AS Edad,
+        (SELECT COUNT(*) 
+        FROM Res cr 
+        WHERE cr.Madre = r.ID OR cr.Padre = r.ID) AS NumeroCrias,
+        f.ID AS FincaID,
+        f.Nombre AS FincaNombre
+      FROM 
+        Res r
+      INNER JOIN 
+        Finca f ON r.FincaID = f.ID
+      WHERE 
+        r.Estado = 'Activa'`)
   }
 
   static async getRes (id) {
     return await database.query(`
-      SELECT r.*, f.Nombre as FincaNombre 
+      SELECT 
+        r.*,
+        DATEDIFF(CURDATE(), r.FechaNacimiento) AS Edad,
+        (SELECT COUNT(*) 
+        FROM Res cr 
+        WHERE cr.Madre = r.ID OR cr.Padre = r.ID) AS NumeroCrias,
+        f.Nombre as FincaNombre 
       FROM Res r
       INNER JOIN Finca f ON r.FincaID = f.ID
       WHERE r.ID = ? `, [id])
