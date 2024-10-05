@@ -14,8 +14,8 @@ export class InsumoController {
 
   static async getInsumo (req, res) {
     try {
-      const [Insumo] = await InsumoModel.getInsumo(req.params.id)
-      if (!Insumo || Insumo.length === 0) {
+      const [[Insumo]] = await InsumoModel.getInsumo(req.params.id)
+      if (!Insumo) {
         notFound(req, res, `No se encontró ningún insumo con el ID ${req.params.id}`)
       } else {
         success(req, res, Insumo, 200)

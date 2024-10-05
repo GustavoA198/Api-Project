@@ -14,8 +14,8 @@ export class FincaController {
 
   static async getFinca (req, res) {
     try {
-      const [Finca] = await FincaModel.getFinca(req.params.id)
-      if (!Finca || Finca.length === 0) {
+      const [[Finca]] = await FincaModel.getFinca(req.params.id)
+      if (!Finca) {
         notFound(req, res, `No se encontró ninguna finca con el ID ${req.params.id}`)
       } else {
         success(req, res, Finca, 200)
