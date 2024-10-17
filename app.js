@@ -9,8 +9,6 @@ import { InsumoRouter } from './src/routes/insumo.route.js'
 import { ActividadRouter } from './src/routes/actividad.route.js'
 import { OcupacionRouter } from './src/routes/ocupacion.route.js'
 import { ProductoRouter } from './src/routes/producto.route.js'
-import { VentaRouter } from './src/routes/venta.route.js'
-import { ProductoVentasRouter } from './src/routes/productosVentas.route.js'
 import { AlimentoRouter } from './src/routes/alimento.route.js'
 import { MuerteRouter } from './src/routes/muerte.route.js'
 import { ProduccionIndividualRouter } from './src/routes/produccionIndividual.route.js'
@@ -25,6 +23,7 @@ import { ImagenRouter } from './src/routes/imagen.route.js'
 import { InsumoServicioRouter } from './src/routes/insumoServicio.route.js'
 import { ParaInseminarRouter } from './src/routes/parainseminar.route.js'
 import { ReproduccionRouter } from './src/routes/reproduccion.route.js'
+import { ProveedorRouter } from './src/routes/proveedor.route.js'
 
 const app = express()
 
@@ -46,8 +45,6 @@ app.get('/', (req, res) => {
         actividad: '/actividad',
         ocupacion: '/ocupacion',
         producto: '/producto',
-        venta: '/venta',
-        productosVentas: '/productosVentas',
         alimento: '/alimento',
         muerte: '/muerte',
         produccionIndividual: '/produccionIndividual',
@@ -71,8 +68,6 @@ app.use('/insumo', InsumoRouter)
 app.use('/actividad', ActividadRouter)
 app.use('/ocupacion', OcupacionRouter)
 app.use('/producto', ProductoRouter)
-app.use('/venta', VentaRouter)
-app.use('/productosVentas', ProductoVentasRouter)
 app.use('/alimento', AlimentoRouter)
 app.use('/muerte', MuerteRouter)
 app.use('/produccionIndividual', ProduccionIndividualRouter)
@@ -87,5 +82,6 @@ app.use('/imagen', ImagenRouter)
 app.use('/insumoServicio', InsumoServicioRouter)
 app.use('/parainseminar', ParaInseminarRouter)
 app.use('/reproduccion', ReproduccionRouter)
+app.use('/proveedor', ProveedorRouter)
 
 export default app
