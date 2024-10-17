@@ -1,12 +1,21 @@
 import { TransaccionModel } from '../models/transaccion.model.js'
 import { validateTransaccion, validatePartialTransaccion } from '../schemas/transaccion.schema.js'
-import { error, success, notFound } from '../utils/responses.js'
+import { error, success, notFound, notContent } from '../utils/responses.js'
 
 export class TransaccionController {
   static async getAll (req, res) {
     try {
-      const [all] = await TransaccionModel.getAll()
+      const all = await TransaccionModel.getAll()
       success(req, res, all, 200)
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getResumen (req, res) {
+    try {
+      const resumen = await TransaccionModel.getResumen()
+      success(req, res, resumen, 200)
     } catch (e) {
       error(req, res, e.message, e.status)
     }
@@ -14,9 +23,9 @@ export class TransaccionController {
 
   static async getTransaccion (req, res) {
     try {
-      const [Transaccion] = await TransaccionModel.getTransaccionById(req.params.id)
-      if (!Transaccion || Transaccion.length === 0) {
-        notFound(req, res, `No se encontró ninguna transaccion con el ID ${req.params.id}`)
+      const Transaccion = await TransaccionModel.getTransaccionById(req.params.id)
+      if (!Transaccion.ID) {
+        notContent(req, res, `No se encontró ninguna transaccion con el ID ${req.params.id}`)
       } else {
         success(req, res, Transaccion, 200)
       }

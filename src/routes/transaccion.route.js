@@ -5,6 +5,7 @@ export const TransaccionRouter = Router()
 
 // GET
 TransaccionRouter.get('/', TransaccionController.getAll)
+TransaccionRouter.get('/resumen', TransaccionController.getResumen)
 TransaccionRouter.get('/:id', TransaccionController.getTransaccion)
 
 // POST
