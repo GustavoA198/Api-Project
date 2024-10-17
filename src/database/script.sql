@@ -1,17 +1,27 @@
 -- Create Database
-    CREATE DATABASE ProGanaderoDB;
+    CREATE DATABASE ProGanaderoDB2;
 
 -- Use the database
-USE ProGanaderoDB;
+USE ProGanaderoDB2;
 
--- Tabla res de prueba
-CREATE TABLE Cliente (
+CREATE TABLE Persona (
     ID VARCHAR(36) PRIMARY KEY NOT NULL,
     Identificacion VARCHAR(20) NOT NULL,
     Nombre VARCHAR(100) NOT NULL,
     Direccion VARCHAR(200),
     Telefono VARCHAR(20) NOT NULL,
     Email VARCHAR(100)
+);
+
+CREATE TABLE Cliente (
+    ID VARCHAR(36) PRIMARY KEY NOT NULL,
+    FOREIGN KEY (ID) REFERENCES Persona(ID)
+);
+
+-- Tabla para proveedores (hereda de Persona)
+CREATE TABLE Proveedor (
+    ID VARCHAR(36) PRIMARY KEY NOT NULL,
+    FOREIGN KEY (ID) REFERENCES Persona(ID)
 );
 
 CREATE TABLE Finca (
@@ -74,24 +84,21 @@ CREATE TABLE Ocupacion (
 );
 
 CREATE TABLE Producto (
-    ID VARCHAR(36) PRIMARY KEY,
+    ID VARCHAR(36) UNIQUE,       -- ID is unique but not the primary key
+    Numero INT(8) AUTO_INCREMENT PRIMARY KEY, -- Numero is the primary key and auto-increments
     Nombre VARCHAR(100) NOT NULL,
-    Cantidad INT(11) NOT NULL
+    Cantidad BIGINT,
+    UnidadMedida VARCHAR(20),
+    Observaciones TEXT
 );
 
-CREATE TABLE Venta (
-    ID VARCHAR(36) PRIMARY KEY,
-    Total DECIMAL(10,2) NOT NULL,
-    Observaciones TEXT,
-    ClienteID VARCHAR(36) NOT NULL
-);
 
-CREATE TABLE ProductosVentas (
+CREATE TABLE ProductoTransaccion (
     ID VARCHAR(36) PRIMARY KEY,
     PrecioUnitario DECIMAL(10,2),
     Cantidad INT(11) NOT NULL,
     ProductoID VARCHAR(36) NOT NULL,
-    VentaID VARCHAR(36) NOT NULL
+    TransaccionID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Res (
@@ -168,9 +175,7 @@ CREATE TABLE Uso (
     Justificacion TEXT,
     Fecha VARCHAR(10) NOT NULL,
     Cantidad INT(11),
-    ProductoID VARCHAR(36),
-    ServicioID VARCHAR(36),
-    FOREIGN KEY (ProductoID) REFERENCES Insumo(ID)
+    ProductoID VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE Usuario (
@@ -187,8 +192,10 @@ CREATE TABLE Usuario (
 CREATE TABLE Transaccion (
     ID VARCHAR(36) PRIMARY KEY,
     Descripcion TEXT,
+    Tipo ENUM('Ingreso', 'Egreso') NOT NULL,
     Fecha VARCHAR(10) NOT NULL,
-    Valor DECIMAL(10,2) NOT NULL
+    Valor DECIMAL(10,2) NOT NULL,
+    Tercero VARCHAR(36) NOT NULL
 );
 
 CREATE TABLE InsumosTransaccion (
@@ -258,17 +265,12 @@ ALTER TABLE Ocupacion
 ADD CONSTRAINT fk_Ocupacion_Lote
 FOREIGN KEY (LoteID) REFERENCES Lote(ID);
 
--- Asociación de la tabla 'Venta' con la tabla 'Cliente'
-ALTER TABLE Venta
-ADD CONSTRAINT fk_Venta_Cliente
-FOREIGN KEY (ClienteID) REFERENCES Cliente(ID);
-
--- Asociación de la tabla 'ProductosVentas' con las tablas 'Producto' y 'Venta'
-ALTER TABLE ProductosVentas
-ADD CONSTRAINT fk_ProductosVentas_Producto
+-- Asociación de la tabla 'ProductosTransaccion' con las tablas 'Producto' y 'Transaccion'
+ALTER TABLE ProductoTransaccion
+ADD CONSTRAINT fk_ProductoTransaccion_Producto
 FOREIGN KEY (ProductoID) REFERENCES Producto(ID),
-ADD CONSTRAINT fk_ProductosVentas_Venta
-FOREIGN KEY (VentaID) REFERENCES Venta(ID);
+ADD CONSTRAINT fk_ProductoTransaccion_Transaccion
+FOREIGN KEY (TransaccionID) REFERENCES Transaccion(ID);
 
 -- Asociación de la tabla 'Muerte' con la tabla 'Res'
 ALTER TABLE Muerte
@@ -297,6 +299,11 @@ ALTER TABLE Uso
 ADD CONSTRAINT fk_Uso_Producto
 FOREIGN KEY (ProductoID) REFERENCES Producto(ID);
 
+-- Asociación de la tabla 'Transaccion' con la tabla un Tercero'
+ALTER TABLE Transaccion
+ADD CONSTRAINT fk_Transaccion_Tercero
+FOREIGN KEY (Tercero) REFERENCES Persona(ID);
+
 -- Asociación de la tabla 'InsumosTransaccion' con las tablas 'Insumo' y 'Transaccion'
 ALTER TABLE InsumosTransaccion
 ADD CONSTRAINT fk_InsumosTransaccion_Insumo
@@ -317,12 +324,20 @@ FOREIGN KEY (ResID) REFERENCES Res(ID);
 -- Inicio de la insercion de datos de prueba
 
 -- Cliente
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000001', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000002', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000003', '123123123', 'Pedro Gomez', 'Calle 789', '3213213', 'pedro@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000004', '321321321', 'Luisa Perez', 'Calle 321', '3213213', 'luisa@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000005', '456456456', 'Carlos Rodriguez', 'Calle 654', '6546546', 'carlos@gmail.com');
-INSERT INTO Cliente (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000006', '654654654', 'Ana Gomez', 'Calle 987', '6546546', 'ana@gmail.com');
+INSERT INTO Persona (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000001', '123456789', 'Juan Perez', 'Calle 123', '1234567', 'juan@gmail.com');
+INSERT INTO Persona (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000002', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@gmail.com');
+INSERT INTO Persona (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000003', '123123123', 'Pedro Gomez', 'Calle 789', '3213213', 'pedro@gmail.com');
+INSERT INTO Persona (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000004', '321321321', 'Luisa Perez', 'Calle 321', '3213213', 'luisa@gmail.com');
+INSERT INTO Persona (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000005', '456456456', 'Carlos Rodriguez', 'Calle 654', '6546546', 'carlos@gmail.com');
+INSERT INTO Persona (ID, Identificacion, Nombre, Direccion, Telefono, Email) VALUES ('00000000-0000-0000-0000-000000000006', '654654654', 'Ana Gomez', 'Calle 987', '6546546', 'ana@gmail.com');
+
+--- enlazar la mitad de personas con cliente y la otra mitad con proovedor
+INSERT INTO Cliente (ID) VALUES ('00000000-0000-0000-0000-000000000001');
+INSERT INTO Cliente (ID) VALUES ('00000000-0000-0000-0000-000000000002');
+INSERT INTO Cliente (ID) VALUES ('00000000-0000-0000-0000-000000000003');
+INSERT INTO Proveedor (ID) VALUES ('00000000-0000-0000-0000-000000000004');
+INSERT INTO Proveedor (ID) VALUES ('00000000-0000-0000-0000-000000000005');
+INSERT INTO Proveedor (ID) VALUES ('00000000-0000-0000-0000-000000000006');
 
 -- Finca
 INSERT INTO Finca (ID, Nombre, Direccion, Observaciones) VALUES ('00000000-0000-0000-0000-000000000001', 'Finca La Esperanza', 'Calle 123', 'Finca de prueba');
@@ -380,28 +395,9 @@ INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, Lo
 INSERT INTO Ocupacion (ID, NoAnimales, FechaIngreso, TipoRebano, FechaSalida, LoteID) VALUES ('00000000-0000-0000-0000-000000000010', 55, '2020-04-01', 'Novillas', '2020-04-30', '00000000-0000-0000-0000-000000000010');
 
 -- Productos
-INSERT INTO Producto (ID, Nombre, Cantidad) VALUES ('00000000-0000-0000-0000-000000000001', 'Leche', 100);
-INSERT INTO Producto (ID, Nombre, Cantidad) VALUES ('00000000-0000-0000-0000-000000000002', 'Carne', 550);
+INSERT INTO Producto (ID, Nombre, Cantidad, UnidadMedida) VALUES ('00000000-0000-0000-0000-000000000001', 'Leche', 100, 'Lts');
+INSERT INTO Producto (ID, Nombre, Cantidad, UnidadMedida) VALUES ('00000000-0000-0000-0000-000000000002', 'Carne', 550, 'Kgs');
 
--- Venta
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000001', 100.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000001');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000002', 50.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000002');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000003', 75.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000003');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000004', 25.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000004');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000005', 10.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000005');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000006', 5.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000006');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000007', 100.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000001');
-INSERT INTO Venta (ID, Total, Observaciones, ClienteID) VALUES ('00000000-0000-0000-0000-000000000008', 50.00, 'Venta de prueba', '00000000-0000-0000-0000-000000000002');
-
--- ProductosVentas
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000001', 10.00, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000002', 5.00, 10, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000003', 7.50, 10, '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000004', 2.50, 10, '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000005', 1.00, 10, '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000006', 0.50, 10, '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000007', 10.00, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000007');
-INSERT INTO ProductosVentas (ID, PrecioUnitario, Cantidad, ProductoID, VentaID) VALUES ('00000000-0000-0000-0000-000000000008', 5.00, 10, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000008');
 
    -- Reses madres y padres sin relaciones parentales iniciales
 INSERT INTO Res (ID, Numero, Nombre, Tipo, FechaNacimiento, Estado, Madre, Padre, PesoActual, PesoNacimiento, Sexo, Raza, NumeroPartos, RegistroICA, Observaciones, FincaID) 
@@ -529,22 +525,38 @@ INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Emai
 INSERT INTO Usuario (ID, Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contrasena) VALUES ('00000000-0000-0000-0000-000000000002', 'operario', '987654321', 'Maria Rodriguez', 'Calle 456', '7654321', 'maria@maria.com', '123456');
 
 -- Transaccion
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000001', 'Compra de insumos', '2021-05-01', 100.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000002', 'Compra de insumos', '2022-03-15', 50.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000003', 'Compra de insumos', '2023-07-20', 75.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000004', 'Compra de insumos', '2022-09-10', 325.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000005', 'Compra de insumos', '2023-11-05', 910.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000006', 'Compra de insumos', '2022-12-25', 500.00);
-INSERT INTO Transaccion (ID, Descripcion, Fecha, Valor) VALUES ('00000000-0000-0000-0000-000000000007', 'Compra de insumos', '2021-08-30', 100.00);
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000001', 'Compra de insumos', 'Ingreso', '2021-05-01', 100.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000002', 'Compra de insumos', 'Ingreso', '2022-03-15', 50.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000003', 'Compra de insumos', 'Ingreso', '2023-07-20', 75.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000004', 'Compra de insumos', 'Ingreso', '2022-09-10', 325.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000005', 'Compra de insumos', 'Ingreso', '2023-11-05', 910.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000006', 'Compra de insumos', 'Ingreso', '2022-12-25', 500.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000007', 'Compra de insumos', 'Ingreso', '2021-08-30', 100.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000008', 'Compra de insumos', 'Egreso', '2021-05-01', 100.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000009', 'Compra de insumos', 'Egreso', '2022-03-15', 50.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000010', 'Compra de insumos', 'Egreso', '2023-07-20', 75.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000011', 'Compra de insumos', 'Egreso', '2022-09-10', 325.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000012', 'Compra de insumos', 'Egreso', '2023-11-05', 910.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000013', 'Compra de insumos', 'Egreso', '2022-12-25', 500.00, '00000000-0000-0000-0000-000000000001');
+INSERT INTO Transaccion (ID, Descripcion, Tipo, Fecha, Valor, Tercero) VALUES ('00000000-0000-0000-0000-000000000014', 'Compra de insumos', 'Egreso', '2021-08-30', 100.00, '00000000-0000-0000-0000-000000000001');
 
 -- InsumosTransaccion
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000001', 10, 10.00, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000002', 10, 5.00, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000003', 10, 7.50, '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000004', 10, 32.50, '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000004');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000005', 10, 91.00, '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000005');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000006', 10, 50.00, '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000006');
-INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000007', 10, 10.00, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000007');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000001', 10, 10.00, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000008');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000002', 10, 5.00, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000009');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000003', 10, 7.50, '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000010');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000004', 10, 32.50, '00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000011');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000005', 10, 91.00, '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000012');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000006', 10, 50.00, '00000000-0000-0000-0000-000000000006', '00000000-0000-0000-0000-000000000013');
+INSERT INTO InsumosTransaccion (ID, Cantidad, ValorUnitario, InsumoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000007', 10, 10.00, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000014');
+
+-- ProductoTransaccion
+INSERT INTO ProductoTransaccion (ID, PrecioUnitario, Cantidad, ProductoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000001', 10.00, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001');
+INSERT INTO ProductoTransaccion (ID, PrecioUnitario, Cantidad, ProductoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000002', 5.00, 10, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002');
+INSERT INTO ProductoTransaccion (ID, PrecioUnitario, Cantidad, ProductoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000003', 7.50, 10, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000003');
+INSERT INTO ProductoTransaccion (ID, PrecioUnitario, Cantidad, ProductoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000004', 2.50, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000004');
+INSERT INTO ProductoTransaccion (ID, PrecioUnitario, Cantidad, ProductoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000005', 1.00, 10, '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000005');
+INSERT INTO ProductoTransaccion (ID, PrecioUnitario, Cantidad, ProductoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000006', 0.50, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000006');
+INSERT INTO ProductoTransaccion (ID, PrecioUnitario, Cantidad, ProductoID, TransaccionID) VALUES ('00000000-0000-0000-0000-000000000007', 10.00, 10, '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000007');
 
 -- Imagen
 
