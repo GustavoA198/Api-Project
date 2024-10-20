@@ -53,9 +53,9 @@ export class TransaccionModel {
       FROM
           Transaccion t
       LEFT JOIN 
-          insumosTransaccion it ON t.ID = it.TransaccionID
+          InsumosTransaccion it ON t.ID = it.TransaccionID
       LEFT JOIN 
-          productoTransaccion pt ON t.ID = pt.TransaccionID
+          ProductoTransaccion pt ON t.ID = pt.TransaccionID
       LEFT JOIN 
           Insumo i ON it.InsumoID = i.ID
       LEFT JOIN 

@@ -1,8 +1,8 @@
 -- Create Database
-    CREATE DATABASE ProGanaderoDB2;
+    CREATE DATABASE ProGanaderoDB;
 
 -- Use the database
-USE ProGanaderoDB2;
+USE ProGanaderoDB;
 
 CREATE TABLE Persona (
     ID VARCHAR(36) PRIMARY KEY NOT NULL,
