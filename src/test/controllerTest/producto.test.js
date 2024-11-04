@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 import { jest } from '@jest/globals'
-import { ProductoController } from '../controllers/producto.controller.js'
-import { ProductoModel } from '../models/producto.model.js'
-import { validatePartialProducto } from '../schemas/producto.schema.js'
+import { ProductoController } from '../../controllers/producto.controller.js'
+import { ProductoModel } from '../../models/producto.model.js'
 
 // Mocks de respuesta
 const mockProductos = [
@@ -11,7 +10,6 @@ const mockProductos = [
 ]
 const mockProducto = { ID: '1', Numero: 1, Nombre: 'Producto 1', Cantidad: 10, UnidadMedida: 'kg', Observaciones: 'Sin observaciones' }
 const mockProductoPost = { Nombre: 'Producto 1', Fecha: '2024-10-31', Cantidad: 10 }
-const mockProductoUpdate = { Nombre: 'Producto 2', Fecha: '2024-10-31' }
 const mockBadValidatorPost = {
   body: [
     {
@@ -34,9 +32,9 @@ const mockBadValidatorPost = {
 }
 
 // Mock del modelo ProductoModel
-jest.mock('../models/producto.model.js')
+jest.mock('../../models/producto.model.js')
 
-jest.mock('../schemas/producto.schema.js')
+jest.mock('../../schemas/producto.schema.js')
 
 describe('Test del controlador de producto', () => {
   afterEach(() => {
