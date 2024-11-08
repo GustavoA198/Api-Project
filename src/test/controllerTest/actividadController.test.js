@@ -32,20 +32,6 @@ const mockBadValidatorPost = {
   'status': 400
 }
 
-/* const mockActividadUpdateResponse = {
-  body: {
-    "fieldCount": 0,
-    "affectedRows": 1,
-    "insertId": 0,
-    "info": "Rows matched: 1  Changed: 1  Warnings: 0",
-    "serverStatus": 2,
-    "warningStatus": 0,
-    "changedRows": 1
-  },
-  'error': false,
-  'status': 200
-} */
-
 // Mock del modelo ActividadModel
 jest.mock('../../models/actividad.model.js')
 jest.mock('../../schemas/actividad.schema.js')
@@ -294,28 +280,42 @@ describe('Test del controlador de actividad', () => {
     })
   })
 
-  /* // UPDATE
-  test('update falla actualizando una actividad ', async () => {
-    const req = {
-      params: { id: '1' },
-      body: mockActividadUpdate
-    }
+  // UPDATE
+  test('update actualiza una actividad existente exitosamente', async () => {
+    const req = { params: { id: '1' }, body: mockActividadPost }
     const res = {
       status: jest.fn().mockReturnThis(),
       send: jest.fn().mockReturnThis()
     }
 
-    ActividadModel.update = jest.fn().mockResolvedValue([mockActividadUpdateResponse])
+    ActividadModel.update = jest.fn().mockResolvedValue([{ affectedRows: 1 }])
 
     await ActividadController.update(req, res)
 
-    expect(res.status).toHaveBeenCalledWith(500)
-    expect(res.send).toHaveBeenCalledTimes(1)
-    expect(ActividadModel.update).toHaveBeenCalledWith(req.params.id, req.body)
+    expect(res.status).toHaveBeenCalledWith(200)
     expect(res.send).toHaveBeenCalledWith({
       error: false,
-      status: 400,
-      body: mockActividadUpdateResponse
+      status: 200,
+      body: expect.any(Object)
     })
-  }) */
+  })
+
+  test('update retorna error 404 si la actividad no existe', async () => {
+    const req = { params: { id: '999' }, body: mockActividadPost }
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn().mockReturnThis()
+    }
+
+    ActividadModel.update = jest.fn().mockResolvedValue([{ affectedRows: 0 }])
+
+    await ActividadController.update(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(404)
+    expect(res.send).toHaveBeenCalledWith({
+      error: true,
+      status: 404,
+      body: `No se encontro ninguna actividad con el ID ${req.params.id} para actualizar`
+    })
+  })
 })

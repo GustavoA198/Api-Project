@@ -40,7 +40,7 @@ export class ProductoController {
   }
 
   static async update (req, res) {
-    const [result] = validatePartialProducto(req.body)
+    const result = validatePartialProducto(req.body)
     if (result.success) {
       try {
         const [updateResult] = await ProductoModel.update(req.params.id, result.data)

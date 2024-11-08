@@ -224,36 +224,6 @@ describe('Test del controlador de producto', () => {
     validateProductoMock.mockRestore()
   })
 
-  /*  */
-
-  /* test('update actualiza un producto exitosamente', async () => {
-    const req = {
-      params: { id: '1' },
-      body: mockProductoUpdate
-    }
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      send: jest.fn().mockReturnThis()
-    }
-
-    const validatePartialProductoMock = jest.fn().mockReturnValue({ success: true, data: mockProductoUpdate })
-    ProductoModel.update = jest.fn().mockResolvedValue([{ affectedRows: 1, changedRows: 1 }])
-
-    await ProductoController.update(req, res)
-
-    expect(res.status).toHaveBeenCalledWith(200)
-    expect(res.send).toHaveBeenCalledTimes(1)
-    expect(res.send).toHaveBeenCalledWith({
-      error: false,
-      status: 200,
-      body: { affectedRows: 1, changedRows: 1 }
-    })
-
-    validatePartialProductoMock.mockRestore()
-  })
- */
-    /*  */
-
   // DELETE
   test('delete elimina un producto existente exitosamente', async () => {
     const req = { params: { id: '1' } }
@@ -309,6 +279,53 @@ describe('Test del controlador de producto', () => {
       error: true,
       status: 500,
       body: 'Error inesperado'
+    })
+  })
+
+  // Update
+  test('update actualiza un producto existente exitosamente', async () => {
+    const req = {
+      body: mockProducto,
+      params: { id: '1' }
+    }
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn().mockReturnThis()
+    }
+
+    ProductoModel.update = jest.fn().mockResolvedValue([{ affectedRows: 1 }])
+
+    await ProductoController.update(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(200)
+    expect(res.send).toHaveBeenCalledTimes(1)
+    expect(res.send).toHaveBeenCalledWith({
+      error: false,
+      status: 200,
+      body: { affectedRows: 1 }
+    })
+  })
+
+  test('update retorna error 404 si el producto no existe', async () => {
+    const req = {
+      body: mockProducto,
+      params: { id: '999' }
+    }
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn().mockReturnThis()
+    }
+
+    ProductoModel.update = jest.fn().mockResolvedValue([{ affectedRows: 0 }])
+
+    await ProductoController.update(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(404)
+    expect(res.send).toHaveBeenCalledTimes(1)
+    expect(res.send).toHaveBeenCalledWith({
+      error: true,
+      status: 404,
+      body: `No se encontro ningún producto con el ID ${req.params.id} para actualizar`
     })
   })
 })
