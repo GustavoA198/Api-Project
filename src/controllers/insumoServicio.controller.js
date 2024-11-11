@@ -40,7 +40,6 @@ export class InsumoController {
 
   static async update (req, res) {
     const result = validateInsumoServicio(req.body)
-    console.log(result)
     if (result.success) {
       try {
         const updateResult = await InsumosServicioModel.update(result.data)
@@ -59,8 +58,6 @@ export class InsumoController {
 
   static async delete (req, res) {
     const result = validateInsumoServicioDelete(req.body)
-
-    console.log(result)
     if (!result.success) {
       error(req, res, JSON.parse(result.error.message), 400)
       return
