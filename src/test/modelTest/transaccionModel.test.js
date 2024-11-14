@@ -1,75 +1,67 @@
 /* eslint-disable no-undef */
 import { jest } from '@jest/globals'
-import { ResModel } from '../../models/res.model.js'
+import { TransaccionModel } from '../../models/transaccion.model.js'
 import { database } from '../../database/db.js'
 
 jest.mock('../../database/db.js')
 
-describe('ResModel', () => {
+describe('Test para el modelo de transaccion', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
 
-  test('getAll obtiene todos los registros activos', async () => {
-    const mockData = [{ ID: 1, Nombre: 'Res1', Estado: 'Activa' }]
-    database.query = jest.fn().mockResolvedValue(mockData)
+  test('getResumen obtiene el resumen de las transacciones', async () => {
+    const mockData = [{ Tipo: 'Ingreso', Total: 100 }, { Tipo: 'Egreso', Total: 50 }]
+    database.query = jest.fn().mockResolvedValue([mockData])
 
-    const result = await ResModel.getAll()
+    const result = await TransaccionModel.getResumen()
 
     expect(database.query).toHaveBeenCalledWith(expect.any(String))
-    expect(result).toEqual(mockData)
+    expect(result).toEqual({ Ingreso: 100, Egreso: 50, Total: 50 })
   })
 
-  test('getRes obtiene un registro por ID', async () => {
-    const mockData = [{ ID: 1, Nombre: 'Res1', Estado: 'Activa' }]
-    database.query = jest.fn().mockResolvedValue(mockData)
+  // getTransaccionById
+  test('getTransaccionById obtiene una transaccion por ID', async () => {
+    const mockData = { id: 1, Nombre: 'Transaccion1' }
+    database.query = jest.fn().mockResolvedValue([[mockData]])
 
-    const result = await ResModel.getRes(1)
+    const result = await TransaccionModel.getTransaccionById(1)
 
     expect(database.query).toHaveBeenCalledWith(expect.any(String), [1])
-    expect(result).toEqual(mockData)
+    expect(result).toEqual({Nombre: 'Transaccion1', Productos: [{Nombre: 'Transaccion1', id: 1}], ProductosString: 'undefined', id: 1})
   })
 
-  test('getHijos obtiene hijos de un registro', async () => {
-    const mockData = [{ ID: 2, Madre: 1 }]
-    database.query = jest.fn().mockResolvedValue(mockData)
+  // getResumen
+  test('getResumen obtiene el resumen de las transacciones', async () => {
+    const mockData = [{ Tipo: 'Ingreso', Total: 100 }, { Tipo: 'Egreso', Total: 50 }]
+    database.query = jest.fn().mockResolvedValue([mockData])
 
-    const result = await ResModel.getHijos(1)
+    const result = await TransaccionModel.getResumen()
 
-    expect(database.query).toHaveBeenCalledWith(expect.any(String), [1, 1])
-    expect(result).toEqual(mockData)
+    expect(database.query).toHaveBeenCalledWith(expect.any(String))
+    expect(result).toEqual({ Ingreso: 100, Egreso: 50, Total: 50 })
   })
 
-  test('create agrega un nuevo registro', async () => {
-    const mockData = { Numero: 1, Nombre: 'Res1', Estado: 'Activa' }
-    const insertResult = { affectedRows: 1 }
-    database.query.mockResolvedValueOnce([[{ id: 'some-uuid' }]])
-    database.query.mockResolvedValueOnce(insertResult)
-
-    const result = await ResModel.create(mockData)
-
-    expect(database.query).toHaveBeenCalledTimes(2)
-    expect(result).toEqual(insertResult)
-  })
-
-  test('update actualiza un registro existente', async () => {
-    const mockData = { Nombre: 'Res1 Actualizado' }
+  // update
+  test('update actualiza una transaccion existente', async () => {
+    const mockData = { Nombre: 'Transaccion Actualizada' }
     const updateResult = { affectedRows: 1 }
     database.query.mockResolvedValue(updateResult)
 
-    const result = await ResModel.update(1, mockData)
+    const result = await TransaccionModel.update(1, mockData)
 
     expect(database.query).toHaveBeenCalled()
     expect(result).toEqual(updateResult)
   })
 
-  test('delete elimina un registro cambiando su estado', async () => {
-    const mockData = { affectedRows: 1 }
-    database.query.mockResolvedValue(mockData)
+  // delete
+  test('delete elimina una transaccion existente', async () => {
+    const deleteResult = { affectedRows: 1 }
+    database.query.mockResolvedValue(deleteResult)
 
-    const result = await ResModel.delete(1)
+    const result = await TransaccionModel.delete(1)
 
-    expect(database.query).toHaveBeenCalledWith(expect.any(String), ['Muerte', 1])
-    expect(result).toEqual(mockData)
+    expect(database.query).toHaveBeenCalled()
+    expect(result).toEqual(deleteResult)
   })
 })
