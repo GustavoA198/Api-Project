@@ -1,17 +1,18 @@
 import { Router } from 'express'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { InseminacionController } from '../controllers/inseminacion.controller.js'
 
 export const InseminacionRouter = Router()
 
 // GET
-InseminacionRouter.get('/', InseminacionController.getAll)
-InseminacionRouter.get('/:id', InseminacionController.getInseminacion)
+InseminacionRouter.get('/', Autenticacion, InseminacionController.getAll)
+InseminacionRouter.get('/:id', Autenticacion, InseminacionController.getInseminacion)
 
 // POST
-InseminacionRouter.post('/', InseminacionController.create)
+InseminacionRouter.post('/', Autenticacion, InseminacionController.create)
 
 // PUT
-InseminacionRouter.put('/:id', InseminacionController.update)
+InseminacionRouter.put('/:id', Autenticacion, InseminacionController.update)
 
 // DELETE
-InseminacionRouter.delete('/:id', InseminacionController.delete)
+InseminacionRouter.delete('/:id', Autenticacion, InseminacionController.delete)

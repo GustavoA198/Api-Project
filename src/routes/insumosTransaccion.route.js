@@ -1,17 +1,18 @@
 import { Router } from 'express'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { InsumosTransaccionController } from '../controllers/insumosTransaccion.controller.js'
 
 export const InsumosTransaccionRouter = Router()
 
 // GET
-InsumosTransaccionRouter.get('/', InsumosTransaccionController.getAll)
-InsumosTransaccionRouter.get('/:id', InsumosTransaccionController.getInsumosTransaccion)
+InsumosTransaccionRouter.get('/', Autenticacion, InsumosTransaccionController.getAll)
+InsumosTransaccionRouter.get('/:id', Autenticacion, InsumosTransaccionController.getInsumosTransaccion)
 
 // POST
-InsumosTransaccionRouter.post('/', InsumosTransaccionController.create)
+InsumosTransaccionRouter.post('/', Autenticacion, InsumosTransaccionController.create)
 
 // PUT
-InsumosTransaccionRouter.put('/:id', InsumosTransaccionController.update)
+InsumosTransaccionRouter.put('/:id', Autenticacion, InsumosTransaccionController.update)
 
 // DELETE
-InsumosTransaccionRouter.delete('/:id', InsumosTransaccionController.delete)
+InsumosTransaccionRouter.delete('/:id', Autenticacion, InsumosTransaccionController.delete)

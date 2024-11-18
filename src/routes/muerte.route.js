@@ -1,17 +1,18 @@
 import { Router } from 'express'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { MuerteController } from '../controllers/muerte.controller.js'
 
 export const MuerteRouter = Router()
 
 // GET
-MuerteRouter.get('/', MuerteController.getAll)
-MuerteRouter.get('/:id', MuerteController.getMuerte)
+MuerteRouter.get('/', Autenticacion, MuerteController.getAll)
+MuerteRouter.get('/:id', Autenticacion, MuerteController.getMuerte)
 
 // POST
-MuerteRouter.post('/', MuerteController.create)
+MuerteRouter.post('/', Autenticacion, MuerteController.create)
 
 // PUT
-MuerteRouter.put('/:id', MuerteController.update)
+MuerteRouter.put('/:id', Autenticacion, MuerteController.update)
 
 // DELETE
-MuerteRouter.delete('/:id', MuerteController.delete)
+MuerteRouter.delete('/:id', Autenticacion, MuerteController.delete)

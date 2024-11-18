@@ -1,17 +1,18 @@
 import { Router } from 'express'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { MontaController } from '../controllers/monta.controller.js'
 
 export const MontaRouter = Router()
 
 // GET
-MontaRouter.get('/', MontaController.getAll)
-MontaRouter.get('/:id', MontaController.getMonta)
+MontaRouter.get('/', Autenticacion, MontaController.getAll)
+MontaRouter.get('/:id', Autenticacion, MontaController.getMonta)
 
 // POST
-MontaRouter.post('/', MontaController.create)
+MontaRouter.post('/', Autenticacion, MontaController.create)
 
 // PUT
-MontaRouter.put('/:id', MontaController.update)
+MontaRouter.put('/:id', Autenticacion, MontaController.update)
 
 // DELETE
-MontaRouter.delete('/:id', MontaController.delete)
+MontaRouter.delete('/:id', Autenticacion, MontaController.delete)

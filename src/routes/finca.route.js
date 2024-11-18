@@ -1,17 +1,18 @@
 import { Router } from 'express'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { FincaController } from '../controllers/finca.controller.js'
 
 export const FincaRouter = Router()
 
 // GET
-FincaRouter.get('/', FincaController.getAll)
-FincaRouter.get('/:id', FincaController.getFinca)
+FincaRouter.get('/', Autenticacion, FincaController.getAll)
+FincaRouter.get('/:id', Autenticacion, FincaController.getFinca)
 
 // POST
-FincaRouter.post('/', FincaController.create)
+FincaRouter.post('/', Autenticacion, FincaController.create)
 
 // PUT
-FincaRouter.put('/:id', FincaController.update)
+FincaRouter.put('/:id', Autenticacion, FincaController.update)
 
 // DELETE
-FincaRouter.delete('/:id', FincaController.delete)
+FincaRouter.delete('/:id', Autenticacion, FincaController.delete)

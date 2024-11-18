@@ -1,17 +1,18 @@
 import { ProveedorController } from '../controllers/proveedor.controller.js'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { Router } from 'express'
 
 export const ProveedorRouter = Router()
 
 // GET
-ProveedorRouter.get('/', ProveedorController.getAll)
-ProveedorRouter.get('/:id', ProveedorController.getProveedor)
+ProveedorRouter.get('/', Autenticacion, ProveedorController.getAll)
+ProveedorRouter.get('/:id', Autenticacion, ProveedorController.getProveedor)
 
 // POST
-ProveedorRouter.post('/', ProveedorController.create)
+ProveedorRouter.post('/', Autenticacion, ProveedorController.create)
 
 // PUT
-ProveedorRouter.put('/:id', ProveedorController.update)
+ProveedorRouter.put('/:id', Autenticacion, ProveedorController.update)
 
 // DELETE
-ProveedorRouter.delete('/:id', ProveedorController.delete)
+ProveedorRouter.delete('/:id', Autenticacion, ProveedorController.delete)

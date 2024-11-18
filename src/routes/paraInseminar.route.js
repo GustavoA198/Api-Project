@@ -1,18 +1,19 @@
 import { ParaInseminarController } from '../controllers/paraInseminar.controller.js'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { Router } from 'express'
 
 export const ParaInseminarRouter = Router()
 
 // GET
-ParaInseminarRouter.get('/', ParaInseminarController.getAll)
-ParaInseminarRouter.get('/id/:id', ParaInseminarController.getParaInseminar)
-ParaInseminarRouter.get('/sugeridos', ParaInseminarController.getSugeridos)
+ParaInseminarRouter.get('/', Autenticacion, ParaInseminarController.getAll)
+ParaInseminarRouter.get('/id/:id', Autenticacion, ParaInseminarController.getParaInseminar)
+ParaInseminarRouter.get('/sugeridos', Autenticacion, ParaInseminarController.getSugeridos)
 
 // POST
-ParaInseminarRouter.post('/', ParaInseminarController.create)
+ParaInseminarRouter.post('/', Autenticacion, ParaInseminarController.create)
 
 // PUT
-ParaInseminarRouter.put('/:id', ParaInseminarController.update)
+ParaInseminarRouter.put('/:id', Autenticacion, ParaInseminarController.update)
 
 // DELETE
-ParaInseminarRouter.delete('/:id', ParaInseminarController.delete)
+ParaInseminarRouter.delete('/:id', Autenticacion, ParaInseminarController.delete)

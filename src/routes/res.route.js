@@ -6,14 +6,14 @@ export const ResRouter = Router()
 
 // GET
 ResRouter.get('/', Autenticacion, ResController.getAll)
-ResRouter.get('/:id', ResController.getRes)
-ResRouter.get('/hijos/:id', ResController.getHijos)
+ResRouter.get('/:id', Autenticacion, ResController.getRes)
+ResRouter.get('/hijos/:id', Autenticacion, ResController.getHijos)
 
 // POST
-ResRouter.post('/', ResController.create)
+ResRouter.post('/', Autenticacion, ResController.create)
 
 // PUT
-ResRouter.put('/:id', ResController.update)
+ResRouter.put('/:id', Autenticacion, ResController.update)
 
 // DELETE
-ResRouter.delete('/:id', ResController.delete)
+ResRouter.delete('/:id', Autenticacion, ResController.delete)

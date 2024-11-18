@@ -1,17 +1,18 @@
 import { OcupacionController } from '../controllers/ocupacion.controller.js'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { Router } from 'express'
 
 export const OcupacionRouter = Router()
 
 // GET
-OcupacionRouter.get('/', OcupacionController.getAll)
-OcupacionRouter.get('/:id', OcupacionController.getOcupacion)
+OcupacionRouter.get('/', Autenticacion, OcupacionController.getAll)
+OcupacionRouter.get('/:id', Autenticacion, OcupacionController.getOcupacion)
 
 // POST
-OcupacionRouter.post('/', OcupacionController.create)
+OcupacionRouter.post('/', Autenticacion, OcupacionController.create)
 
 // PUT
-OcupacionRouter.put('/:id', OcupacionController.update)
+OcupacionRouter.put('/:id', Autenticacion, OcupacionController.update)
 
 // DELETE
-OcupacionRouter.delete('/:id', OcupacionController.delete)
+OcupacionRouter.delete('/:id', Autenticacion, OcupacionController.delete)

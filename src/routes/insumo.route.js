@@ -1,17 +1,18 @@
 import { Router } from 'express'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { InsumoController } from '../controllers/insumo.controller.js'
 
 export const InsumoRouter = Router()
 
 // GET
-InsumoRouter.get('/', InsumoController.getAll)
-InsumoRouter.get('/:id', InsumoController.getInsumo)
+InsumoRouter.get('/', Autenticacion, InsumoController.getAll)
+InsumoRouter.get('/:id', Autenticacion, InsumoController.getInsumo)
 
 // POST
-InsumoRouter.post('/', InsumoController.create)
+InsumoRouter.post('/', Autenticacion, InsumoController.create)
 
 // PUT
-InsumoRouter.put('/:id', InsumoController.update)
+InsumoRouter.put('/:id', Autenticacion, InsumoController.update)
 
 // DELETE
-InsumoRouter.delete('/:id', InsumoController.delete)
+InsumoRouter.delete('/:id', Autenticacion, InsumoController.delete)

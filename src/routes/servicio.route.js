@@ -1,25 +1,26 @@
 import { Router } from 'express'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 import { ServicioController } from '../controllers/servicio.controller.js'
 
 export const ServicioRouter = Router()
 
 // GET
-ServicioRouter.get('/', ServicioController.getAll)
-ServicioRouter.get('/inseminacionOmonta', ServicioController.getAllInseminacionOMonta)
-ServicioRouter.get('/secado', ServicioController.getAllSecado)
+ServicioRouter.get('/', Autenticacion, ServicioController.getAll)
+ServicioRouter.get('/inseminacionOmonta', Autenticacion, ServicioController.getAllInseminacionOMonta)
+ServicioRouter.get('/secado', Autenticacion, ServicioController.getAllSecado)
 
-ServicioRouter.get('/:id', ServicioController.getServicio)
-ServicioRouter.get('/inseminacionOmonta/:id', ServicioController.getInseminacionOMontaById)
+ServicioRouter.get('/:id', Autenticacion, ServicioController.getServicio)
+ServicioRouter.get('/inseminacionOmonta/:id', Autenticacion, ServicioController.getInseminacionOMontaById)
 
-ServicioRouter.get('/res/:id', ServicioController.getServicioByIdRes)
-ServicioRouter.get('/res/inseminacionOmonta/:id', ServicioController.getInseminacionOMontaByIdRes)
-ServicioRouter.get('/res/secado/:id', ServicioController.getSecadoByIdRes)
+ServicioRouter.get('/res/:id', Autenticacion, ServicioController.getServicioByIdRes)
+ServicioRouter.get('/res/inseminacionOmonta/:id', Autenticacion, ServicioController.getInseminacionOMontaByIdRes)
+ServicioRouter.get('/res/secado/:id', Autenticacion, ServicioController.getSecadoByIdRes)
 
 // POST
-ServicioRouter.post('/', ServicioController.create)
+ServicioRouter.post('/', Autenticacion, ServicioController.create)
 
 // PUT
-ServicioRouter.put('/:id', ServicioController.update)
+ServicioRouter.put('/:id', Autenticacion, ServicioController.update)
 
 // DELETE
-ServicioRouter.delete('/:id', ServicioController.delete)
+ServicioRouter.delete('/:id', Autenticacion, ServicioController.delete)
