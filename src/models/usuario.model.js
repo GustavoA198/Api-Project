@@ -9,6 +9,10 @@ export class UsuarioModel {
     return database.query('SELECT * FROM Usuario WHERE id = ?', [id])
   }
 
+  static async getUsuarioByEmail (email) {
+    return database.query('SELECT * FROM Usuario WHERE Email = ?', [email])
+  }
+
   static async create (data) {
     const {Tipo, Identificacion, Nombre, Direccion, Telefono, Email, Contrasena} = data
     const [[{ id }]] = await database.query('SELECT UUID() id')

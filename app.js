@@ -24,6 +24,7 @@ import { InsumoServicioRouter } from './src/routes/insumoServicio.route.js'
 import { ParaInseminarRouter } from './src/routes/parainseminar.route.js'
 import { ReproduccionRouter } from './src/routes/reproduccion.route.js'
 import { ProveedorRouter } from './src/routes/proveedor.route.js'
+import { LoginRouter } from './src/routes/login.route.js'
 
 const app = express()
 
@@ -58,6 +59,9 @@ app.get('/', (req, res) => {
       }
     })
 })
+
+// Route Login
+app.use('/login', LoginRouter)
 
 // Routes
 app.use('/res', ResRouter)

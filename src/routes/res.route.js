@@ -1,10 +1,11 @@
 import { Router } from 'express'
 import { ResController } from '../controllers/res.controller.js'
+import { Autenticacion } from '../middlewares/autenticacion.js'
 
 export const ResRouter = Router()
 
 // GET
-ResRouter.get('/', ResController.getAll)
+ResRouter.get('/', Autenticacion, ResController.getAll)
 ResRouter.get('/:id', ResController.getRes)
 ResRouter.get('/hijos/:id', ResController.getHijos)
 
