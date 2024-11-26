@@ -25,6 +25,19 @@ export class ProduccionIndividualController {
     }
   }
 
+  static async getProduccionIndividualByFecha (req, res) {
+    try {
+      const [ProduccionIndividual] = await ProduccionIndividualModel.getProduccionIndividualByFecha(req.params.id, req.params.FechaInicio, req.params.FechaFin)
+      if (!ProduccionIndividual || ProduccionIndividual.length === 0) {
+        notFound(req, res, `No se encontró ninguna produccion entre las fechas ${req.params.FechaInicio} y ${req.params.FechaFin}`)
+      } else {
+        success(req, res, ProduccionIndividual, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
   static async create (req, res) {
     const result = validateProduccionIndividual(req.body)
     if (result.success) {

@@ -34,6 +34,19 @@ export class TransaccionController {
     }
   }
 
+  static async getTransaccionByFecha (req, res) {
+    try {
+      const Transaccion = await TransaccionModel.getTransaccionesByFecha(req.params.FechaInicio, req.params.FechaFin)
+      if (!Transaccion || Transaccion.length === 0) {
+        notFound(req, res, `No se encontró ninguna transaccion entre las fechas ${req.params.FechaInicio} y ${req.params.FechaFin}`)
+      } else {
+        success(req, res, Transaccion, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
   static async create (req, res) {
     const result = validateTransaccion(req.body)
     if (result.success) {

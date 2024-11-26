@@ -127,6 +127,15 @@ export class TransaccionModel {
     }
   }
 
+  static async getTransaccionesByFecha (fechaInicio, fechaFin) {
+    const [transacciones] = await database.query(`
+      SELECT t.Fecha, t.Tipo, t.Valor 
+      FROM Transaccion t
+      WHERE t.Fecha BETWEEN ? AND ?
+      ORDER BY t.Fecha`, [fechaInicio, fechaFin])
+    return transacciones
+  }
+
   static async update (id, data) {
     const keys = Object.keys(data)
     const values = Object.values(data)

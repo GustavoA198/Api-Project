@@ -7,6 +7,7 @@ export const TransaccionRouter = Router()
 TransaccionRouter.get('/', TransaccionController.getAll)
 TransaccionRouter.get('/resumen', TransaccionController.getResumen)
 TransaccionRouter.get('/:id', TransaccionController.getTransaccion)
+TransaccionRouter.get('/fechas/:FechaInicio/:FechaFin', TransaccionController.getTransaccionByFecha)
 
 // POST
 TransaccionRouter.post('/', TransaccionController.create)
