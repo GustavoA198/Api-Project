@@ -9,7 +9,7 @@
 - Enter on project
 
 ```bash
-cd thesis_project_frontend
+cd Api-Project
 ```
 
 - Check node version.
