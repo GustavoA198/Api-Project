@@ -21,7 +21,7 @@ import { TransaccionRouter } from './src/routes/transaccion.route.js'
 import { InsumosTransaccionRouter } from './src/routes/insumosTransaccion.route.js'
 import { ImagenRouter } from './src/routes/imagen.route.js'
 import { InsumoServicioRouter } from './src/routes/insumoServicio.route.js'
-import { ParaInseminarRouter } from './src/routes/parainseminar.route.js'
+import { ParaInseminarRouter } from './src/routes/paraInseminar.route.js'
 import { ReproduccionRouter } from './src/routes/reproduccion.route.js'
 import { ProveedorRouter } from './src/routes/proveedor.route.js'
 
