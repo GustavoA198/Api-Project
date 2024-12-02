@@ -1,4 +1,4 @@
-import { ActividadModel } from '../models/Actividad.model.js'
+import { ActividadModel } from '../models/actividad.model.js'
 import { validateActividad, validatePartialActividad } from '../schemas/actividad.schema.js'
 import { error, success, notFound } from '../utils/responses.js'
 
