@@ -13,28 +13,31 @@ export class ReproduccionModel {
         
         AND
 
-        ((SELECT COUNT(*)
-        FROM Monta m
-        WHERE 
-          m.ServicioID = s1.ID AND
-          m.Estado = 'Confirmado') > 0
-          
-        OR
+        (
+          (SELECT COUNT(*)
+          FROM Monta m
+          WHERE 
+            m.ServicioID = s1.ID AND
+            m.Estado = 'Confirmado') > 0
+            
+          OR
 
-        (SELECT COUNT(*)
-        FROM Inseminacion i
-        WHERE 
-          i.ServicioID = s1.ID AND
-          i.Estado = 'Confirmado') > 0)
+          (SELECT COUNT(*)
+          FROM Inseminacion i
+          WHERE 
+            i.ServicioID = s1.ID AND
+            i.Estado = 'Confirmado') > 0
+        )
           
         AND
-
-        (SELECT COUNT(*) 
-        FROM Servicio s2 
-        WHERE
-          Tipo = 'Aborto' AND 
-          s2.ResID = s1.ResID AND 
-          s2.Fecha > s1.Fecha) = 0 
+        NOT EXISTS (
+          SELECT 1
+          FROM Servicio s2
+          WHERE 
+          s2.Tipo = 'Aborto' 
+          AND s2.ResID = s1.ResID 
+          AND s2.Fecha >= s1.Fecha
+        )
           
         AND
 
@@ -42,7 +45,7 @@ export class ReproduccionModel {
         FROM Res r
         WHERE 
           r.Madre = s1.ResID AND
-          r.FechaNacimiento > s1.Fecha           
+          r.FechaNacimiento >= s1.Fecha           
           ) = 0
         `)
 
