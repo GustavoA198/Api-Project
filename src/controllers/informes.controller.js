@@ -3,6 +3,7 @@ import { error, success, notFound } from '../utils/responses.js'
 
 export class InformesController {
 
+  /* sección inicial */
   static async getResesPorFecha (req, res) {
     try {
       const { fechaInicio, fechaFin } = req.params
@@ -31,6 +32,37 @@ export class InformesController {
     }
   }
 
+  static async getNumeroNacimientosPorFecha (req, res) {
+    try {
+      const { fechaInicio, fechaFin } = req.params
+      const [all] = await InformesModel.getNumeroNacimientosPorFecha(fechaInicio, fechaFin)
+      if (!all || all.length === 0) {
+        notFound(req, res, `No se encontró ningún nacimiento entre ${fechaInicio} y ${fechaFin}`)
+      } else {
+        success(req, res, all, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getProduccionTotalPorTipo (req, res) {
+    try {
+      const { fechaInicio, fechaFin, tipo } = req.params
+      const [all] = await InformesModel.getProduccionTotalPorTipo(fechaInicio, fechaFin, tipo)
+      if (!all || all.length === 0) {
+        notFound(req, res, `No se encontró ninguna producción de tipo ${tipo} entre ${fechaInicio} y ${fechaFin}`)
+      } else {
+        success(req, res, all, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+/* seccion de las graficas */
+
+/* sección final */
   static async getDistribucionPorSexo (req, res) {
     try {
       const { fechaInicio, fechaFin } = req.params

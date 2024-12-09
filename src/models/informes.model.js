@@ -2,16 +2,18 @@ import { database } from '../database/db.js'
 
 export class InformesModel {
 
+  /* sección inicial */
+
   static async getResesPorFecha (fechaInicio, fechaFin) {
     return await database.query(
       `SELECT Res.*
        FROM Res
        LEFT JOIN Muerte ON Res.ID = Muerte.ResID
-       WHERE Res.FechaNacimiento <= ?
-         AND (Muerte.Fecha IS NULL OR Muerte.Fecha >= ?)
+       WHERE STR_TO_DATE(Res.FechaNacimiento, '%Y-%m-%d') <= ?
+         AND (Muerte.Fecha IS NULL OR STR_TO_DATE(Muerte.Fecha, '%Y-%m-%d') >= ?)
          AND (
            Res.Estado = 'Activa'
-           OR (Res.Estado = 'Vendida' AND (Muerte.Fecha IS NULL OR Muerte.Fecha >= ?))
+           OR (Res.Estado = 'Vendida' AND (Muerte.Fecha IS NULL OR STR_TO_DATE(Muerte.Fecha, '%Y-%m-%d') >= ?))
          )`,
       [fechaFin, fechaInicio, fechaInicio]
     )
@@ -22,7 +24,7 @@ export class InformesModel {
       `SELECT COUNT(*) AS numeroReses
        FROM Res
        LEFT JOIN Muerte ON Res.ID = Muerte.ResID
-       WHERE Res.FechaNacimiento <= ?
+       WHERE STR_TO_DATE(Res.FechaNacimiento, '%Y-%m-%d') <= ?
          AND (Muerte.Fecha IS NULL OR Muerte.Fecha >= ?)
          AND (
            Res.Estado = 'Activa'
@@ -32,12 +34,39 @@ export class InformesModel {
     )
   }
 
+  static async getNumeroNacimientosPorFecha (fechaInicio, fechaFin) {
+    return await database.query(
+      `SELECT COUNT(*) AS numeroNacimientos
+       FROM Res
+       WHERE STR_TO_DATE(Res.FechaNacimiento, '%Y-%m-%d') BETWEEN ? AND ?`,
+      [fechaInicio, fechaFin]
+    )
+  }
+
+  static async getProduccionTotalPorTipo (fechaInicio, fechaFin, tipo) {
+    return await database.query(
+      `SELECT 
+          CASE 
+            WHEN MOD(SUM(Cantidad), 1) = 0 THEN CAST(SUM(Cantidad) AS UNSIGNED)
+            ELSE TRUNCATE(SUM(Cantidad), 1)
+          END AS produccionTotal
+       FROM ProduccionIndividual
+       WHERE STR_TO_DATE(Fecha, '%Y-%m-%d') BETWEEN ? AND ?
+         AND Tipo = ?`,
+      [fechaInicio, fechaFin, tipo]
+    )
+  }
+
+  /* Sección de las gráficas */
+
+  /* Sección final */
+
   static async getDistribucionPorSexo (fechaInicio, fechaFin) {
     return await database.query(
       `SELECT Res.Sexo, COUNT(*) AS numeroReses
        FROM Res
        LEFT JOIN Muerte ON Res.ID = Muerte.ResID
-       WHERE Res.FechaNacimiento <= ?
+       WHERE STR_TO_DATE(Res.FechaNacimiento, '%Y-%m-%d') <= ?
          AND (Muerte.Fecha IS NULL OR Muerte.Fecha >= ?)
          AND (
            Res.Estado = 'Activa'
@@ -53,7 +82,7 @@ export class InformesModel {
       `SELECT Res.Tipo, COUNT(*) AS numeroReses
        FROM Res
        LEFT JOIN Muerte ON Res.ID = Muerte.ResID
-       WHERE Res.FechaNacimiento <= ?
+       WHERE STR_TO_DATE(Res.FechaNacimiento, '%Y-%m-%d') <= ?
          AND (Muerte.Fecha IS NULL OR Muerte.Fecha >= ?)
          AND (
            Res.Estado = 'Activa'
@@ -71,7 +100,7 @@ export class InformesModel {
           COUNT(*) AS numeroReses
        FROM Res
        LEFT JOIN Muerte ON Res.ID = Muerte.ResID
-       WHERE Res.FechaNacimiento <= ?
+       WHERE STR_TO_DATE(Res.FechaNacimiento, '%Y-%m-%d') <= ?
          AND (Muerte.Fecha IS NULL OR Muerte.Fecha >= ?)
          AND (
            Res.Estado = 'Activa'
@@ -79,7 +108,7 @@ export class InformesModel {
          )
        GROUP BY IFNULL(Res.Raza, 'Otros')
        HAVING COUNT(*) > 0
-       LIMIT 4`, // Limita a las primeras 3 razas y una categoría "Otros"
+       LIMIT 4`,
       [fechaFin, fechaInicio, fechaInicio]
     )
   }
@@ -99,7 +128,7 @@ export class InformesModel {
           COUNT(*) AS numeroReses
        FROM Res
        LEFT JOIN Muerte ON Res.ID = Muerte.ResID
-       WHERE Res.FechaNacimiento <= ?
+       WHERE STR_TO_DATE(Res.FechaNacimiento, '%Y-%m-%d') <= ?
          AND (Muerte.Fecha IS NULL OR Muerte.Fecha >= ?)
          AND (
            Res.Estado = 'Activa'
