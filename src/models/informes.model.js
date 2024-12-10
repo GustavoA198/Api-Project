@@ -47,8 +47,8 @@ export class InformesModel {
     return await database.query(
       `SELECT 
           CASE 
-            WHEN MOD(SUM(Cantidad), 1) = 0 THEN CAST(SUM(Cantidad) AS UNSIGNED)
-            ELSE TRUNCATE(SUM(Cantidad), 1)
+            WHEN MOD(COALESCE(SUM(Cantidad), 0), 1) = 0 THEN CAST(COALESCE(SUM(Cantidad), 0) AS UNSIGNED)
+            ELSE TRUNCATE(COALESCE(SUM(Cantidad), 0), 1)
           END AS produccionTotal
        FROM ProduccionIndividual
        WHERE STR_TO_DATE(Fecha, '%Y-%m-%d') BETWEEN ? AND ?
