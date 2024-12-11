@@ -59,6 +59,40 @@ export class InformesModel {
 
   /* Sección de las gráficas */
 
+  static async getProduccionLechePorFecha (fechaInicio, fechaFin) {
+    return await database.query(
+      `SELECT 
+          Fecha, 
+          SUM(Cantidad) AS produccionTotal
+       FROM ProduccionIndividual
+       WHERE STR_TO_DATE(Fecha, '%Y-%m-%d') BETWEEN ? AND ?
+         AND Tipo = 'Leche'
+       GROUP BY Fecha
+       ORDER BY STR_TO_DATE(Fecha, '%Y-%m-%d') ASC`,
+      [fechaInicio, fechaFin]
+    )
+  }
+
+  static async getBalancePorFecha (fechaInicio, fechaFin) {
+    return await database.query(
+      `WITH TransaccionesPorFecha AS (
+         SELECT 
+             STR_TO_DATE(Fecha, '%Y-%m-%d') AS Fecha,
+             SUM(CASE WHEN Tipo = 'Ingreso' THEN Valor ELSE -Valor END) AS TotalDia
+         FROM Transaccion
+         WHERE STR_TO_DATE(Fecha, '%Y-%m-%d') BETWEEN ? AND ?
+         GROUP BY STR_TO_DATE(Fecha, '%Y-%m-%d')
+       )
+       SELECT 
+           Fecha,
+           TotalDia,
+           SUM(TotalDia) OVER (ORDER BY Fecha ASC) AS Balance
+       FROM TransaccionesPorFecha
+       ORDER BY Fecha ASC`,
+      [fechaInicio, fechaFin]
+    )
+  }
+
   /* Sección final */
 
   static async getDistribucionPorSexo (fechaInicio, fechaFin) {

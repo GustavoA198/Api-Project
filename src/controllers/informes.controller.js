@@ -62,6 +62,34 @@ export class InformesController {
 
 /* seccion de las graficas */
 
+  static async getProduccionLechePorFecha (req, res) {
+    try {
+      const { fechaInicio, fechaFin } = req.params
+      const [all] = await InformesModel.getProduccionLechePorFecha(fechaInicio, fechaFin)
+      if (!all || all.length === 0) {
+        notFound(req, res, `No se encontró ninguna producción de leche entre ${fechaInicio} y ${fechaFin}`)
+      } else {
+        success(req, res, all, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
+  static async getBalancePorFecha (req, res) {
+    try {
+      const { fechaInicio, fechaFin } = req.params
+      const [all] = await InformesModel.getBalancePorFecha(fechaInicio, fechaFin)
+      if (!all || all.length === 0) {
+        notFound(req, res, `No se encontró ningún balance entre ${fechaInicio} y ${fechaFin}`)
+      } else {
+        success(req, res, all, 200)
+      }
+    } catch (e) {
+      error(req, res, e.message, e.status)
+    }
+  }
+
 /* sección final */
   static async getDistribucionPorSexo (req, res) {
     try {

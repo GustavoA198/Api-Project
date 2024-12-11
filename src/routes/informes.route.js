@@ -11,6 +11,8 @@ InformesRouter.get('/getNumeroNacimientosPorFecha/:fechaInicio/:fechaFin', Infor
 InformesRouter.get('/getProduccionTotalPorTipo/:fechaInicio/:fechaFin/:tipo', InformesController.getProduccionTotalPorTipo)
 
 /* graficas */
+InformesRouter.get('/getProduccionLechePorFecha/:fechaInicio/:fechaFin', InformesController.getProduccionLechePorFecha)
+InformesRouter.get('/getBalancePorFecha/:fechaInicio/:fechaFin', InformesController.getBalancePorFecha)
 
 /* sección final */
 InformesRouter.get('/getDistribucionPorSexo/:fechaInicio/:fechaFin', InformesController.getDistribucionPorSexo)
