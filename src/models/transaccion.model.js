@@ -2,7 +2,7 @@ import { database } from '../database/db.js'
 
 export class TransaccionModel {
   static async getAll () {
-    const [listIDs] = await database.query('SELECT ID FROM Transaccion')
+    const [listIDs] = await database.query('SELECT ID FROM Transaccion ORDER BY Fecha DESC')
 
     let listTransaccion = []
 
