@@ -16,6 +16,13 @@ export class ProduccionIndividualModel {
       WHERE p.id = ?`, [id])
   }
 
+  static async getProduccionIndividualByFecha (id, FechaInicio, FechaFin) {
+    return await database.query(`
+      SELECT p.Fecha, p.Cantidad
+      FROM ProduccionIndividual p
+      WHERE p.ResID = ? AND p.Fecha BETWEEN ? AND ?`, [id, FechaInicio, FechaFin])
+  }
+
   static async createProduccionIndividual ({Fecha, Tipo, Cantidad, ResID}) {
     if (Tipo === 'Carne') {
       await database.query('UPDATE Res SET Estado = "Vendida" WHERE id = ?', [ResID])

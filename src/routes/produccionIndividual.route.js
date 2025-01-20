@@ -7,6 +7,7 @@ export const ProduccionIndividualRouter = Router()
 // GET
 ProduccionIndividualRouter.get('/', Autenticacion, ProduccionIndividualController.getAll)
 ProduccionIndividualRouter.get('/:id', Autenticacion, ProduccionIndividualController.getProduccionIndividual)
+ProduccionIndividualRouter.get('/:id/:FechaInicio/:FechaFin', Autenticacion, ProduccionIndividualController.getProduccionIndividualByFecha)
 
 // POST
 ProduccionIndividualRouter.post('/', Autenticacion, ProduccionIndividualController.create)
