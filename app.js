@@ -25,6 +25,7 @@ import { ParaInseminarRouter } from './src/routes/parainseminar.route.js'
 import { ReproduccionRouter } from './src/routes/reproduccion.route.js'
 import { ProveedorRouter } from './src/routes/proveedor.route.js'
 import { LoginRouter } from './src/routes/login.route.js'
+import { InformesRouter } from './src/routes/informes.route.js'
 
 const app = express()
 
@@ -87,5 +88,6 @@ app.use('/insumoServicio', InsumoServicioRouter)
 app.use('/parainseminar', ParaInseminarRouter)
 app.use('/reproduccion', ReproduccionRouter)
 app.use('/proveedor', ProveedorRouter)
+app.use('/informes', InformesRouter)
 
 export default app
